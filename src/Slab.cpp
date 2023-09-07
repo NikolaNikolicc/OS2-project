@@ -76,35 +76,35 @@ void *kmem_cache_s::kmem_cache_alloc() {
         if(this->slabs_partial->get_number_of_active_objects() == this->num){
             // move from partial to full
             Slab* tmp = this->slabs_partial;
-            tmp->next = this->slabs_full;
             this->slabs_partial = this->slabs_partial->next;
+            tmp->next = this->slabs_full;
             this->slabs_full = tmp;
             this->num_slabs_partial--;
             this->num_slabs_full++;
         }
         return addr;
     }
-
-    if(num_slabs_free != 0){
-        void* addr = this->slabs_free->return_first_free_object_and_rearange_list(this->num, this->objsize);
+    else if(num_slabs_free != 0){
+        void* addr1 = this->slabs_free->return_first_free_object_and_rearange_list(this->num, this->objsize);
         this->num_active_obj++;
 
         // move from free to partial
         Slab* tmp = this->slabs_free;
+        this->slabs_free = this->slabs_free->next;
         tmp->next = this->slabs_partial;
         tmp->increment_num_of_active();
-        this->slabs_free = this->slabs_free->next;
         this->slabs_partial = tmp;
         this->num_slabs_free--;
         this->num_slabs_partial++;
 
-        return addr;
+        return addr1;
     }
-
-    // case if we need to expand cache
-    create_free_slab();
-    this->growing = true;
-    return nullptr;
+    else{
+        // case if we need to expand cache
+        create_free_slab();
+        this->growing = true;
+        return nullptr;
+    }
 }
 
 void kmem_cache_s::create_free_slab() {
@@ -261,18 +261,21 @@ int kmem_cache_s::kmem_cache_destroy(size_t addr) {
     while (tmp) {
         prev = tmp;
         tmp = tmp->next;
+        prev->clear_slab((int)num, (int)objsize, dtor);
         BuddySystem::getInstance().buddyFree((size_t)prev);
     }
     prev = nullptr; tmp = this->slabs_partial;
     while (tmp) {
         prev = tmp;
         tmp = tmp->next;
+        prev->clear_slab((int)num, (int)objsize, dtor);
         BuddySystem::getInstance().buddyFree((size_t)prev);
     }
     prev = nullptr; tmp = this->slabs_free;
     while (tmp) {
         prev = tmp;
         tmp = tmp->next;
+        prev->clear_slab((int)num, (int)objsize, dtor);
         BuddySystem::getInstance().buddyFree((size_t)prev);
     }
 
@@ -362,12 +365,12 @@ void kmem_cache_s::kmem_cache_info() {
     size_t neto = sizeof(kmem_cache_s) + num_of_slabs * sizeof(Slab) + num_active_obj * objsize;
     size_t bruto = (1 + num_of_slabs * size_in_blocks) * BLOCK_SIZE;
 
-    printString("Prosecna iskoriscenost prostora: ");
+    printString("Realna iskoriscenost prostora: ");
     printInt(neto);
     printString("/");
     printInt(bruto);
     printString("\n");
-    printString("Realna iskoriscenost prostora: ");
+    printString("Efektivna iskoriscenost prostora: ");
     printInt(num_active_obj * objsize);
     printString("/");
     size_t real_bruto = num_of_slabs * size_in_blocks * BLOCK_SIZE - num_of_slabs * sizeof(Slab);
@@ -393,4 +396,13 @@ void *Slab::return_first_free_object_and_rearange_list(int number_of_objects_in_
     if(i >= number_of_objects_in_slab)return nullptr; // nece se desiti ali postoji kao ogranicenje
     (this->free_objects)[i] = true;
     return (void*)(this->first_addr + size_of_object * i);
+}
+
+void Slab::clear_slab(int num_of_objects_in_slab, int objsize, void (*dtor)(void *)) {
+    if(dtor == nullptr)return;
+    for(int i = 0; i < num_of_objects_in_slab; i++){
+        if(this->free_objects[i]){
+            dtor((void*)(this->first_addr + i * objsize));
+        }
+    }
 }

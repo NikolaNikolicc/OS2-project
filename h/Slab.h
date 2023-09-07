@@ -10,7 +10,9 @@ private:
     bool *free_objects;
     size_t first_addr;
     friend struct kmem_cache_s;
+
 public:
+    void clear_slab(int num_of_objects_in_slab, int objsize, void (*dtor)(void *));
     size_t get_number_of_active_objects(){return num_active;}
     void* return_first_free_object_and_rearange_list(int, int);
     void increment_num_of_active(){num_active++;}

@@ -23,7 +23,9 @@ public:
         return bs;
     }
 
-    size_t getBuddyHeapEnd(){return buddyHeapEnd;}
+    int get_buddy_alloc_heap_end(){return buddyHeapEnd;}
+    int get_buddy_alloc_heap_start(){return buddyHeapStart;}
+
 protected:
     BuddySystem();
 private:
