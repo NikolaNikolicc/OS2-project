@@ -21,5 +21,6 @@ void kfree(const void *objp); // Deallocate one small memory buffer
 void kmem_cache_destroy(kmem_cache_t *cachep); // Deallocate cache
 void kmem_cache_info(kmem_cache_t *cachep); // Print cache info
 int kmem_cache_error(kmem_cache_t *cachep); // Print error message
+void print_all_caches();
 
 #endif //PROJECT_BASE_V1_1_SLABI_H

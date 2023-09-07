@@ -10,18 +10,22 @@
 //#include "../test/testPrenosParametara.hpp"
 //#include "../test/modif.hpp"
 
+#include "../h/SlabI.h"
 #include "../h/Buddy.h"
 
 void userMain() {
 
-    size_t addr = (size_t )BuddySystem::getInstance().buddyAlloc(1);
-    printInt(*(size_t*)(addr - sizeof(size_t)));
-    printString("\n");
-    size_t addr1 = (size_t)BuddySystem::getInstance().buddyAlloc(64);
-    printInt(*(size_t*)(addr1 - sizeof(size_t)));
-    printString("\n");
-    BuddySystem::getInstance().buddyFree(addr1);
-    BuddySystem::getInstance().buddyFree(addr);
+    void * space = (void*)HEAP_START_ADDR;
+    int block_num = ((size_t)HEAP_END_ADDR - (size_t)HEAP_START_ADDR) / 8 / BLOCK_SIZE;
+    kmem_init(space, block_num);
+
+    void* obj = kmalloc(32);
+    print_all_caches();
+    kfree(obj);
+    print_all_caches();
+
+
+
 
 
 

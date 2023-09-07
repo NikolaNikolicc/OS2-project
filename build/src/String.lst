@@ -1,0 +1,859 @@
+GAS LISTING /tmp/ccDwtScd.s 			page 1
+
+
+   1              		.file	"String.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.align	2
+   7              		.globl	_Z10size_startPKc
+   9              	_Z10size_startPKc:
+  10              	.LFB38:
+  11              		.file 1 "src/String.cpp"
+   1:src/String.cpp **** //
+   2:src/String.cpp **** // Created by os on 9/5/23.
+   3:src/String.cpp **** //
+   4:src/String.cpp **** #include "../h/String.h"
+   5:src/String.cpp **** #include "../test/printing.hpp"
+   6:src/String.cpp **** 
+   7:src/String.cpp **** // does name start with size-, 1 if true, 0 if not
+   8:src/String.cpp **** bool size_start(const char *name){
+  12              		.loc 1 8 34
+  13              		.cfi_startproc
+  14              	.LVL0:
+  15 0000 130101FF 		addi	sp,sp,-16
+  16              		.cfi_def_cfa_offset 16
+  17 0004 23348100 		sd	s0,8(sp)
+  18              		.cfi_offset 8, -8
+  19 0008 13040101 		addi	s0,sp,16
+  20              		.cfi_def_cfa 8, 0
+   9:src/String.cpp ****     // Check if the input string starts with "size-"
+  10:src/String.cpp ****     if (name[0] == 's' && name[1] == 'i' && name[2] == 'z' && name[3] == 'e' && name[4] == '-') {
+  21              		.loc 1 10 5
+  22              		.loc 1 10 15 is_stmt 0
+  23 000c 03470500 		lbu	a4,0(a0)
+  24              		.loc 1 10 5
+  25 0010 93073007 		li	a5,115
+  26 0014 630AF700 		beq	a4,a5,.L9
+  11:src/String.cpp ****         return true;
+  12:src/String.cpp ****     }
+  13:src/String.cpp ****     return false;
+  27              		.loc 1 13 12
+  28 0018 13050000 		li	a0,0
+  29              	.LVL1:
+  30              	.L2:
+  14:src/String.cpp **** }
+  31              		.loc 1 14 1
+  32 001c 03348100 		ld	s0,8(sp)
+  33              		.cfi_remember_state
+  34              		.cfi_restore 8
+  35              		.cfi_def_cfa 2, 16
+  36 0020 13010101 		addi	sp,sp,16
+  37              		.cfi_def_cfa_offset 0
+  38 0024 67800000 		jr	ra
+  39              	.LVL2:
+  40              	.L9:
+  41              		.cfi_restore_state
+  10:src/String.cpp ****         return true;
+  42              		.loc 1 10 33 discriminator 1
+  43 0028 03471500 		lbu	a4,1(a0)
+GAS LISTING /tmp/ccDwtScd.s 			page 2
+
+
+  10:src/String.cpp ****         return true;
+  44              		.loc 1 10 24 discriminator 1
+  45 002c 93079006 		li	a5,105
+  46 0030 6306F700 		beq	a4,a5,.L10
+  13:src/String.cpp **** }
+  47              		.loc 1 13 12
+  48 0034 13050000 		li	a0,0
+  49              	.LVL3:
+  50 0038 6FF05FFE 		j	.L2
+  51              	.LVL4:
+  52              	.L10:
+  10:src/String.cpp ****         return true;
+  53              		.loc 1 10 51 discriminator 2
+  54 003c 03472500 		lbu	a4,2(a0)
+  10:src/String.cpp ****         return true;
+  55              		.loc 1 10 42 discriminator 2
+  56 0040 9307A007 		li	a5,122
+  57 0044 6306F700 		beq	a4,a5,.L11
+  13:src/String.cpp **** }
+  58              		.loc 1 13 12
+  59 0048 13050000 		li	a0,0
+  60              	.LVL5:
+  61 004c 6FF01FFD 		j	.L2
+  62              	.LVL6:
+  63              	.L11:
+  10:src/String.cpp ****         return true;
+  64              		.loc 1 10 69 discriminator 3
+  65 0050 03473500 		lbu	a4,3(a0)
+  10:src/String.cpp ****         return true;
+  66              		.loc 1 10 60 discriminator 3
+  67 0054 93075006 		li	a5,101
+  68 0058 6306F700 		beq	a4,a5,.L12
+  13:src/String.cpp **** }
+  69              		.loc 1 13 12
+  70 005c 13050000 		li	a0,0
+  71              	.LVL7:
+  72 0060 6FF0DFFB 		j	.L2
+  73              	.LVL8:
+  74              	.L12:
+  10:src/String.cpp ****         return true;
+  75              		.loc 1 10 87 discriminator 4
+  76 0064 03474500 		lbu	a4,4(a0)
+  10:src/String.cpp ****         return true;
+  77              		.loc 1 10 78 discriminator 4
+  78 0068 9307D002 		li	a5,45
+  79 006c 6306F700 		beq	a4,a5,.L7
+  13:src/String.cpp **** }
+  80              		.loc 1 13 12
+  81 0070 13050000 		li	a0,0
+  82              	.LVL9:
+  83 0074 6FF09FFA 		j	.L2
+  84              	.LVL10:
+  85              	.L7:
+  11:src/String.cpp ****     }
+  86              		.loc 1 11 16
+  87 0078 13051000 		li	a0,1
+  88              	.LVL11:
+GAS LISTING /tmp/ccDwtScd.s 			page 3
+
+
+  89 007c 6FF01FFA 		j	.L2
+  90              		.cfi_endproc
+  91              	.LFE38:
+  93              		.align	2
+  94              		.globl	_Z14get_int_lengthi
+  96              	_Z14get_int_lengthi:
+  97              	.LFB39:
+  15:src/String.cpp **** 
+  16:src/String.cpp **** int get_int_length(int number) {
+  98              		.loc 1 16 32 is_stmt 1
+  99              		.cfi_startproc
+ 100              	.LVL12:
+ 101 0080 130101FF 		addi	sp,sp,-16
+ 102              		.cfi_def_cfa_offset 16
+ 103 0084 23348100 		sd	s0,8(sp)
+ 104              		.cfi_offset 8, -8
+ 105 0088 13040101 		addi	s0,sp,16
+ 106              		.cfi_def_cfa 8, 0
+ 107 008c 93070500 		mv	a5,a0
+  17:src/String.cpp ****     int length = 0;
+ 108              		.loc 1 17 5
+ 109              	.LVL13:
+ 110              		.loc 1 17 9 is_stmt 0
+ 111 0090 13050000 		li	a0,0
+ 112              	.LVL14:
+ 113              	.L15:
+  18:src/String.cpp ****     while (number != 0) {
+ 114              		.loc 1 18 5 is_stmt 1
+ 115              		.loc 1 18 19
+ 116 0094 638A0700 		beqz	a5,.L14
+  19:src/String.cpp ****         number /= 10;
+ 117              		.loc 1 19 9
+ 118              		.loc 1 19 16 is_stmt 0
+ 119 0098 1307A000 		li	a4,10
+ 120 009c BBC7E702 		divw	a5,a5,a4
+ 121              	.LVL15:
+  20:src/String.cpp ****         length++;
+ 122              		.loc 1 20 9 is_stmt 1
+ 123              		.loc 1 20 15 is_stmt 0
+ 124 00a0 1B051500 		addiw	a0,a0,1
+ 125              	.LVL16:
+  18:src/String.cpp ****     while (number != 0) {
+ 126              		.loc 1 18 5
+ 127 00a4 6FF01FFF 		j	.L15
+ 128              	.LVL17:
+ 129              	.L14:
+  21:src/String.cpp ****     }
+  22:src/String.cpp ****     return length;
+ 130              		.loc 1 22 5 is_stmt 1
+  23:src/String.cpp **** }
+ 131              		.loc 1 23 1 is_stmt 0
+ 132 00a8 03348100 		ld	s0,8(sp)
+ 133              		.cfi_restore 8
+ 134              		.cfi_def_cfa 2, 16
+ 135 00ac 13010101 		addi	sp,sp,16
+ 136              		.cfi_def_cfa_offset 0
+ 137 00b0 67800000 		jr	ra
+GAS LISTING /tmp/ccDwtScd.s 			page 4
+
+
+ 138              		.cfi_endproc
+ 139              	.LFE39:
+ 141              		.align	2
+ 142              		.globl	_Z13int_to_stringiPci
+ 144              	_Z13int_to_stringiPci:
+ 145              	.LFB40:
+  24:src/String.cpp **** 
+  25:src/String.cpp **** void int_to_string(int number, char* buffer, int bufferSize) {
+ 146              		.loc 1 25 62 is_stmt 1
+ 147              		.cfi_startproc
+ 148              	.LVL18:
+ 149 00b4 130101FD 		addi	sp,sp,-48
+ 150              		.cfi_def_cfa_offset 48
+ 151 00b8 23341102 		sd	ra,40(sp)
+ 152 00bc 23308102 		sd	s0,32(sp)
+ 153 00c0 233C9100 		sd	s1,24(sp)
+ 154 00c4 23382101 		sd	s2,16(sp)
+ 155 00c8 23343101 		sd	s3,8(sp)
+ 156              		.cfi_offset 1, -8
+ 157              		.cfi_offset 8, -16
+ 158              		.cfi_offset 9, -24
+ 159              		.cfi_offset 18, -32
+ 160              		.cfi_offset 19, -40
+ 161 00cc 13040103 		addi	s0,sp,48
+ 162              		.cfi_def_cfa 8, 0
+ 163 00d0 93040500 		mv	s1,a0
+ 164 00d4 13890500 		mv	s2,a1
+ 165 00d8 93090600 		mv	s3,a2
+  26:src/String.cpp ****     int length = get_int_length(number);
+ 166              		.loc 1 26 5
+ 167              		.loc 1 26 32 is_stmt 0
+ 168 00dc 97000000 		call	_Z14get_int_lengthi
+ 168      E7800000 
+ 169              	.LVL19:
+  27:src/String.cpp **** 
+  28:src/String.cpp ****     if (length >= bufferSize) {
+ 170              		.loc 1 28 5 is_stmt 1
+ 171 00e4 635A3503 		bge	a0,s3,.L17
+  29:src/String.cpp ****         // Handle buffer overflow
+  30:src/String.cpp ****         return;
+  31:src/String.cpp ****     }
+  32:src/String.cpp **** 
+  33:src/String.cpp ****     for (int i = length - 1; i >= 0; i--) {
+ 172              		.loc 1 33 5
+ 173              	.LBB2:
+ 174              		.loc 1 33 14 is_stmt 0
+ 175 00e8 9B07F5FF 		addiw	a5,a0,-1
+ 176              	.LVL20:
+ 177              	.L20:
+ 178              		.loc 1 33 32 is_stmt 1 discriminator 3
+ 179 00ec 63C20702 		bltz	a5,.L19
+  34:src/String.cpp ****         buffer[i] = '0' + (number % 10);
+ 180              		.loc 1 34 9 discriminator 2
+ 181              		.loc 1 34 35 is_stmt 0 discriminator 2
+ 182 00f0 9306A000 		li	a3,10
+ 183 00f4 3BE7D402 		remw	a4,s1,a3
+ 184              		.loc 1 34 17 discriminator 2
+GAS LISTING /tmp/ccDwtScd.s 			page 5
+
+
+ 185 00f8 3306F900 		add	a2,s2,a5
+ 186              		.loc 1 34 25 discriminator 2
+ 187 00fc 1B070703 		addiw	a4,a4,48
+ 188              		.loc 1 34 19 discriminator 2
+ 189 0100 2300E600 		sb	a4,0(a2)
+  35:src/String.cpp ****         number /= 10;
+ 190              		.loc 1 35 9 is_stmt 1 discriminator 2
+ 191              		.loc 1 35 16 is_stmt 0 discriminator 2
+ 192 0104 BBC4D402 		divw	s1,s1,a3
+ 193              	.LVL21:
+  33:src/String.cpp ****         buffer[i] = '0' + (number % 10);
+ 194              		.loc 1 33 5 is_stmt 1 discriminator 2
+ 195 0108 9B87F7FF 		addiw	a5,a5,-1
+ 196              	.LVL22:
+ 197 010c 6FF01FFE 		j	.L20
+ 198              	.LVL23:
+ 199              	.L19:
+ 200              	.LBE2:
+  36:src/String.cpp ****     }
+  37:src/String.cpp ****     buffer[length] = '\0';
+ 201              		.loc 1 37 5
+ 202              		.loc 1 37 18 is_stmt 0
+ 203 0110 3309A900 		add	s2,s2,a0
+ 204              	.LVL24:
+ 205              		.loc 1 37 20
+ 206 0114 23000900 		sb	zero,0(s2)
+ 207              	.LVL25:
+ 208              	.L17:
+  38:src/String.cpp **** }
+ 209              		.loc 1 38 1
+ 210 0118 83308102 		ld	ra,40(sp)
+ 211              		.cfi_restore 1
+ 212 011c 03340102 		ld	s0,32(sp)
+ 213              		.cfi_restore 8
+ 214              		.cfi_def_cfa 2, 48
+ 215 0120 83348101 		ld	s1,24(sp)
+ 216              		.cfi_restore 9
+ 217 0124 03390101 		ld	s2,16(sp)
+ 218              		.cfi_restore 18
+ 219 0128 83398100 		ld	s3,8(sp)
+ 220              		.cfi_restore 19
+ 221 012c 13010103 		addi	sp,sp,48
+ 222              		.cfi_def_cfa_offset 0
+ 223 0130 67800000 		jr	ra
+ 224              		.cfi_endproc
+ 225              	.LFE40:
+ 227              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 228              		.align	3
+ 229              	.LC0:
+ 230 0000 73697A65 		.string	"size-xxxxxx"
+ 230      2D787878 
+ 230      78787800 
+ 231              		.text
+ 232              		.align	2
+ 233              		.globl	_Z27concatenate_int_to_char_ptri
+ 235              	_Z27concatenate_int_to_char_ptri:
+ 236              	.LFB41:
+GAS LISTING /tmp/ccDwtScd.s 			page 6
+
+
+  39:src/String.cpp **** 
+  40:src/String.cpp **** char* concatenate_int_to_char_ptr(int number) {
+ 237              		.loc 1 40 47 is_stmt 1
+ 238              		.cfi_startproc
+ 239              	.LVL26:
+ 240 0134 130101FE 		addi	sp,sp,-32
+ 241              		.cfi_def_cfa_offset 32
+ 242 0138 233C1100 		sd	ra,24(sp)
+ 243 013c 23388100 		sd	s0,16(sp)
+ 244 0140 23349100 		sd	s1,8(sp)
+ 245              		.cfi_offset 1, -8
+ 246              		.cfi_offset 8, -16
+ 247              		.cfi_offset 9, -24
+ 248 0144 13040102 		addi	s0,sp,32
+ 249              		.cfi_def_cfa 8, 0
+ 250 0148 93040500 		mv	s1,a0
+  41:src/String.cpp ****     char* baseString = (char*)"size-xxxxxx";
+ 251              		.loc 1 41 5
+ 252              	.LVL27:
+  42:src/String.cpp ****     int length = get_int_length(number);
+ 253              		.loc 1 42 5
+ 254              		.loc 1 42 32 is_stmt 0
+ 255 014c 97000000 		call	_Z14get_int_lengthi
+ 255      E7800000 
+ 256              	.LVL28:
+  43:src/String.cpp ****     for(int i = 5 + length; i >= 5; i--){
+ 257              		.loc 1 43 5 is_stmt 1
+ 258              	.LBB3:
+ 259              		.loc 1 43 13 is_stmt 0
+ 260 0154 1B055500 		addiw	a0,a0,5
+ 261              	.LVL29:
+ 262 0158 93070500 		mv	a5,a0
+ 263 015c 6F008001 		j	.L26
+ 264              	.LVL30:
+ 265              	.L28:
+ 266              	.LBB4:
+  44:src/String.cpp ****         if(i == 5 + length){
+  45:src/String.cpp ****             baseString[i] = '\0';
+ 267              		.loc 1 45 13 is_stmt 1
+ 268              		.loc 1 45 25 is_stmt 0
+ 269 0160 17070000 		lla	a4,.LC0
+ 269      13070700 
+ 270 0168 3387E700 		add	a4,a5,a4
+ 271              		.loc 1 45 27
+ 272 016c 23000700 		sb	zero,0(a4)
+ 273              	.LVL31:
+ 274              	.L25:
+ 275              	.LBE4:
+  43:src/String.cpp ****     for(int i = 5 + length; i >= 5; i--){
+ 276              		.loc 1 43 5 is_stmt 1 discriminator 2
+ 277 0170 9B87F7FF 		addiw	a5,a5,-1
+ 278              	.LVL32:
+ 279              	.L26:
+  43:src/String.cpp ****     for(int i = 5 + length; i >= 5; i--){
+ 280              		.loc 1 43 31 discriminator 1
+ 281 0174 13074000 		li	a4,4
+ 282 0178 6358F702 		ble	a5,a4,.L23
+GAS LISTING /tmp/ccDwtScd.s 			page 7
+
+
+ 283              	.LBE3:
+  44:src/String.cpp ****         if(i == 5 + length){
+ 284              		.loc 1 44 9
+ 285              	.LBB7:
+ 286              	.LBB6:
+ 287 017c E382A7FE 		beq	a5,a0,.L28
+ 288              	.LBB5:
+  46:src/String.cpp ****         }else{
+  47:src/String.cpp ****             int mod = number % 10;
+ 289              		.loc 1 47 13
+ 290              		.loc 1 47 17 is_stmt 0
+ 291 0180 9306A000 		li	a3,10
+ 292 0184 3BE7D402 		remw	a4,s1,a3
+ 293              	.LVL33:
+  48:src/String.cpp ****             number /= 10;
+ 294              		.loc 1 48 13 is_stmt 1
+ 295              		.loc 1 48 20 is_stmt 0
+ 296 0188 BBC4D402 		divw	s1,s1,a3
+ 297              	.LVL34:
+  49:src/String.cpp ****             char num_char = '0' + mod;
+ 298              		.loc 1 49 13 is_stmt 1
+ 299              		.loc 1 49 33 is_stmt 0
+ 300 018c 1377F70F 		andi	a4,a4,0xff
+ 301              		.loc 1 49 18
+ 302 0190 1B070703 		addiw	a4,a4,48
+ 303              	.LVL35:
+  50:src/String.cpp ****             baseString[i] = num_char;
+ 304              		.loc 1 50 13 is_stmt 1
+ 305              		.loc 1 50 25 is_stmt 0
+ 306 0194 97060000 		lla	a3,.LC0
+ 306      93860600 
+ 307 019c B386D700 		add	a3,a5,a3
+ 308              		.loc 1 50 27
+ 309 01a0 2380E600 		sb	a4,0(a3)
+ 310 01a4 6FF0DFFC 		j	.L25
+ 311              	.LVL36:
+ 312              	.L23:
+ 313              	.LBE5:
+ 314              	.LBE6:
+ 315              	.LBE7:
+  51:src/String.cpp ****         }
+  52:src/String.cpp ****     }
+  53:src/String.cpp ****     return baseString;
+ 316              		.loc 1 53 5 is_stmt 1
+  54:src/String.cpp **** 
+  55:src/String.cpp **** }
+ 317              		.loc 1 55 1 is_stmt 0
+ 318 01a8 17050000 		lla	a0,.LC0
+ 318      13050500 
+ 319 01b0 83308101 		ld	ra,24(sp)
+ 320              		.cfi_restore 1
+ 321 01b4 03340101 		ld	s0,16(sp)
+ 322              		.cfi_restore 8
+ 323              		.cfi_def_cfa 2, 32
+ 324 01b8 83348100 		ld	s1,8(sp)
+ 325              		.cfi_restore 9
+ 326              	.LVL37:
+GAS LISTING /tmp/ccDwtScd.s 			page 8
+
+
+ 327 01bc 13010102 		addi	sp,sp,32
+ 328              		.cfi_def_cfa_offset 0
+ 329 01c0 67800000 		jr	ra
+ 330              		.cfi_endproc
+ 331              	.LFE41:
+ 333              		.align	2
+ 334              		.globl	_Z14string_comparePKcS0_
+ 336              	_Z14string_comparePKcS0_:
+ 337              	.LFB42:
+  56:src/String.cpp **** 
+  57:src/String.cpp **** bool string_compare(const char* str1, const char* str2) {
+ 338              		.loc 1 57 57 is_stmt 1
+ 339              		.cfi_startproc
+ 340              	.LVL38:
+ 341 01c4 130101FF 		addi	sp,sp,-16
+ 342              		.cfi_def_cfa_offset 16
+ 343 01c8 23348100 		sd	s0,8(sp)
+ 344              		.cfi_offset 8, -8
+ 345 01cc 13040101 		addi	s0,sp,16
+ 346              		.cfi_def_cfa 8, 0
+ 347 01d0 6F00C000 		j	.L32
+ 348              	.L37:
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+  59:src/String.cpp ****         if (*str1 != *str2) {
+  60:src/String.cpp ****             return false;
+  61:src/String.cpp ****         }
+  62:src/String.cpp ****         str1++;
+ 349              		.loc 1 62 9
+ 350              		.loc 1 62 13 is_stmt 0
+ 351 01d4 13051500 		addi	a0,a0,1
+ 352              	.LVL39:
+  63:src/String.cpp ****         str2++;
+ 353              		.loc 1 63 9 is_stmt 1
+ 354              		.loc 1 63 13 is_stmt 0
+ 355 01d8 93851500 		addi	a1,a1,1
+ 356              	.LVL40:
+ 357              	.L32:
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 358              		.loc 1 58 5 is_stmt 1
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 359              		.loc 1 58 26
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 360              		.loc 1 58 12 is_stmt 0
+ 361 01dc 83470500 		lbu	a5,0(a0)
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 362              		.loc 1 58 26
+ 363 01e0 638C0700 		beqz	a5,.L30
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 364              		.loc 1 58 29 discriminator 1
+ 365 01e4 03C70500 		lbu	a4,0(a1)
+  58:src/String.cpp ****     while (*str1 != '\0' && *str2 != '\0') {
+ 366              		.loc 1 58 26 discriminator 1
+ 367 01e8 63080700 		beqz	a4,.L30
+  59:src/String.cpp ****             return false;
+ 368              		.loc 1 59 9 is_stmt 1
+ 369 01ec E384E7FE 		beq	a5,a4,.L37
+  60:src/String.cpp ****         }
+GAS LISTING /tmp/ccDwtScd.s 			page 9
+
+
+ 370              		.loc 1 60 20 is_stmt 0
+ 371 01f0 13050000 		li	a0,0
+ 372              	.LVL41:
+ 373 01f4 6F00C001 		j	.L31
+ 374              	.LVL42:
+ 375              	.L30:
+  64:src/String.cpp ****     }
+  65:src/String.cpp **** 
+  66:src/String.cpp ****     // Check if both strings have reached the end simultaneously
+  67:src/String.cpp ****     return (*str1 == '\0' && *str2 == '\0');
+ 376              		.loc 1 67 5 is_stmt 1
+ 377              		.loc 1 67 27 is_stmt 0
+ 378 01f8 639A0700 		bnez	a5,.L34
+ 379              		.loc 1 67 30 discriminator 1
+ 380 01fc 83C70500 		lbu	a5,0(a1)
+ 381              		.loc 1 67 27 discriminator 1
+ 382 0200 638E0700 		beqz	a5,.L35
+ 383              		.loc 1 67 27
+ 384 0204 13050000 		li	a0,0
+ 385              	.LVL43:
+ 386 0208 6F008000 		j	.L31
+ 387              	.LVL44:
+ 388              	.L34:
+ 389 020c 13050000 		li	a0,0
+ 390              	.LVL45:
+ 391              	.L31:
+  68:src/String.cpp **** }...
+ 392              		.loc 1 68 1
+ 393 0210 03348100 		ld	s0,8(sp)
+ 394              		.cfi_remember_state
+ 395              		.cfi_restore 8
+ 396              		.cfi_def_cfa 2, 16
+ 397 0214 13010101 		addi	sp,sp,16
+ 398              		.cfi_def_cfa_offset 0
+ 399 0218 67800000 		jr	ra
+ 400              	.LVL46:
+ 401              	.L35:
+ 402              		.cfi_restore_state
+  67:src/String.cpp ****     return (*str1 == '\0' && *str2 == '\0');
+ 403              		.loc 1 67 27
+ 404 021c 13051000 		li	a0,1
+ 405              	.LVL47:
+ 406 0220 6FF01FFF 		j	.L31
+ 407              		.cfi_endproc
+ 408              	.LFE42:
+ 410              	.Letext0:
+ 411              		.file 2 "src/../test/../h/../h/../h/../lib/hw.h"
+ 412              		.file 3 "src/../test/../h/syscall_c.h"
+GAS LISTING /tmp/ccDwtScd.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 String.cpp
+     /tmp/ccDwtScd.s:9      .text:0000000000000000 _Z10size_startPKc
+     /tmp/ccDwtScd.s:13     .text:0000000000000000 .L0 
+     /tmp/ccDwtScd.s:15     .text:0000000000000000 .L0 
+     /tmp/ccDwtScd.s:16     .text:0000000000000004 .L0 
+     /tmp/ccDwtScd.s:18     .text:0000000000000008 .L0 
+     /tmp/ccDwtScd.s:20     .text:000000000000000c .L0 
+     /tmp/ccDwtScd.s:22     .text:000000000000000c .L0 
+     /tmp/ccDwtScd.s:23     .text:000000000000000c .L0 
+     /tmp/ccDwtScd.s:25     .text:0000000000000010 .L0 
+     /tmp/ccDwtScd.s:28     .text:0000000000000018 .L0 
+     /tmp/ccDwtScd.s:32     .text:000000000000001c .L0 
+     /tmp/ccDwtScd.s:33     .text:0000000000000020 .L0 
+     /tmp/ccDwtScd.s:34     .text:0000000000000020 .L0 
+     /tmp/ccDwtScd.s:35     .text:0000000000000020 .L0 
+     /tmp/ccDwtScd.s:37     .text:0000000000000024 .L0 
+     /tmp/ccDwtScd.s:41     .text:0000000000000028 .L0 
+     /tmp/ccDwtScd.s:43     .text:0000000000000028 .L0 
+     /tmp/ccDwtScd.s:45     .text:000000000000002c .L0 
+     /tmp/ccDwtScd.s:48     .text:0000000000000034 .L0 
+     /tmp/ccDwtScd.s:54     .text:000000000000003c .L0 
+     /tmp/ccDwtScd.s:56     .text:0000000000000040 .L0 
+     /tmp/ccDwtScd.s:59     .text:0000000000000048 .L0 
+     /tmp/ccDwtScd.s:65     .text:0000000000000050 .L0 
+     /tmp/ccDwtScd.s:67     .text:0000000000000054 .L0 
+     /tmp/ccDwtScd.s:70     .text:000000000000005c .L0 
+     /tmp/ccDwtScd.s:76     .text:0000000000000064 .L0 
+     /tmp/ccDwtScd.s:78     .text:0000000000000068 .L0 
+     /tmp/ccDwtScd.s:81     .text:0000000000000070 .L0 
+     /tmp/ccDwtScd.s:87     .text:0000000000000078 .L0 
+     /tmp/ccDwtScd.s:90     .text:0000000000000080 .L0 
+     /tmp/ccDwtScd.s:96     .text:0000000000000080 _Z14get_int_lengthi
+     /tmp/ccDwtScd.s:99     .text:0000000000000080 .L0 
+     /tmp/ccDwtScd.s:101    .text:0000000000000080 .L0 
+     /tmp/ccDwtScd.s:102    .text:0000000000000084 .L0 
+     /tmp/ccDwtScd.s:104    .text:0000000000000088 .L0 
+     /tmp/ccDwtScd.s:106    .text:000000000000008c .L0 
+     /tmp/ccDwtScd.s:110    .text:0000000000000090 .L0 
+     /tmp/ccDwtScd.s:111    .text:0000000000000090 .L0 
+     /tmp/ccDwtScd.s:115    .text:0000000000000094 .L0 
+     /tmp/ccDwtScd.s:116    .text:0000000000000094 .L0 
+     /tmp/ccDwtScd.s:118    .text:0000000000000098 .L0 
+     /tmp/ccDwtScd.s:119    .text:0000000000000098 .L0 
+     /tmp/ccDwtScd.s:123    .text:00000000000000a0 .L0 
+     /tmp/ccDwtScd.s:124    .text:00000000000000a0 .L0 
+     /tmp/ccDwtScd.s:127    .text:00000000000000a4 .L0 
+     /tmp/ccDwtScd.s:131    .text:00000000000000a8 .L0 
+     /tmp/ccDwtScd.s:132    .text:00000000000000a8 .L0 
+     /tmp/ccDwtScd.s:133    .text:00000000000000ac .L0 
+     /tmp/ccDwtScd.s:134    .text:00000000000000ac .L0 
+     /tmp/ccDwtScd.s:136    .text:00000000000000b0 .L0 
+     /tmp/ccDwtScd.s:138    .text:00000000000000b4 .L0 
+     /tmp/ccDwtScd.s:144    .text:00000000000000b4 _Z13int_to_stringiPci
+     /tmp/ccDwtScd.s:147    .text:00000000000000b4 .L0 
+     /tmp/ccDwtScd.s:149    .text:00000000000000b4 .L0 
+     /tmp/ccDwtScd.s:150    .text:00000000000000b8 .L0 
+GAS LISTING /tmp/ccDwtScd.s 			page 11
+
+
+     /tmp/ccDwtScd.s:156    .text:00000000000000cc .L0 
+     /tmp/ccDwtScd.s:157    .text:00000000000000cc .L0 
+     /tmp/ccDwtScd.s:158    .text:00000000000000cc .L0 
+     /tmp/ccDwtScd.s:159    .text:00000000000000cc .L0 
+     /tmp/ccDwtScd.s:160    .text:00000000000000cc .L0 
+     /tmp/ccDwtScd.s:162    .text:00000000000000d0 .L0 
+     /tmp/ccDwtScd.s:167    .text:00000000000000dc .L0 
+     /tmp/ccDwtScd.s:168    .text:00000000000000dc .L0 
+     /tmp/ccDwtScd.s:171    .text:00000000000000e4 .L0 
+     /tmp/ccDwtScd.s:174    .text:00000000000000e8 .L0 
+     /tmp/ccDwtScd.s:175    .text:00000000000000e8 .L0 
+     /tmp/ccDwtScd.s:179    .text:00000000000000ec .L0 
+     /tmp/ccDwtScd.s:181    .text:00000000000000f0 .L0 
+     /tmp/ccDwtScd.s:182    .text:00000000000000f0 .L0 
+     /tmp/ccDwtScd.s:185    .text:00000000000000f8 .L0 
+     /tmp/ccDwtScd.s:187    .text:00000000000000fc .L0 
+     /tmp/ccDwtScd.s:189    .text:0000000000000100 .L0 
+     /tmp/ccDwtScd.s:191    .text:0000000000000104 .L0 
+     /tmp/ccDwtScd.s:192    .text:0000000000000104 .L0 
+     /tmp/ccDwtScd.s:195    .text:0000000000000108 .L0 
+     /tmp/ccDwtScd.s:202    .text:0000000000000110 .L0 
+     /tmp/ccDwtScd.s:203    .text:0000000000000110 .L0 
+     /tmp/ccDwtScd.s:206    .text:0000000000000114 .L0 
+     /tmp/ccDwtScd.s:210    .text:0000000000000118 .L0 
+     /tmp/ccDwtScd.s:211    .text:000000000000011c .L0 
+     /tmp/ccDwtScd.s:213    .text:0000000000000120 .L0 
+     /tmp/ccDwtScd.s:214    .text:0000000000000120 .L0 
+     /tmp/ccDwtScd.s:216    .text:0000000000000124 .L0 
+     /tmp/ccDwtScd.s:218    .text:0000000000000128 .L0 
+     /tmp/ccDwtScd.s:220    .text:000000000000012c .L0 
+     /tmp/ccDwtScd.s:222    .text:0000000000000130 .L0 
+     /tmp/ccDwtScd.s:224    .text:0000000000000134 .L0 
+     /tmp/ccDwtScd.s:235    .text:0000000000000134 _Z27concatenate_int_to_char_ptri
+     /tmp/ccDwtScd.s:238    .text:0000000000000134 .L0 
+     /tmp/ccDwtScd.s:240    .text:0000000000000134 .L0 
+     /tmp/ccDwtScd.s:241    .text:0000000000000138 .L0 
+     /tmp/ccDwtScd.s:245    .text:0000000000000144 .L0 
+     /tmp/ccDwtScd.s:246    .text:0000000000000144 .L0 
+     /tmp/ccDwtScd.s:247    .text:0000000000000144 .L0 
+     /tmp/ccDwtScd.s:249    .text:0000000000000148 .L0 
+     /tmp/ccDwtScd.s:253    .text:000000000000014c .L0 
+     /tmp/ccDwtScd.s:254    .text:000000000000014c .L0 
+     /tmp/ccDwtScd.s:255    .text:000000000000014c .L0 
+     /tmp/ccDwtScd.s:259    .text:0000000000000154 .L0 
+     /tmp/ccDwtScd.s:260    .text:0000000000000154 .L0 
+     /tmp/ccDwtScd.s:268    .text:0000000000000160 .L0 
+     /tmp/ccDwtScd.s:269    .text:0000000000000160 .L0 
+     /tmp/ccDwtScd.s:272    .text:000000000000016c .L0 
+     /tmp/ccDwtScd.s:277    .text:0000000000000170 .L0 
+     /tmp/ccDwtScd.s:281    .text:0000000000000174 .L0 
+     /tmp/ccDwtScd.s:287    .text:000000000000017c .L0 
+     /tmp/ccDwtScd.s:290    .text:0000000000000180 .L0 
+     /tmp/ccDwtScd.s:291    .text:0000000000000180 .L0 
+     /tmp/ccDwtScd.s:295    .text:0000000000000188 .L0 
+     /tmp/ccDwtScd.s:296    .text:0000000000000188 .L0 
+     /tmp/ccDwtScd.s:299    .text:000000000000018c .L0 
+     /tmp/ccDwtScd.s:300    .text:000000000000018c .L0 
+GAS LISTING /tmp/ccDwtScd.s 			page 12
+
+
+     /tmp/ccDwtScd.s:302    .text:0000000000000190 .L0 
+     /tmp/ccDwtScd.s:305    .text:0000000000000194 .L0 
+     /tmp/ccDwtScd.s:306    .text:0000000000000194 .L0 
+     /tmp/ccDwtScd.s:309    .text:00000000000001a0 .L0 
+     /tmp/ccDwtScd.s:317    .text:00000000000001a8 .L0 
+     /tmp/ccDwtScd.s:318    .text:00000000000001a8 .L0 
+     /tmp/ccDwtScd.s:320    .text:00000000000001b4 .L0 
+     /tmp/ccDwtScd.s:322    .text:00000000000001b8 .L0 
+     /tmp/ccDwtScd.s:323    .text:00000000000001b8 .L0 
+     /tmp/ccDwtScd.s:325    .text:00000000000001bc .L0 
+     /tmp/ccDwtScd.s:328    .text:00000000000001c0 .L0 
+     /tmp/ccDwtScd.s:330    .text:00000000000001c4 .L0 
+     /tmp/ccDwtScd.s:336    .text:00000000000001c4 _Z14string_comparePKcS0_
+     /tmp/ccDwtScd.s:339    .text:00000000000001c4 .L0 
+     /tmp/ccDwtScd.s:341    .text:00000000000001c4 .L0 
+     /tmp/ccDwtScd.s:342    .text:00000000000001c8 .L0 
+     /tmp/ccDwtScd.s:344    .text:00000000000001cc .L0 
+     /tmp/ccDwtScd.s:346    .text:00000000000001d0 .L0 
+     /tmp/ccDwtScd.s:350    .text:00000000000001d4 .L0 
+     /tmp/ccDwtScd.s:351    .text:00000000000001d4 .L0 
+     /tmp/ccDwtScd.s:354    .text:00000000000001d8 .L0 
+     /tmp/ccDwtScd.s:355    .text:00000000000001d8 .L0 
+     /tmp/ccDwtScd.s:359    .text:00000000000001dc .L0 
+     /tmp/ccDwtScd.s:360    .text:00000000000001dc .L0 
+     /tmp/ccDwtScd.s:361    .text:00000000000001dc .L0 
+     /tmp/ccDwtScd.s:363    .text:00000000000001e0 .L0 
+     /tmp/ccDwtScd.s:365    .text:00000000000001e4 .L0 
+     /tmp/ccDwtScd.s:367    .text:00000000000001e8 .L0 
+     /tmp/ccDwtScd.s:369    .text:00000000000001ec .L0 
+     /tmp/ccDwtScd.s:371    .text:00000000000001f0 .L0 
+     /tmp/ccDwtScd.s:377    .text:00000000000001f8 .L0 
+     /tmp/ccDwtScd.s:378    .text:00000000000001f8 .L0 
+     /tmp/ccDwtScd.s:380    .text:00000000000001fc .L0 
+     /tmp/ccDwtScd.s:382    .text:0000000000000200 .L0 
+     /tmp/ccDwtScd.s:384    .text:0000000000000204 .L0 
+     /tmp/ccDwtScd.s:393    .text:0000000000000210 .L0 
+     /tmp/ccDwtScd.s:394    .text:0000000000000214 .L0 
+     /tmp/ccDwtScd.s:395    .text:0000000000000214 .L0 
+     /tmp/ccDwtScd.s:396    .text:0000000000000214 .L0 
+     /tmp/ccDwtScd.s:398    .text:0000000000000218 .L0 
+     /tmp/ccDwtScd.s:402    .text:000000000000021c .L0 
+     /tmp/ccDwtScd.s:404    .text:000000000000021c .L0 
+     /tmp/ccDwtScd.s:407    .text:0000000000000224 .L0 
+     /tmp/ccDwtScd.s:413    .text:0000000000000224 .L0 
+     /tmp/ccDwtScd.s:229    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccDwtScd.s:269    .text:0000000000000160 .L0 
+     /tmp/ccDwtScd.s:306    .text:0000000000000194 .L0 
+     /tmp/ccDwtScd.s:318    .text:00000000000001a8 .L0 
+     /tmp/ccDwtScd.s:40     .text:0000000000000028 .L9
+     /tmp/ccDwtScd.s:52     .text:000000000000003c .L10
+     /tmp/ccDwtScd.s:30     .text:000000000000001c .L2
+     /tmp/ccDwtScd.s:63     .text:0000000000000050 .L11
+     /tmp/ccDwtScd.s:74     .text:0000000000000064 .L12
+     /tmp/ccDwtScd.s:85     .text:0000000000000078 .L7
+     /tmp/ccDwtScd.s:129    .text:00000000000000a8 .L14
+     /tmp/ccDwtScd.s:113    .text:0000000000000094 .L15
+     /tmp/ccDwtScd.s:208    .text:0000000000000118 .L17
+GAS LISTING /tmp/ccDwtScd.s 			page 13
+
+
+     /tmp/ccDwtScd.s:199    .text:0000000000000110 .L19
+     /tmp/ccDwtScd.s:177    .text:00000000000000ec .L20
+     /tmp/ccDwtScd.s:279    .text:0000000000000174 .L26
+     /tmp/ccDwtScd.s:312    .text:00000000000001a8 .L23
+     /tmp/ccDwtScd.s:265    .text:0000000000000160 .L28
+     /tmp/ccDwtScd.s:274    .text:0000000000000170 .L25
+     /tmp/ccDwtScd.s:357    .text:00000000000001dc .L32
+     /tmp/ccDwtScd.s:375    .text:00000000000001f8 .L30
+     /tmp/ccDwtScd.s:348    .text:00000000000001d4 .L37
+     /tmp/ccDwtScd.s:391    .text:0000000000000210 .L31
+     /tmp/ccDwtScd.s:388    .text:000000000000020c .L34
+     /tmp/ccDwtScd.s:401    .text:000000000000021c .L35
+     /tmp/ccDwtScd.s:785    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccDwtScd.s:1483   .debug_str:00000000000001ea .LASF39
+     /tmp/ccDwtScd.s:1447   .debug_str:00000000000000f4 .LASF40
+     /tmp/ccDwtScd.s:1441   .debug_str:00000000000000aa .LASF41
+     /tmp/ccDwtScd.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccDwtScd.s:410    .text:0000000000000224 .Letext0
+     /tmp/ccDwtScd.s:1413   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccDwtScd.s:1457   .debug_str:0000000000000130 .LASF0
+     /tmp/ccDwtScd.s:1459   .debug_str:000000000000013d .LASF1
+     /tmp/ccDwtScd.s:1453   .debug_str:000000000000010f .LASF2
+     /tmp/ccDwtScd.s:1443   .debug_str:00000000000000de .LASF4
+     /tmp/ccDwtScd.s:1475   .debug_str:00000000000001a6 .LASF3
+     /tmp/ccDwtScd.s:1419   .debug_str:000000000000001f .LASF5
+     /tmp/ccDwtScd.s:1463   .debug_str:0000000000000157 .LASF6
+     /tmp/ccDwtScd.s:1455   .debug_str:000000000000011d .LASF7
+     /tmp/ccDwtScd.s:1491   .debug_str:00000000000002da .LASF8
+     /tmp/ccDwtScd.s:1439   .debug_str:000000000000009c .LASF9
+     /tmp/ccDwtScd.s:1467   .debug_str:000000000000016f .LASF10
+     /tmp/ccDwtScd.s:1423   .debug_str:0000000000000036 .LASF11
+     /tmp/ccDwtScd.s:1487   .debug_str:00000000000002b9 .LASF12
+     /tmp/ccDwtScd.s:1421   .debug_str:0000000000000026 .LASF13
+     /tmp/ccDwtScd.s:1417   .debug_str:000000000000000f .LASF14
+     /tmp/ccDwtScd.s:1425   .debug_str:0000000000000041 .LASF15
+     /tmp/ccDwtScd.s:1473   .debug_str:0000000000000190 .LASF16
+     /tmp/ccDwtScd.s:1435   .debug_str:0000000000000081 .LASF17
+     /tmp/ccDwtScd.s:1437   .debug_str:0000000000000097 .LASF18
+     /tmp/ccDwtScd.s:1445   .debug_str:00000000000000e5 .LASF22
+     /tmp/ccDwtScd.s:1481   .debug_str:00000000000001d1 .LASF24
+     /tmp/ccDwtScd.s:337    .text:00000000000001c4 .LFB42
+     /tmp/ccDwtScd.s:408    .text:0000000000000224 .LFE42
+     /tmp/ccDwtScd.s:1431   .debug_str:0000000000000077 .LASF19
+     /tmp/ccDwtScd.s:1134   .debug_loc:0000000000000000 .LLST12
+     /tmp/ccDwtScd.s:1433   .debug_str:000000000000007c .LASF20
+     /tmp/ccDwtScd.s:1157   .debug_loc:000000000000006f .LLST13
+     /tmp/ccDwtScd.s:1465   .debug_str:000000000000016a .LASF21
+     /tmp/ccDwtScd.s:1495   .debug_str:000000000000030b .LASF23
+     /tmp/ccDwtScd.s:1493   .debug_str:00000000000002ea .LASF25
+     /tmp/ccDwtScd.s:236    .text:0000000000000134 .LFB41
+     /tmp/ccDwtScd.s:331    .text:00000000000001c4 .LFE41
+     /tmp/ccDwtScd.s:1461   .debug_str:0000000000000150 .LASF26
+     /tmp/ccDwtScd.s:1168   .debug_loc:00000000000000a5 .LLST7
+     /tmp/ccDwtScd.s:1469   .debug_str:000000000000017e .LASF27
+     /tmp/ccDwtScd.s:1451   .debug_str:0000000000000108 .LASF28
+     /tmp/ccDwtScd.s:1190   .debug_loc:0000000000000104 .LLST8
+     /tmp/ccDwtScd.s:1405   .debug_ranges:0000000000000000 .Ldebug_ranges0
+GAS LISTING /tmp/ccDwtScd.s 			page 14
+
+
+     /tmp/ccDwtScd.s:1197   .debug_loc:0000000000000127 .LLST9
+     /tmp/ccDwtScd.s:288    .text:0000000000000180 .LBB5
+     /tmp/ccDwtScd.s:313    .text:00000000000001a8 .LBE5
+     /tmp/ccDwtScd.s:1204   .debug_loc:000000000000014a .LLST10
+     /tmp/ccDwtScd.s:1497   .debug_str:0000000000000327 .LASF29
+     /tmp/ccDwtScd.s:1220   .debug_loc:0000000000000176 .LLST11
+     /tmp/ccDwtScd.s:256    .text:0000000000000154 .LVL28
+     /tmp/ccDwtScd.s:1477   .debug_str:00000000000001b8 .LASF34
+     /tmp/ccDwtScd.s:1429   .debug_str:0000000000000061 .LASF36
+     /tmp/ccDwtScd.s:145    .text:00000000000000b4 .LFB40
+     /tmp/ccDwtScd.s:225    .text:0000000000000134 .LFE40
+     /tmp/ccDwtScd.s:1227   .debug_loc:0000000000000199 .LLST3
+     /tmp/ccDwtScd.s:1471   .debug_str:0000000000000189 .LASF30
+     /tmp/ccDwtScd.s:1249   .debug_loc:00000000000001f8 .LLST4
+     /tmp/ccDwtScd.s:1479   .debug_str:00000000000001c6 .LASF31
+     /tmp/ccDwtScd.s:1267   .debug_loc:0000000000000244 .LLST5
+     /tmp/ccDwtScd.s:173    .text:00000000000000e8 .LBB2
+     /tmp/ccDwtScd.s:200    .text:0000000000000110 .LBE2
+     /tmp/ccDwtScd.s:1281   .debug_loc:000000000000027d .LLST6
+     /tmp/ccDwtScd.s:169    .text:00000000000000e4 .LVL19
+     /tmp/ccDwtScd.s:1415   .debug_str:0000000000000000 .LASF32
+     /tmp/ccDwtScd.s:1427   .debug_str:000000000000004d .LASF33
+     /tmp/ccDwtScd.s:97     .text:0000000000000080 .LFB39
+     /tmp/ccDwtScd.s:139    .text:00000000000000b4 .LFE39
+     /tmp/ccDwtScd.s:1292   .debug_loc:00000000000002b3 .LLST1
+     /tmp/ccDwtScd.s:1307   .debug_loc:00000000000002fc .LLST2
+     /tmp/ccDwtScd.s:1485   .debug_str:00000000000002ae .LASF35
+     /tmp/ccDwtScd.s:1489   .debug_str:00000000000002c8 .LASF37
+     /tmp/ccDwtScd.s:10     .text:0000000000000000 .LFB38
+     /tmp/ccDwtScd.s:91     .text:0000000000000080 .LFE38
+     /tmp/ccDwtScd.s:1449   .debug_str:0000000000000103 .LASF38
+     /tmp/ccDwtScd.s:1323   .debug_loc:0000000000000346 .LLST0
+     /tmp/ccDwtScd.s:340    .text:00000000000001c4 .LVL38
+     /tmp/ccDwtScd.s:352    .text:00000000000001d8 .LVL39
+     /tmp/ccDwtScd.s:372    .text:00000000000001f4 .LVL41
+     /tmp/ccDwtScd.s:374    .text:00000000000001f8 .LVL42
+     /tmp/ccDwtScd.s:385    .text:0000000000000208 .LVL43
+     /tmp/ccDwtScd.s:387    .text:000000000000020c .LVL44
+     /tmp/ccDwtScd.s:390    .text:0000000000000210 .LVL45
+     /tmp/ccDwtScd.s:400    .text:000000000000021c .LVL46
+     /tmp/ccDwtScd.s:405    .text:0000000000000220 .LVL47
+     /tmp/ccDwtScd.s:356    .text:00000000000001dc .LVL40
+     /tmp/ccDwtScd.s:239    .text:0000000000000134 .LVL26
+     /tmp/ccDwtScd.s:264    .text:0000000000000160 .LVL30
+     /tmp/ccDwtScd.s:297    .text:000000000000018c .LVL34
+     /tmp/ccDwtScd.s:311    .text:00000000000001a8 .LVL36
+     /tmp/ccDwtScd.s:326    .text:00000000000001bc .LVL37
+     /tmp/ccDwtScd.s:261    .text:0000000000000158 .LVL29
+     /tmp/ccDwtScd.s:293    .text:0000000000000188 .LVL33
+     /tmp/ccDwtScd.s:303    .text:0000000000000194 .LVL35
+     /tmp/ccDwtScd.s:148    .text:00000000000000b4 .LVL18
+     /tmp/ccDwtScd.s:176    .text:00000000000000ec .LVL20
+     /tmp/ccDwtScd.s:193    .text:0000000000000108 .LVL21
+     /tmp/ccDwtScd.s:198    .text:0000000000000110 .LVL23
+     /tmp/ccDwtScd.s:207    .text:0000000000000118 .LVL25
+     /tmp/ccDwtScd.s:204    .text:0000000000000114 .LVL24
+     /tmp/ccDwtScd.s:196    .text:000000000000010c .LVL22
+GAS LISTING /tmp/ccDwtScd.s 			page 15
+
+
+     /tmp/ccDwtScd.s:100    .text:0000000000000080 .LVL12
+     /tmp/ccDwtScd.s:112    .text:0000000000000094 .LVL14
+     /tmp/ccDwtScd.s:121    .text:00000000000000a0 .LVL15
+     /tmp/ccDwtScd.s:128    .text:00000000000000a8 .LVL17
+     /tmp/ccDwtScd.s:109    .text:0000000000000090 .LVL13
+     /tmp/ccDwtScd.s:125    .text:00000000000000a4 .LVL16
+     /tmp/ccDwtScd.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccDwtScd.s:29     .text:000000000000001c .LVL1
+     /tmp/ccDwtScd.s:39     .text:0000000000000028 .LVL2
+     /tmp/ccDwtScd.s:49     .text:0000000000000038 .LVL3
+     /tmp/ccDwtScd.s:51     .text:000000000000003c .LVL4
+     /tmp/ccDwtScd.s:60     .text:000000000000004c .LVL5
+     /tmp/ccDwtScd.s:62     .text:0000000000000050 .LVL6
+     /tmp/ccDwtScd.s:71     .text:0000000000000060 .LVL7
+     /tmp/ccDwtScd.s:73     .text:0000000000000064 .LVL8
+     /tmp/ccDwtScd.s:82     .text:0000000000000074 .LVL9
+     /tmp/ccDwtScd.s:84     .text:0000000000000078 .LVL10
+     /tmp/ccDwtScd.s:88     .text:000000000000007c .LVL11
+     /tmp/ccDwtScd.s:414    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccDwtScd.s:258    .text:0000000000000154 .LBB3
+     /tmp/ccDwtScd.s:283    .text:000000000000017c .LBE3
+     /tmp/ccDwtScd.s:285    .text:000000000000017c .LBB7
+     /tmp/ccDwtScd.s:315    .text:00000000000001a8 .LBE7
+
+NO UNDEFINED SYMBOLS

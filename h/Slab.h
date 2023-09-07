@@ -1,22 +1,26 @@
 
 #include "../lib/hw.h"
 #include "../h/Buddy.h"
+#include "../h/String.h"
 
 class Slab{
 private:
-    size_t slab_size; // size of slab in bytes, this field exists because of implementation of buddy allocator
     size_t num_active = 0; // number of active objects in slab
     Slab* next = nullptr; // next slab
-    bool **freeObjects;
-    size_t firstAddr;
+    bool *free_objects;
+    size_t first_addr;
     friend struct kmem_cache_s;
 public:
-    size_t getNumberOfActiveObjects(){return num_active;}
-    void* returnFirstFreeObjectAndRearangeList(int, int);
-    void incrementNumOfActive(){num_active++;}
+    size_t get_number_of_active_objects(){return num_active;}
+    void* return_first_free_object_and_rearange_list(int, int);
+    void increment_num_of_active(){num_active++;}
+    void decrement_num_of_active(){num_active--;}
 };
 
 struct kmem_cache_s{
+
+    static kmem_cache_s* head;
+
     Slab* slabs_full = nullptr;
     Slab* slabs_partial = nullptr;
     Slab* slabs_free = nullptr;
@@ -39,14 +43,26 @@ struct kmem_cache_s{
     bool growing = false; // if number of slabs doesn't grow since last shrink
     size_t shrink = 0; // how many times cache got shrink
 
-    // create cache
-    static void* kmem_cache_create(const char* name, size_t size, void (*ctor)(void *), void (*dtor)(void *));
+    // methods
     size_t kmem_cache_shrink();
     void* kmem_cache_alloc();
+    int kmem_cache_free(void* objp);
+    int kmem_cache_destroy(size_t addr);
+    void kmem_cache_info();
+
+    // static methods
+    static void* kmem_cache_create(const char* name, size_t size, void (*ctor)(void *), void (*dtor)(void *));
+    static void* kmalloc(size_t size);
+    static int kfree(const void* objp);
+    static bool is_small_buffer_size_correct(size_t size);
+    static void print_info_all_caches();
+
+private:
     void create_free_slab();
-    void move_from_to(Slab* slabs_from, size_t& num_from, Slab* slabs_to, size_t& num_to);
+    static kmem_cache_s* check_if_name_exists(const char* name);
+    static size_t pow(size_t deg);
 
 };
 
-static kmem_cache_s* head = nullptr;
+
 static const size_t NUM_OF_OBJECTS_IN_SLAB = 10;

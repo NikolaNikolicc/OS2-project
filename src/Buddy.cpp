@@ -9,11 +9,6 @@ BuddySystem::BuddySystem(){
 
 // vraca 0 u slucaju neuspesne alokacije, u slucaju uspesne vraca adresu bloka, na sizeof(size_t) ispred se nalazi avelicina alociranog bloka
 void* BuddySystem::buddyAlloc(size_t size) {
-    if (!isInitialized){
-        initBuddy();
-        isInitialized = true;
-    }
-
     size_t position = 50;
     for(size_t i = 0; i < 40; i++){
         if(arr[i] && arr[i]->size >= size + sizeof(size_t)){
@@ -31,18 +26,13 @@ void* BuddySystem::buddyAlloc(size_t size) {
 }
 
 void BuddySystem::buddyFree(size_t addr) {
-    if (!isInitialized){
-        initBuddy();
-        isInitialized = true;
-    }
-
     size_t size = *(size_t*)(addr - sizeof(size_t));
     if((void*)addr == nullptr || size == 0)return;
     size_t position = log(size);
     MemNode* newNode = (MemNode*)(addr - sizeof(size_t));
     newNode->next = nullptr;
     newNode->size = size;
-    int merged = (int)insertInArray(position, newNode);
+    int merged = (int)insertInArray(position, (size_t)newNode);
     while(merged != -1){
         MemNode* curr = arr[position], *prev = nullptr, *next = nullptr;
         for(int i = 0; i < merged; i++){
@@ -70,7 +60,7 @@ void BuddySystem::buddyFree(size_t addr) {
 // deli cvor na dva manja i ubacuje ih u red ispod, sve dok je to moguce (dok u naredni moze da stane required_size), vraca poslednji red u koji su elementi ubaceni
 size_t BuddySystem::splitAndOrder(size_t position, size_t required_size) {
     size_t val = pow(position);
-    while((val >> 1) > required_size){
+    while((val >> 1) >= required_size && (val >> 1) >= BLOCK_SIZE){
         MemNode* tmp = arr[position];
         arr[position] = arr[position]->next;
         tmp->next = nullptr;
@@ -83,14 +73,15 @@ size_t BuddySystem::splitAndOrder(size_t position, size_t required_size) {
         position--;
         val >>= 1;
 
-        insertInArray(position, tmp);
-        insertInArray(position, newNode);
+        insertInArray(position, (size_t)tmp);
+        insertInArray(position, (size_t)newNode);
     }
     return position;
 }
 
 // vraca na kojem mestu je node ubacen u nizu arr[position]
-int BuddySystem::insertInArray(size_t position, BuddySystem::MemNode *node) {
+int BuddySystem::insertInArray(size_t position, size_t addr) {
+    MemNode* node = (MemNode*)addr;
 
     if(!arr[position]){
         arr[position] = node;
@@ -112,7 +103,7 @@ int BuddySystem::insertInArray(size_t position, BuddySystem::MemNode *node) {
 
 // vraca -1 ukoliko nije spojeno, ukoliko jeste vraca poziciju na kojoj je element ubacen
 int BuddySystem::tryToMerge(BuddySystem::MemNode *left, BuddySystem::MemNode *right, size_t position) {
-    if(left && right && ((size_t)left + left->size == (size_t)right) && (((size_t)left - (size_t)HEAP_START_ADDR) % position == 0)){
+    if(left && right && ((size_t)left + left->size == (size_t)right) && (((size_t)left - buddyHeapStart) % pow(position) == 0)){
         left->size <<= 1;
         MemNode* prev = nullptr;
         for(MemNode* curr = arr[position]; curr != left; curr = curr->next){
@@ -126,7 +117,7 @@ int BuddySystem::tryToMerge(BuddySystem::MemNode *left, BuddySystem::MemNode *ri
         right->next = nullptr;
         left->next = nullptr;
 //        *(size_t*)(left - sizeof(size_t)) = left->size;
-        size_t insertPosition = insertInArray(position + 1, left);
+        size_t insertPosition = insertInArray(position + 1, (size_t)left);
         // nema svrhu, samo testiranje da ne bi bilo optimizacije
         left = arr[position];
         return (int)insertPosition;

@@ -18,6 +18,7 @@ public:
         if(block_num != 0 && space != nullptr){
             bs.buddyHeapStart = (size_t)space;
             bs.buddyNumOfBlocks = block_num;
+            bs.initBuddy();
         }
         return bs;
     }
@@ -36,11 +37,9 @@ private:
     size_t buddyHeapEnd;
     size_t buddyNumOfBlocks;
 
-    bool isInitialized = false;
-
     void initBuddy();
     size_t splitAndOrder(size_t position, size_t required_size);
-    int insertInArray(size_t position, MemNode* node);
+    int insertInArray(size_t position, size_t addr);
     int tryToMerge(MemNode* left, MemNode* right, size_t position);
 
     size_t static pow(size_t deg){
