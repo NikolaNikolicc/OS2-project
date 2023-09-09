@@ -29,12 +29,24 @@ void* kmem_cache_s::kmem_cache_create(const char *name, size_t size, void (*ctor
 
     // calc how many blocks one slab should contain
     tmp->size_in_blocks = 1;
-    while(tmp->size_in_blocks * BLOCK_SIZE < tmp->objsize * NUM_OF_OBJECTS_IN_SLAB + sizeof(Slab) + sizeof(size_t)){
+    size_t min_size_of_objects = tmp->objsize * NUM_OF_OBJECTS_IN_SLAB;
+    size_t min_size_of_arr = 2 * sizeof(size_t);
+    // min requirements
+    while(tmp->size_in_blocks * BLOCK_SIZE < sizeof(size_t)*2 + sizeof(Slab) + min_size_of_arr + min_size_of_objects){
         tmp->size_in_blocks++;
     }
+
     // calc how many objects one slab can contain
-    int how_many_objects_into_one_slab = (int)(tmp->size_in_blocks * BLOCK_SIZE - sizeof(Slab) - sizeof(size_t)) / (int)(tmp->objsize);
+    int how_many_objects_into_one_slab = 10;
+    int current_size_of_arr = 2;
+    while(how_many_objects_into_one_slab * tmp->objsize <=
+            (int)(tmp->size_in_blocks * BLOCK_SIZE - sizeof(size_t)*2 - sizeof(Slab) - current_size_of_arr * sizeof(size_t))){
+        if(++how_many_objects_into_one_slab % 8 == 0){
+            current_size_of_arr++;
+        }
+    }
     tmp->num = how_many_objects_into_one_slab;
+    tmp->size_of_arr = current_size_of_arr;
 
     // creating an empty slab
     tmp->create_free_slab();
@@ -58,6 +70,7 @@ size_t kmem_cache_s::kmem_cache_shrink() {
     while(curr){
         prev = curr;
         curr = curr->next;
+        prev->clear_slab(num, objsize, dtor);
         BuddySystem::getInstance().buddyFree((size_t)prev);
     }
     this->slabs_free = nullptr;
@@ -108,16 +121,15 @@ void *kmem_cache_s::kmem_cache_alloc() {
 }
 
 void kmem_cache_s::create_free_slab() {
-    Slab* tmp = (Slab*)(BuddySystem::getInstance().buddyAlloc(this->num * this->objsize + sizeof(Slab)));
+    Slab* tmp = (Slab*)(BuddySystem::getInstance().buddyAlloc(this->num * this->objsize + sizeof(Slab) + this->num * sizeof(bool)));
     tmp->num_active = 0;
     tmp->next = nullptr;
     this->slabs_free = tmp;
-    tmp->first_addr = ((size_t)tmp + sizeof(Slab));
-    bool arr[this->num];
-    for(size_t  i = 0; i < this->num; i++){
-        arr[i] = false;
+    tmp->first_addr = ((size_t)tmp + sizeof(Slab) + this->size_of_arr * sizeof(size_t));
+
+    for(size_t  i = 0; i < this->size_of_arr; i++){
+        tmp->free_objects[i] = 0;
     }
-    tmp->free_objects = arr;
 
     // initialize slab if there is constructor
     if(this->ctor != nullptr){
@@ -131,6 +143,34 @@ void kmem_cache_s::create_free_slab() {
     this->num_slabs_free++;
 }
 
+void Slab::set_mask(int position,  bool flag){
+    int pos = position / sizeof(size_t);
+    int relative_pos = position % sizeof(size_t);
+    size_t mask = 1;
+    for(int i = 0; i < sizeof(size_t) - relative_pos - 1; i++){
+        mask <<= 1;
+    }
+    if(flag){
+        // setujemo bit na jedan
+        this->free_objects[pos] |= mask;
+    }else{
+        // setujemo bit na nula
+        mask = ~mask;
+        this->free_objects[pos] &= mask;
+    }
+    return;
+}
+
+bool Slab::is_active(int position){
+    int pos = position / sizeof(size_t);
+    int relative_pos = position % sizeof(size_t);
+    size_t mask = 1;
+    for(int i = 0; i < sizeof(size_t) - relative_pos - 1; i++){
+        mask <<= 1;
+    }
+    return this->free_objects[pos] & mask;
+}
+
 // returns -1 if object not found and 0 if removal is completed
 int kmem_cache_s::kmem_cache_free(void *objp) {
     // check firstly in partial
@@ -139,7 +179,7 @@ int kmem_cache_s::kmem_cache_free(void *objp) {
         if((size_t)objp > (size_t)tmp &&
         (size_t)objp < (size_t)tmp + this->size_in_blocks * BLOCK_SIZE - sizeof(size_t)){
             size_t position = (((size_t)objp - (size_t)tmp->first_addr)) / (size_t)this->objsize;
-            (tmp->free_objects)[position] = false;
+            tmp->set_mask(position, false);
             if(this->dtor){
                 this->dtor(objp);
             }
@@ -169,7 +209,7 @@ int kmem_cache_s::kmem_cache_free(void *objp) {
         if((size_t)objp > (size_t)tmp &&
            (size_t)objp < (size_t)tmp + this->size_in_blocks * BLOCK_SIZE - sizeof(size_t)){
             size_t position = (((size_t)objp - (size_t)tmp->first_addr)) / (size_t)this->objsize;
-            (tmp->free_objects)[position] = false;
+            tmp->set_mask(position, false);
             if(this->dtor){
                 this->dtor(objp);
             }
@@ -228,20 +268,15 @@ size_t kmem_cache_s::pow(size_t deg){
     return tmp;
 }
 
-bool kmem_cache_s::is_small_buffer_size_correct(size_t size) {
-    size_t num = 1;
-    size_t iter = 0;
-    while(num < size){
-        num <<= 1;
-        iter++;
-        if(num == size){
-            if(iter >= 5 && iter <= 17){
-                return true;
-            }
-            else return false;
-        }
+int kmem_cache_s::is_small_buffer_size_correct(size_t size) {
+    int deg = 5;
+    size_t val = pow(deg);
+    while(size > val){
+        deg++;
+        val <<= 1;
     }
-    return false;
+    if(deg > 17)return 0;
+    return (int)val;
 }
 
 // returns 0 if delete is executed, -1 if not
@@ -358,11 +393,12 @@ void kmem_cache_s::kmem_cache_info() {
     printInt(sizeof(kmem_cache_s));
     printString("\n");
     printString("Velicina metapodataka za Slab: ");
-    printInt(sizeof(Slab));
+    size_t size_of_slab = sizeof(Slab) + this->size_of_arr * sizeof(size_t) + sizeof(size_t);
+    printInt(size_of_slab);
     printString("\n");
 
     // percentage of fullfilment of cache
-    size_t neto = sizeof(kmem_cache_s) + num_of_slabs * sizeof(Slab) + num_active_obj * objsize;
+    size_t neto = sizeof(kmem_cache_s) + num_of_slabs * size_of_slab + num_active_obj * objsize;
     size_t bruto = (1 + num_of_slabs * size_in_blocks) * BLOCK_SIZE;
 
     printString("Realna iskoriscenost prostora: ");
@@ -390,18 +426,18 @@ void kmem_cache_s::print_info_all_caches() {
 
 void *Slab::return_first_free_object_and_rearange_list(int number_of_objects_in_slab, int size_of_object) {
     int i = 0;
-    while(i < number_of_objects_in_slab && (this->free_objects)[i]){
+    while(i < number_of_objects_in_slab && this->is_active(i)){
         i++;
     }
     if(i >= number_of_objects_in_slab)return nullptr; // nece se desiti ali postoji kao ogranicenje
-    (this->free_objects)[i] = true;
+    this->set_mask(i, true);
     return (void*)(this->first_addr + size_of_object * i);
 }
 
 void Slab::clear_slab(int num_of_objects_in_slab, int objsize, void (*dtor)(void *)) {
     if(dtor == nullptr)return;
     for(int i = 0; i < num_of_objects_in_slab; i++){
-        if(this->free_objects[i]){
+        if(this->is_active(i)){
             dtor((void*)(this->first_addr + i * objsize));
         }
     }

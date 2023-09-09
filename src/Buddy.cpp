@@ -16,7 +16,7 @@ void* BuddySystem::buddyAlloc(size_t size) {
             break;
         }
     }
-    if(position == 50)return 0;
+    if(position == 50)return nullptr;
     MemNode* node = arr[position];
     arr[position] = arr[position]->next;
     node->next = nullptr;

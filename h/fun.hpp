@@ -7,6 +7,7 @@
 #include "../h/riscv.hpp"
 #include "../h/syscall_c.h"
 #include "../test/userMain.hpp"
+#include "../h/SlabI.h"
 
 void idle_function(void* arg){
     while(1){
@@ -32,6 +33,24 @@ void user_main_wrapper(void* arg){
     userMain();
     switch_to_priviledged();
     is_user_main_finished = true;
+}
+
+void memory_setup(){
+    void * space = (void*)HEAP_START_ADDR;
+    int block_num = ((size_t)HEAP_END_ADDR - (size_t)HEAP_START_ADDR) / 8 / BLOCK_SIZE;
+    kmem_init(space, block_num);
+//    printString("Buddy allocator heap start: ");
+//    printInt(BuddySystem::getInstance().get_buddy_alloc_heap_start());
+//    printString("\n");
+//    printString("Buddy allocator heap end: ");
+//    printInt(BuddySystem::getInstance().get_buddy_alloc_heap_end());
+//    printString("\n");
+//    printString("Memory allocator heap start: ");
+//    printInt(MemoryAllocator::getInstance().get_mem_alloc_heap_start());
+//    printString("\n");
+//    printString("Memory allocator heap end: ");
+//    printInt(MemoryAllocator::getInstance().get_mem_alloc_heap_end());
+//    printString("\n\n");
 }
 
 #endif

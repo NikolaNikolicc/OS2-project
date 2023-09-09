@@ -14,7 +14,9 @@ kmem_cache_t *kmem_cache_create(const char *name, size_t size, void (*ctor)(void
     if(size_start(name)){
         return nullptr;
     }
-    return (kmem_cache_t*)kmem_cache_s::kmem_cache_create(name, size, ctor, dtor);
+    kmem_cache_t* cache = (kmem_cache_t*)kmem_cache_s::kmem_cache_create(name, size, ctor, dtor);
+    if(cache == nullptr)return nullptr;
+    return cache;
 }
 
 int kmem_cache_shrink(kmem_cache_t *cachep) {
@@ -30,13 +32,14 @@ void *kmem_cache_alloc(kmem_cache_t *cachep) {
     return nullptr;
 }
 
-void kmem_cache_free(kmem_cache_t *cachep, void *objp) {
-    cachep->kmem_cache_free(objp);
+int kmem_cache_free(kmem_cache_t *cachep, void *objp) {
+    return cachep->kmem_cache_free(objp);
 }
 
 void *kmalloc(size_t size) {
-    if(!kmem_cache_t::is_small_buffer_size_correct(size))return nullptr;
-    return kmem_cache_t::kmalloc(size);
+    int ret = kmem_cache_t::is_small_buffer_size_correct(size);
+    if(!ret)return nullptr;
+    return kmem_cache_t::kmalloc(ret);
 }
 
 void kfree(const void *objp) {

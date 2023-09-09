@@ -3,13 +3,13 @@
 #include "../h/Buddy.h"
 #include "../h/String.h"
 
-class Slab{
+struct Slab{
 private:
+    friend struct kmem_cache_s;
     size_t num_active = 0; // number of active objects in slab
     Slab* next = nullptr; // next slab
-    bool *free_objects;
     size_t first_addr;
-    friend struct kmem_cache_s;
+    size_t free_objects[];
 
 public:
     void clear_slab(int num_of_objects_in_slab, int objsize, void (*dtor)(void *));
@@ -17,6 +17,8 @@ public:
     void* return_first_free_object_and_rearange_list(int, int);
     void increment_num_of_active(){num_active++;}
     void decrement_num_of_active(){num_active--;}
+    void set_mask(int position, bool flag);
+    bool is_active(int position);
 };
 
 struct kmem_cache_s{
@@ -32,6 +34,7 @@ struct kmem_cache_s{
 
     size_t objsize; // size of each object packed in slab
     size_t num; // number of objects packed into the slab
+    size_t size_of_arr;
 
     size_t size_in_blocks; // size of slab in blocks/pages
 
@@ -56,7 +59,7 @@ struct kmem_cache_s{
     static void* kmem_cache_create(const char* name, size_t size, void (*ctor)(void *), void (*dtor)(void *));
     static void* kmalloc(size_t size);
     static int kfree(const void* objp);
-    static bool is_small_buffer_size_correct(size_t size);
+    static int is_small_buffer_size_correct(size_t size);
     static void print_info_all_caches();
 
 private:

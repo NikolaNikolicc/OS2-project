@@ -35,6 +35,7 @@ int main(){
     thread_t consoleWriter = nullptr;
     thread_create(&consoleWriter, &putc_function, nullptr);
     Console::getInstance();
+    memory_setup();
 
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 
