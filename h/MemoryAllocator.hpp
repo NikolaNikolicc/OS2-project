@@ -38,10 +38,10 @@ private:
         heapStart = (size_t)HEAP_START_ADDR + ((size_t)HEAP_END_ADDR - (size_t)HEAP_START_ADDR) / 8 + 1;
         heapEnd = (size_t)HEAP_END_ADDR - 1;
 
-        size_t sizeInBlocks = (heapEnd - heapStart) / MEM_BLOCK_SIZE;
-
         // poravnaj na prvu krstenu adresu
         fmem_head = (FreeMem*)(heapStart + ((heapStart % MEM_BLOCK_SIZE != 0)?(MEM_BLOCK_SIZE - heapStart % MEM_BLOCK_SIZE) : 0));
+
+        size_t sizeInBlocks = (heapEnd - (size_t)fmem_head) / MEM_BLOCK_SIZE;
 
         // napravi node
 

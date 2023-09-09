@@ -39,7 +39,7 @@ void* kmem_cache_s::kmem_cache_create(const char *name, size_t size, void (*ctor
     // calc how many objects one slab can contain
     int how_many_objects_into_one_slab = 10;
     int current_size_of_arr = 2;
-    while(how_many_objects_into_one_slab * tmp->objsize <=
+    while((how_many_objects_into_one_slab + 1) * tmp->objsize <=
             (int)(tmp->size_in_blocks * BLOCK_SIZE - sizeof(size_t)*2 - sizeof(Slab) - current_size_of_arr * sizeof(size_t))){
         if(++how_many_objects_into_one_slab % 8 == 0){
             current_size_of_arr++;
@@ -133,8 +133,10 @@ void kmem_cache_s::create_free_slab() {
 
     // initialize slab if there is constructor
     if(this->ctor != nullptr){
-        for(size_t i = 0, addr = tmp->first_addr; i < this->num; i++, addr += this->objsize){
+        size_t addr = tmp->first_addr;
+        for(size_t i = 0; i < this->num; i++){
             this->ctor((void*)addr);
+            addr += objsize;
         }
     }
 
@@ -239,14 +241,13 @@ void *kmem_cache_s::kmalloc(size_t size) {
     const char* n = (const char*)concatenate_int_to_char_ptr((int)size);
 
     kmem_cache_s* tmp = check_if_name_exists(n);
-    kmem_cache_s* cache = nullptr;
     if(tmp == nullptr){
         // napravi novi
-        cache = (kmem_cache_s*)kmem_cache_create(n, size, nullptr, nullptr);
-        if(!cache)return nullptr;
+        tmp = (kmem_cache_s*)kmem_cache_create(n, size, nullptr, nullptr);
+        if(!tmp)return nullptr;
     }
     // vrati element
-    void* elem = cache->kmem_cache_alloc();
+    void* elem = tmp->kmem_cache_alloc();
     return elem;
 }
 

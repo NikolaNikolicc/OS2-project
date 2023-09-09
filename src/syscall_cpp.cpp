@@ -22,7 +22,15 @@ void operator delete[](void* ptr) {
 
 Thread::Thread(void (*body)(void*), void *arg) {
     // inicijalizacija steka
-    uint64 a4 = (body != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
+    void* stack = mem_alloc(DEFAULT_STACK_SIZE);
+    if(stack == nullptr){
+        this->myHandle = nullptr;
+        return;
+    }
+
+    uint64 a4 = (body != nullptr) ? (uint64)stack : 0;
+
+//    uint64 a4 = (body != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
 
     // kod sistemskog poziva
     uint64 a0 = 0x11;

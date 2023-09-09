@@ -108,6 +108,8 @@ private:
         uint64 sp;
     };
 
+    void TCB_setup(Body body_init, void* arg, void* stack_space, bool b);
+
     static void context_switch(Context *oldContext, Context *runningContext);
 
     static void thread_wrapper();

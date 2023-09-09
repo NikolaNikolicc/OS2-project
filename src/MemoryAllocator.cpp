@@ -1,6 +1,6 @@
 #include "../h/MemoryAllocator.hpp"
 
-void* MemoryAllocator::memory_alloc (size_t size){
+void* MemoryAllocator::memory_alloc (size_t ssize){
     for(FreeMem* cur = fmem_head; cur != nullptr; cur = cur->next   ){ //  cur =  (FreeMem*)(*((char*)cur + 1))
 
 //        printString("velicina u blokovima: ");
@@ -8,10 +8,10 @@ void* MemoryAllocator::memory_alloc (size_t size){
 //        printString("\n");
 
         // <= stavljamo jer zelimo size + 1 blok u tom dodatnom cuvam podatak o broju blokova
-        if(*((size_t*)cur) <= size) continue;
+        if(*((size_t*)cur) <= ssize) continue;
 
         // slucaj da imamo jedan blok viska, dodajemo ga jer ne mozemo nista sa njim (trebaju min 2)
-        if(cur->size == size + 2){
+        if(cur->size == ssize + 2){
             // ulancavanje narednog i prethodnog cvora
             if (cur->prev) {
                 cur->prev->next = cur->next;
@@ -23,10 +23,10 @@ void* MemoryAllocator::memory_alloc (size_t size){
             }
 
             // u cur + 0 upisujemo broj blokova, a cur + 1 vracamo kao adresu
-            *((char*)cur) = size + 1;
+            *((char*)cur) = ssize + 1;
         }
         else {
-            FreeMem *newfrgm = (FreeMem *) ((char *) cur + (size + 1) * MEM_BLOCK_SIZE);
+            FreeMem *newfrgm = (FreeMem *) ((char *) cur + (ssize + 1) * MEM_BLOCK_SIZE);
 
             // ubacivanje ostatka adresa u evidenciju slobodnih adresa
             if (cur->prev) cur->prev->next = newfrgm;
@@ -34,10 +34,10 @@ void* MemoryAllocator::memory_alloc (size_t size){
             if (cur->next)cur->next->prev = newfrgm;
             newfrgm->prev = cur->prev;
             newfrgm->next = cur->next;
-            newfrgm->size = cur->size - size - 1;
+            newfrgm->size = cur->size - ssize - 1;
 
             // u cur + 0 upisujemo broj blokova, a cur + 1 vracamo kao adresu
-            *((char*)cur) = size;
+            *((char*)cur) = ssize;
         }
         return (void*)((char*)cur + MEM_BLOCK_SIZE);
     }

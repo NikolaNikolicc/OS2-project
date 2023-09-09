@@ -22,7 +22,7 @@ void *mem_alloc(size_t size) {
 }
 
 int mem_free(void *addr) {
-
+    if(addr == nullptr)return 0;
     // kod sistemskog poziva
     uint64 a0 = 0x02;
     // priprema argumenata
@@ -44,7 +44,14 @@ int mem_free(void *addr) {
 int thread_create(thread_t *handle, void (*start_routine)(void *), void *arg) {
 
     // inicijalizacija steka
-    uint64 a4 = (start_routine != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
+    void* stack = mem_alloc(DEFAULT_STACK_SIZE);
+    if(stack == nullptr){
+        *handle = nullptr;
+        return -1;
+    }
+    uint64 a4 = (start_routine != nullptr) ? (uint64)stack : 0;
+
+//    uint64 a4 = (start_routine != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
 
     // kod sistemskog poziva
     uint64 a0 = 0x11;

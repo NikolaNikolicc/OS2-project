@@ -10,7 +10,7 @@
 #include "buffer_CPP_API.hpp"
 #include "printing.hpp"
 
-namespace ConsumerProducerCPP {
+namespace ConsumerProducerCPP_API_test {
 
     Semaphore *waitForAll;
 
