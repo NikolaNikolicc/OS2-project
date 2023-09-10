@@ -30,8 +30,8 @@ void userMain() {
 
 //    test_niti();
 
-    test_prvi();
-//    test_drugi();
+//    test_prvi();
+    test_drugi();
 
 //    while(true){
 //        Class2* c = new Class2();

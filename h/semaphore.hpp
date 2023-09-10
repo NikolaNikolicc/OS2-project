@@ -3,13 +3,12 @@
 
 #include "../lib/hw.h"
 #include "../h/MemoryAllocator.hpp"
+#include "SlabI.h"
 
 class TCB;
 
 class MySemaphore{
 public:
-
-    ~MySemaphore(){ sem_close(this);}
 
     static int sem_open(
           MySemaphore** handle,
@@ -35,27 +34,34 @@ public:
 
     // operatori
     void *operator new(uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        return kmem_cache_alloc(get_sem_cache());
     }
 
     void *operator new[](uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        if(n == 0)return nullptr;
+        size_t num_of_elem = n / sizeof(MySemaphore);
+        MySemaphore** arr =  (MySemaphore**)kmalloc(num_of_elem);
+        return (void*)arr;
     }
 
     void operator delete(void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        kmem_cache_free(get_sem_cache(), p);
     }
 
     void operator delete[](void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        if(p == nullptr)return;
+        kfree(p);
     }
 
 private:
 
+    static kmem_cache_t* &get_sem_cache();
     MySemaphore(uint64 init);
 
+    static void semaphore_setup(void* mySemaphore);
+    static void semaphore_destroy(void* mySemaphore);
+
+    static kmem_cache_t* semaphore_cache;
     int val; // mora da bude signed jer ide i u minus
 
     bool indicator;

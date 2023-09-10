@@ -2,8 +2,12 @@
 
 #include "../h/TCB.hpp"
 
+kmem_cache_t* MySemaphore::semaphore_cache = nullptr;
+
 int MySemaphore::sem_open(MySemaphore **handle, uint64 init) {
-    *handle = new MySemaphore(init);
+    auto* sem = (MySemaphore*)kmem_cache_alloc(get_sem_cache());
+    sem->val = (int)init;
+    *handle = sem;
     return 0;
 }
 
@@ -16,6 +20,7 @@ int MySemaphore::sem_close(MySemaphore* handle){
     }
     // indikator za wait na true
     handle->set_indicator(true);
+//    kmem_cache_free(get_sem_cache(), handle);
     return 0;
 }
 
@@ -65,5 +70,24 @@ void MySemaphore::block() {
 void MySemaphore::unblock() {
     TCB* tmp = get_from_blocked();
     if(tmp)Scheduler::getInstance().put(tmp);
+}
+
+kmem_cache_t * &MySemaphore::get_sem_cache() {
+    if(!semaphore_cache){
+        semaphore_cache = kmem_cache_create("semaphore_cache", sizeof(MySemaphore), &semaphore_setup, &semaphore_destroy);
+    }
+    return semaphore_cache;
+}
+
+void MySemaphore::semaphore_setup(void *mySemaphore) {
+    MySemaphore* sem = (MySemaphore*)mySemaphore;
+    sem->head = sem->tail = nullptr;
+    sem->indicator = false;
+
+}
+
+void MySemaphore::semaphore_destroy(void *mySemaphore) {
+    MySemaphore* sem = (MySemaphore*)mySemaphore;
+    sem_close(sem);
 }
 

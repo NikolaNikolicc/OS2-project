@@ -1,7 +1,7 @@
 #include "../h/syscall_cpp.hpp"
 #include "../h/TCB.hpp"
 #include "../h/semaphore.hpp"
-
+#include "../h/SlabI.h"
 
 
 void* operator new(size_t n) {
@@ -22,7 +22,7 @@ void operator delete[](void* ptr) {
 
 Thread::Thread(void (*body)(void*), void *arg) {
     // inicijalizacija steka
-    void* stack = mem_alloc(DEFAULT_STACK_SIZE);
+    void* stack = kmalloc(DEFAULT_STACK_SIZE);
     if(stack == nullptr){
         this->myHandle = nullptr;
         return;

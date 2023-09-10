@@ -2,7 +2,9 @@
 #include "../h/TCB.hpp"
 #include "../h/scheduler.hpp"
 
-TCB* TS::head;
+TS* TS::ts_instance = nullptr;
+kmem_cache_t* TS::ts_cache = nullptr;
+TCB* TS::head = nullptr;
 
 //void TS::printTS() {
 //    TCB* tmp = head;
@@ -67,4 +69,12 @@ void TS::decrement_and_remove() {
     }
     return;
 
+}
+
+TS &TS::getInstance() {
+    if(!ts_instance){
+        ts_cache = (kmem_cache_t*) kmem_cache_create("ts_cache", sizeof(TS), nullptr, nullptr);
+        ts_instance = (TS*)kmem_cache_alloc(ts_cache);
+    }
+    return *ts_instance;
 }

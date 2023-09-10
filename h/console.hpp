@@ -6,10 +6,7 @@
 class Console{
 public:
 
-    static Console& getInstance(){
-        static Console instance;
-        return instance;
-    }
+    static Console& getInstance();
 
     Console(const Console&) = delete;
     void operator=(Console const&) = delete;
@@ -25,8 +22,10 @@ public:
 
 private:
 
-    Console();
+    static void console_setup(void* MyConsole);
 
+    static kmem_cache_t* console_cache;
+    static Console* console_instance;
     MyBuffer* input_buffer;
     MyBuffer* output_buffer;
 };

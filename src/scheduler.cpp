@@ -1,8 +1,11 @@
 #include "../h/scheduler.hpp"
 #include "../h/TCB.hpp"
 
-TCB* Scheduler::head;
-TCB* Scheduler::tail;
+Scheduler* Scheduler::scheduler_instance = nullptr;
+kmem_cache_t* Scheduler::scheduler_cache = nullptr;
+
+TCB* Scheduler::head = nullptr;
+TCB* Scheduler::tail = nullptr;
 
 TCB* Scheduler::get(){
     while(head) {
@@ -27,6 +30,13 @@ void Scheduler::put(TCB* tcb){
     else head = tail = tcb;
 }
 
+Scheduler &Scheduler::getInstance() {
+    if(!scheduler_instance){
+        scheduler_cache = (kmem_cache_t*) kmem_cache_create("scheduler_cache", sizeof(Scheduler), nullptr, nullptr);
+        scheduler_instance = (Scheduler*)kmem_cache_alloc(scheduler_cache);
+    }
+    return *scheduler_instance;
+}
 
 
 //void Scheduler::printScheduler() {

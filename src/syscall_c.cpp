@@ -1,4 +1,6 @@
 #include "../h/syscall_c.h"
+#include "../h/SlabI.h"
+
 void *mem_alloc(size_t size) {
     // prebaci u blokove i zaokruzi na gornji ceo
     size_t ssize = (size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
@@ -44,7 +46,7 @@ int mem_free(void *addr) {
 int thread_create(thread_t *handle, void (*start_routine)(void *), void *arg) {
 
     // inicijalizacija steka
-    void* stack = mem_alloc(DEFAULT_STACK_SIZE);
+    void* stack = kmalloc(DEFAULT_STACK_SIZE);
     if(stack == nullptr){
         *handle = nullptr;
         return -1;

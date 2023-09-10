@@ -6,14 +6,10 @@
 #include "../h/MemoryAllocator.hpp"
 #include "../h/TS.hpp"
 #include "../h/periodic_threads.hpp"
+#include "SlabI.h"
 
 class TCB{
 public:
-
-    ~TCB(){
-        MemoryAllocator::getInstance().memory_free((void*)stack);
-    }
-
     using Body = void (*)(void*);
 
     // trazene
@@ -31,59 +27,48 @@ public:
 
     static int time_sleep(uint64 time);
 
-    // getteri i setteri
-    void set_finished(bool f){ this->finished = f; }
-
-    bool is_finished()const{return finished;}
-
-    void set_next_scheduler(TCB* nextThread){ next_scheduler = nextThread; }
-
-    TCB* get_next_scheduler()const{ return next_scheduler; }
-
-    void set_next_sleep(TCB* nextThread){ next_sleep = nextThread; }
-
-    TCB* get_next_sleep()const{ return next_sleep; }
-
-    void set_next_blocked(TCB* nextThread){ next_blocked = nextThread; }
-
-    TCB* get_next_blocked()const{ return next_blocked; }
-
     uint64 get_thread_id()const{ return id; }
 
+    // getteri i setteri
+    void set_finished(bool f){ this->finished = f; }
+    bool is_finished()const{return finished;}
+    void set_next_scheduler(TCB* nextThread){ next_scheduler = nextThread; }
+    TCB* get_next_scheduler()const{ return next_scheduler; }
+    void set_next_sleep(TCB* nextThread){ next_sleep = nextThread; }
+    TCB* get_next_sleep()const{ return next_sleep; }
+    void set_next_blocked(TCB* nextThread){ next_blocked = nextThread; }
+    TCB* get_next_blocked()const{ return next_blocked; }
     uint64 get_time_sleep()const{ return sleep; }
-
     void set_time_sleep(uint64 new_time){ sleep = new_time; }
-
     uint64 get_time_slice()const{ return time_slice; }
-
     void set_periodic(bool b){
         periodic = b;
         periodicThread::getInstance().put(this);
     }
-
     void set_next_period(TCB* tcb){ next_period = tcb; }
-
     TCB* get_next_period()const{return next_period;}
 
     static void yield();
 
     // operatori
     void *operator new(uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        return kmem_cache_alloc(get_tcb_cache());
     }
 
     void *operator new[](uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        if(n == 0)return nullptr;
+        size_t num_of_elem = n / sizeof(TCB);
+        TCB** arr =  (TCB**)kmalloc(num_of_elem);
+        return (void*)arr;
     }
 
     void operator delete(void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        kmem_cache_free(get_tcb_cache(), p);
     }
 
     void operator delete[](void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        if(p == nullptr)return;
+        kfree(p);
     }
 
     // staticka promenljiva
@@ -98,8 +83,6 @@ protected:
 private:
 
     // konstruktor
-    TCB(Body body_init, void* arg, void* stack_space, bool b);
-
     friend class Riscv;
 
     struct Context
@@ -109,13 +92,14 @@ private:
     };
 
     void TCB_setup(Body body_init, void* arg, void* stack_space, bool b);
-
+    static void tcb_destroy(void* MyTCB);
     static void context_switch(Context *oldContext, Context *runningContext);
-
     static void thread_wrapper();
+    static kmem_cache_t* &get_tcb_cache();
 
     // atributi
     static uint64 time_slice_counter;
+    static kmem_cache_t* tcb_cache;
 
     Body body;
     void* argument;

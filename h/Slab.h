@@ -70,4 +70,4 @@ private:
 };
 
 
-static const size_t NUM_OF_OBJECTS_IN_SLAB = 10;
+static const size_t NUM_OF_OBJECTS_IN_SLAB = 5;

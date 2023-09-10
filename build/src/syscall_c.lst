@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccoAAFXO.s 			page 1
+GAS LISTING /tmp/ccehA9I2.s 			page 1
 
 
    1              		.file	"syscall_c.cpp"
@@ -9,11 +9,13 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
    6              		.align	2
    7              		.globl	mem_alloc
    9              	mem_alloc:
-  10              	.LFB40:
+  10              	.LFB29:
   11              		.file 1 "src/syscall_c.cpp"
    1:src/syscall_c.cpp **** #include "../h/syscall_c.h"
-   2:src/syscall_c.cpp **** void *mem_alloc(size_t size) {
-  12              		.loc 1 2 30
+   2:src/syscall_c.cpp **** #include "../h/SlabI.h"
+   3:src/syscall_c.cpp **** 
+   4:src/syscall_c.cpp **** void *mem_alloc(size_t size) {
+  12              		.loc 1 4 30
   13              		.cfi_startproc
   14              	.LVL0:
   15 0000 130101FB 		addi	sp,sp,-80
@@ -24,43 +26,43 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
   20              		.cfi_offset 8, -16
   21 000c 13040105 		addi	s0,sp,80
   22              		.cfi_def_cfa 8, 0
-   3:src/syscall_c.cpp ****     // prebaci u blokove i zaokruzi na gornji ceo
-   4:src/syscall_c.cpp ****     size_t ssize = (size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-  23              		.loc 1 4 5
-  24              		.loc 1 4 43 is_stmt 0
+   5:src/syscall_c.cpp ****     // prebaci u blokove i zaokruzi na gornji ceo
+   6:src/syscall_c.cpp ****     size_t ssize = (size + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
+  23              		.loc 1 6 5
+  24              		.loc 1 6 43 is_stmt 0
   25 0010 1305F503 		addi	a0,a0,63
   26              	.LVL1:
-  27              		.loc 1 4 12
+  27              		.loc 1 6 12
   28 0014 13556500 		srli	a0,a0,6
   29              	.LVL2:
-   5:src/syscall_c.cpp **** 
-   6:src/syscall_c.cpp ****     // kod sistemskog poziva
-   7:src/syscall_c.cpp ****     uint64 a0 = 0x01;
-  30              		.loc 1 7 5 is_stmt 1
-   8:src/syscall_c.cpp ****     // priprema argumenata
-   9:src/syscall_c.cpp ****     uint64 a1 = ssize;
-  31              		.loc 1 9 5
-  10:src/syscall_c.cpp ****     uint64 a2 = 0;
-  32              		.loc 1 10 5
-  11:src/syscall_c.cpp ****     uint64 a3 = 0;
-  33              		.loc 1 11 5
-  12:src/syscall_c.cpp ****     uint64 a4 = 0;
-  34              		.loc 1 12 5
-  13:src/syscall_c.cpp ****     uint64 a5 = 0;
-  35              		.loc 1 13 5
-  14:src/syscall_c.cpp ****     uint64 a6 = 0;
-  36              		.loc 1 14 5
-  15:src/syscall_c.cpp ****     uint64 a7 = 0;
-  37              		.loc 1 15 5
-  16:src/syscall_c.cpp **** 
-  17:src/syscall_c.cpp ****     // void* pokazivac
-  18:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
-  38              		.loc 1 18 5
-  39              		.loc 1 18 53 is_stmt 0
+   7:src/syscall_c.cpp **** 
+   8:src/syscall_c.cpp ****     // kod sistemskog poziva
+   9:src/syscall_c.cpp ****     uint64 a0 = 0x01;
+  30              		.loc 1 9 5 is_stmt 1
+  10:src/syscall_c.cpp ****     // priprema argumenata
+  11:src/syscall_c.cpp ****     uint64 a1 = ssize;
+  31              		.loc 1 11 5
+  12:src/syscall_c.cpp ****     uint64 a2 = 0;
+  32              		.loc 1 12 5
+  13:src/syscall_c.cpp ****     uint64 a3 = 0;
+  33              		.loc 1 13 5
+  14:src/syscall_c.cpp ****     uint64 a4 = 0;
+  34              		.loc 1 14 5
+  15:src/syscall_c.cpp ****     uint64 a5 = 0;
+  35              		.loc 1 15 5
+  16:src/syscall_c.cpp ****     uint64 a6 = 0;
+  36              		.loc 1 16 5
+  17:src/syscall_c.cpp ****     uint64 a7 = 0;
+  37              		.loc 1 17 5
+  18:src/syscall_c.cpp **** 
+  19:src/syscall_c.cpp ****     // void* pokazivac
+  20:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+  38              		.loc 1 20 5
+GAS LISTING /tmp/ccehA9I2.s 			page 2
+
+
+  39              		.loc 1 20 53 is_stmt 0
   40 0018 93071000 		li	a5,1
-GAS LISTING /tmp/ccoAAFXO.s 			page 2
-
-
   41 001c 2338F4FA 		sd	a5,-80(s0)
   42 0020 233CA4FA 		sd	a0,-72(s0)
   43 0024 233004FC 		sd	zero,-64(s0)
@@ -69,18 +71,18 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
   46 0030 233C04FC 		sd	zero,-40(s0)
   47 0034 233004FE 		sd	zero,-32(s0)
   48 0038 233404FE 		sd	zero,-24(s0)
-  19:src/syscall_c.cpp **** 
-  20:src/syscall_c.cpp ****     // sistemski poziv
-  21:src/syscall_c.cpp ****     return abi::sys_call(reinterpret_cast<void*>(empty));
-  49              		.loc 1 21 5 is_stmt 1
-  50              		.loc 1 21 25 is_stmt 0
+  21:src/syscall_c.cpp **** 
+  22:src/syscall_c.cpp ****     // sistemski poziv
+  23:src/syscall_c.cpp ****     return abi::sys_call(reinterpret_cast<void*>(empty));
+  49              		.loc 1 23 5 is_stmt 1
+  50              		.loc 1 23 25 is_stmt 0
   51 003c 130504FB 		addi	a0,s0,-80
   52              	.LVL3:
   53 0040 97000000 		call	_ZN3abi8sys_callEPv@plt
   53      E7800000 
   54              	.LVL4:
-  22:src/syscall_c.cpp **** }
-  55              		.loc 1 22 1
+  24:src/syscall_c.cpp **** }
+  55              		.loc 1 24 1
   56 0048 83308104 		ld	ra,72(sp)
   57              		.cfi_restore 1
   58 004c 03340104 		ld	s0,64(sp)
@@ -90,21 +92,21 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
   62              		.cfi_def_cfa_offset 0
   63 0054 67800000 		jr	ra
   64              		.cfi_endproc
-  65              	.LFE40:
+  65              	.LFE29:
   67              		.align	2
   68              		.globl	mem_free
   70              	mem_free:
-  71              	.LFB41:
-  23:src/syscall_c.cpp **** 
-  24:src/syscall_c.cpp **** int mem_free(void *addr) {
-  72              		.loc 1 24 26 is_stmt 1
+  71              	.LFB30:
+  25:src/syscall_c.cpp **** 
+  26:src/syscall_c.cpp **** int mem_free(void *addr) {
+  72              		.loc 1 26 26 is_stmt 1
   73              		.cfi_startproc
   74              	.LVL5:
-  25:src/syscall_c.cpp ****     if(addr == nullptr)return 0;
-  75              		.loc 1 25 5
+  27:src/syscall_c.cpp ****     if(addr == nullptr)return 0;
+  75              		.loc 1 27 5
   76 0058 630C0504 		beqz	a0,.L5
-  24:src/syscall_c.cpp ****     if(addr == nullptr)return 0;
-  77              		.loc 1 24 26 is_stmt 0
+  26:src/syscall_c.cpp ****     if(addr == nullptr)return 0;
+  77              		.loc 1 26 26 is_stmt 0
   78 005c 130101FB 		addi	sp,sp,-80
   79              		.cfi_def_cfa_offset 80
   80 0060 23341104 		sd	ra,72(sp)
@@ -113,33 +115,33 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
   83              		.cfi_offset 8, -16
   84 0068 13040105 		addi	s0,sp,80
   85              		.cfi_def_cfa 8, 0
-  26:src/syscall_c.cpp ****     // kod sistemskog poziva
-  27:src/syscall_c.cpp ****     uint64 a0 = 0x02;
-  86              		.loc 1 27 5 is_stmt 1
+  28:src/syscall_c.cpp ****     // kod sistemskog poziva
+  29:src/syscall_c.cpp ****     uint64 a0 = 0x02;
+  86              		.loc 1 29 5 is_stmt 1
+GAS LISTING /tmp/ccehA9I2.s 			page 3
+
+
   87              	.LVL6:
-  28:src/syscall_c.cpp ****     // priprema argumenata
-GAS LISTING /tmp/ccoAAFXO.s 			page 3
-
-
-  29:src/syscall_c.cpp ****     uint64 a1 = reinterpret_cast<uint64>(addr);
-  88              		.loc 1 29 5
-  30:src/syscall_c.cpp ****     uint64 a2 = 0;
-  89              		.loc 1 30 5
-  31:src/syscall_c.cpp ****     uint64 a3 = 0;
-  90              		.loc 1 31 5
-  32:src/syscall_c.cpp ****     uint64 a4 = 0;
-  91              		.loc 1 32 5
-  33:src/syscall_c.cpp ****     uint64 a5 = 0;
-  92              		.loc 1 33 5
-  34:src/syscall_c.cpp ****     uint64 a6 = 0;
-  93              		.loc 1 34 5
-  35:src/syscall_c.cpp ****     uint64 a7 = 0;
-  94              		.loc 1 35 5
-  36:src/syscall_c.cpp **** 
-  37:src/syscall_c.cpp ****     // void* pokazivac
-  38:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
-  95              		.loc 1 38 5
-  96              		.loc 1 38 53 is_stmt 0
+  30:src/syscall_c.cpp ****     // priprema argumenata
+  31:src/syscall_c.cpp ****     uint64 a1 = reinterpret_cast<uint64>(addr);
+  88              		.loc 1 31 5
+  32:src/syscall_c.cpp ****     uint64 a2 = 0;
+  89              		.loc 1 32 5
+  33:src/syscall_c.cpp ****     uint64 a3 = 0;
+  90              		.loc 1 33 5
+  34:src/syscall_c.cpp ****     uint64 a4 = 0;
+  91              		.loc 1 34 5
+  35:src/syscall_c.cpp ****     uint64 a5 = 0;
+  92              		.loc 1 35 5
+  36:src/syscall_c.cpp ****     uint64 a6 = 0;
+  93              		.loc 1 36 5
+  37:src/syscall_c.cpp ****     uint64 a7 = 0;
+  94              		.loc 1 37 5
+  38:src/syscall_c.cpp **** 
+  39:src/syscall_c.cpp ****     // void* pokazivac
+  40:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+  95              		.loc 1 40 5
+  96              		.loc 1 40 53 is_stmt 0
   97 006c 93072000 		li	a5,2
   98 0070 2338F4FA 		sd	a5,-80(s0)
   99 0074 233CA4FA 		sd	a0,-72(s0)
@@ -149,20 +151,20 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  103 0084 233C04FC 		sd	zero,-40(s0)
  104 0088 233004FE 		sd	zero,-32(s0)
  105 008c 233404FE 		sd	zero,-24(s0)
-  39:src/syscall_c.cpp **** 
-  40:src/syscall_c.cpp ****     // sistemski poziv
-  41:src/syscall_c.cpp ****     return (uint64) abi::sys_call(reinterpret_cast<void *>(empty));
- 106              		.loc 1 41 5 is_stmt 1
- 107              		.loc 1 41 34 is_stmt 0
+  41:src/syscall_c.cpp **** 
+  42:src/syscall_c.cpp ****     // sistemski poziv
+  43:src/syscall_c.cpp ****     return (uint64) abi::sys_call(reinterpret_cast<void *>(empty));
+ 106              		.loc 1 43 5 is_stmt 1
+ 107              		.loc 1 43 34 is_stmt 0
  108 0090 130504FB 		addi	a0,s0,-80
  109              	.LVL7:
  110 0094 97000000 		call	_ZN3abi8sys_callEPv@plt
  110      E7800000 
  111              	.LVL8:
- 112              		.loc 1 41 66
+ 112              		.loc 1 43 66
  113 009c 1B050500 		sext.w	a0,a0
-  42:src/syscall_c.cpp **** }
- 114              		.loc 1 42 1
+  44:src/syscall_c.cpp **** }
+ 114              		.loc 1 44 1
  115 00a0 83308104 		ld	ra,72(sp)
  116              		.cfi_restore 1
  117 00a4 03340104 		ld	s0,64(sp)
@@ -173,24 +175,24 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  122 00ac 67800000 		jr	ra
  123              	.LVL9:
  124              	.L5:
-  25:src/syscall_c.cpp ****     // kod sistemskog poziva
- 125              		.loc 1 25 31
+  27:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 125              		.loc 1 27 31
  126 00b0 13050000 		li	a0,0
+GAS LISTING /tmp/ccehA9I2.s 			page 4
+
+
  127              	.LVL10:
- 128              		.loc 1 42 1
-GAS LISTING /tmp/ccoAAFXO.s 			page 4
-
-
+ 128              		.loc 1 44 1
  129 00b4 67800000 		ret
  130              		.cfi_endproc
- 131              	.LFE41:
+ 131              	.LFE30:
  133              		.align	2
  134              		.globl	thread_create
  136              	thread_create:
- 137              	.LFB42:
-  43:src/syscall_c.cpp **** 
-  44:src/syscall_c.cpp **** int thread_create(thread_t *handle, void (*start_routine)(void *), void *arg) {
- 138              		.loc 1 44 79 is_stmt 1
+ 137              	.LFB31:
+  45:src/syscall_c.cpp **** 
+  46:src/syscall_c.cpp **** int thread_create(thread_t *handle, void (*start_routine)(void *), void *arg) {
+ 138              		.loc 1 46 79 is_stmt 1
  139              		.cfi_startproc
  140              	.LVL11:
  141 00b8 130101F9 		addi	sp,sp,-112
@@ -210,56 +212,56 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  155 00d4 13090500 		mv	s2,a0
  156 00d8 93840500 		mv	s1,a1
  157 00dc 93090600 		mv	s3,a2
-  45:src/syscall_c.cpp **** 
-  46:src/syscall_c.cpp ****     // inicijalizacija steka
-  47:src/syscall_c.cpp ****     void* stack = mem_alloc(DEFAULT_STACK_SIZE);
- 158              		.loc 1 47 5
- 159              		.loc 1 47 28 is_stmt 0
+  47:src/syscall_c.cpp **** 
+  48:src/syscall_c.cpp ****     // inicijalizacija steka
+  49:src/syscall_c.cpp ****     void* stack = kmalloc(DEFAULT_STACK_SIZE);
+ 158              		.loc 1 49 5
+ 159              		.loc 1 49 26 is_stmt 0
  160 00e0 37150000 		li	a0,4096
  161              	.LVL12:
- 162 00e4 97000000 		call	mem_alloc
+ 162 00e4 97000000 		call	_Z7kmallocm@plt
  162      E7800000 
  163              	.LVL13:
-  48:src/syscall_c.cpp ****     if(stack == nullptr){
- 164              		.loc 1 48 5 is_stmt 1
+  50:src/syscall_c.cpp ****     if(stack == nullptr){
+ 164              		.loc 1 50 5 is_stmt 1
  165 00ec 630E0504 		beqz	a0,.L16
-  49:src/syscall_c.cpp ****         *handle = nullptr;
-  50:src/syscall_c.cpp ****         return -1;
-  51:src/syscall_c.cpp ****     }
-  52:src/syscall_c.cpp ****     uint64 a4 = (start_routine != nullptr) ? (uint64)stack : 0;
- 166              		.loc 1 52 5
- 167              		.loc 1 52 44 is_stmt 0
+  51:src/syscall_c.cpp ****         *handle = nullptr;
+  52:src/syscall_c.cpp ****         return -1;
+  53:src/syscall_c.cpp ****     }
+  54:src/syscall_c.cpp ****     uint64 a4 = (start_routine != nullptr) ? (uint64)stack : 0;
+ 166              		.loc 1 54 5
+ 167              		.loc 1 54 44 is_stmt 0
  168 00f0 63820406 		beqz	s1,.L17
  169              	.LVL14:
  170              	.L13:
-  53:src/syscall_c.cpp **** 
-  54:src/syscall_c.cpp **** //    uint64 a4 = (start_routine != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
   55:src/syscall_c.cpp **** 
-  56:src/syscall_c.cpp ****     // kod sistemskog poziva
-  57:src/syscall_c.cpp ****     uint64 a0 = 0x11;
- 171              		.loc 1 57 5 is_stmt 1 discriminator 4
-GAS LISTING /tmp/ccoAAFXO.s 			page 5
+  56:src/syscall_c.cpp **** //    uint64 a4 = (start_routine != nullptr) ? (uint64)mem_alloc(DEFAULT_STACK_SIZE) : 0;
+  57:src/syscall_c.cpp **** 
+  58:src/syscall_c.cpp ****     // kod sistemskog poziva
+GAS LISTING /tmp/ccehA9I2.s 			page 5
 
 
-  58:src/syscall_c.cpp ****     // parametri
-  59:src/syscall_c.cpp ****     uint64  a1, a2, a3, a5, a6, a7;
- 172              		.loc 1 59 5 discriminator 4
-  60:src/syscall_c.cpp ****     a1 = (uint64)handle;
- 173              		.loc 1 60 5 discriminator 4
-  61:src/syscall_c.cpp ****     a2 = (uint64)start_routine;
- 174              		.loc 1 61 5 discriminator 4
-  62:src/syscall_c.cpp ****     a3 = (uint64)arg;
- 175              		.loc 1 62 5 discriminator 4
-  63:src/syscall_c.cpp ****     a6 = (uint64)true;
- 176              		.loc 1 63 5 discriminator 4
-  64:src/syscall_c.cpp **** 
-  65:src/syscall_c.cpp ****     a5 = a7 = 0;
- 177              		.loc 1 65 5 discriminator 4
+  59:src/syscall_c.cpp ****     uint64 a0 = 0x11;
+ 171              		.loc 1 59 5 is_stmt 1 discriminator 4
+  60:src/syscall_c.cpp ****     // parametri
+  61:src/syscall_c.cpp ****     uint64  a1, a2, a3, a5, a6, a7;
+ 172              		.loc 1 61 5 discriminator 4
+  62:src/syscall_c.cpp ****     a1 = (uint64)handle;
+ 173              		.loc 1 62 5 discriminator 4
+  63:src/syscall_c.cpp ****     a2 = (uint64)start_routine;
+ 174              		.loc 1 63 5 discriminator 4
+  64:src/syscall_c.cpp ****     a3 = (uint64)arg;
+ 175              		.loc 1 64 5 discriminator 4
+  65:src/syscall_c.cpp ****     a6 = (uint64)true;
+ 176              		.loc 1 65 5 discriminator 4
   66:src/syscall_c.cpp **** 
-  67:src/syscall_c.cpp ****     // void* pokazivac
-  68:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 178              		.loc 1 68 5 discriminator 4
- 179              		.loc 1 68 53 is_stmt 0 discriminator 4
+  67:src/syscall_c.cpp ****     a5 = a7 = 0;
+ 177              		.loc 1 67 5 discriminator 4
+  68:src/syscall_c.cpp **** 
+  69:src/syscall_c.cpp ****     // void* pokazivac
+  70:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 178              		.loc 1 70 5 discriminator 4
+ 179              		.loc 1 70 53 is_stmt 0 discriminator 4
  180 00f4 93071001 		li	a5,17
  181 00f8 2338F4F8 		sd	a5,-112(s0)
  182 00fc 233C24F9 		sd	s2,-104(s0)
@@ -270,23 +272,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  187 0110 93071000 		li	a5,1
  188 0114 2330F4FC 		sd	a5,-64(s0)
  189 0118 233404FC 		sd	zero,-56(s0)
-  69:src/syscall_c.cpp **** 
-  70:src/syscall_c.cpp ****     // sistemski poziv
-  71:src/syscall_c.cpp ****     return (uint64) abi::sys_call(reinterpret_cast<void *>(empty));
- 190              		.loc 1 71 5 is_stmt 1 discriminator 4
- 191              		.loc 1 71 34 is_stmt 0 discriminator 4
+  71:src/syscall_c.cpp **** 
+  72:src/syscall_c.cpp ****     // sistemski poziv
+  73:src/syscall_c.cpp ****     return (uint64) abi::sys_call(reinterpret_cast<void *>(empty));
+ 190              		.loc 1 73 5 is_stmt 1 discriminator 4
+ 191              		.loc 1 73 34 is_stmt 0 discriminator 4
  192 011c 130504F9 		addi	a0,s0,-112
  193              	.LVL15:
  194 0120 97000000 		call	_ZN3abi8sys_callEPv@plt
  194      E7800000 
  195              	.LVL16:
- 196              		.loc 1 71 66 discriminator 4
+ 196              		.loc 1 73 66 discriminator 4
  197 0128 1B050500 		sext.w	a0,a0
  198              	.LVL17:
  199              	.L12:
-  72:src/syscall_c.cpp **** 
-  73:src/syscall_c.cpp **** }
- 200              		.loc 1 73 1
+  74:src/syscall_c.cpp **** 
+  75:src/syscall_c.cpp **** }
+ 200              		.loc 1 75 1
  201 012c 83308106 		ld	ra,104(sp)
  202              		.cfi_remember_state
  203              		.cfi_restore 1
@@ -296,11 +298,11 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  207 0134 83348105 		ld	s1,88(sp)
  208              		.cfi_restore 9
  209              	.LVL18:
+GAS LISTING /tmp/ccehA9I2.s 			page 6
+
+
  210 0138 03390105 		ld	s2,80(sp)
  211              		.cfi_restore 18
-GAS LISTING /tmp/ccoAAFXO.s 			page 6
-
-
  212              	.LVL19:
  213 013c 83398104 		ld	s3,72(sp)
  214              		.cfi_restore 19
@@ -311,34 +313,34 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  219              	.LVL21:
  220              	.L16:
  221              		.cfi_restore_state
-  49:src/syscall_c.cpp ****         return -1;
- 222              		.loc 1 49 9 is_stmt 1
-  49:src/syscall_c.cpp ****         return -1;
- 223              		.loc 1 49 17 is_stmt 0
+  51:src/syscall_c.cpp ****         return -1;
+ 222              		.loc 1 51 9 is_stmt 1
+  51:src/syscall_c.cpp ****         return -1;
+ 223              		.loc 1 51 17 is_stmt 0
  224 0148 23300900 		sd	zero,0(s2)
-  50:src/syscall_c.cpp ****     }
- 225              		.loc 1 50 9 is_stmt 1
-  50:src/syscall_c.cpp ****     }
- 226              		.loc 1 50 17 is_stmt 0
+  52:src/syscall_c.cpp ****     }
+ 225              		.loc 1 52 9 is_stmt 1
+  52:src/syscall_c.cpp ****     }
+ 226              		.loc 1 52 17 is_stmt 0
  227 014c 1305F0FF 		li	a0,-1
  228              	.LVL22:
  229 0150 6FF0DFFD 		j	.L12
  230              	.LVL23:
  231              	.L17:
-  52:src/syscall_c.cpp **** 
- 232              		.loc 1 52 44
+  54:src/syscall_c.cpp **** 
+ 232              		.loc 1 54 44
  233 0154 13050000 		li	a0,0
  234              	.LVL24:
  235 0158 6FF0DFF9 		j	.L13
  236              		.cfi_endproc
- 237              	.LFE42:
+ 237              	.LFE31:
  239              		.align	2
  240              		.globl	thread_dispatch
  242              	thread_dispatch:
- 243              	.LFB43:
-  74:src/syscall_c.cpp **** 
-  75:src/syscall_c.cpp **** void thread_dispatch() {
- 244              		.loc 1 75 24 is_stmt 1
+ 243              	.LFB32:
+  76:src/syscall_c.cpp **** 
+  77:src/syscall_c.cpp **** void thread_dispatch() {
+ 244              		.loc 1 77 24 is_stmt 1
  245              		.cfi_startproc
  246 015c 130101FB 		addi	sp,sp,-80
  247              		.cfi_def_cfa_offset 80
@@ -348,25 +350,25 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  251              		.cfi_offset 8, -16
  252 0168 13040105 		addi	s0,sp,80
  253              		.cfi_def_cfa 8, 0
-  76:src/syscall_c.cpp **** 
-  77:src/syscall_c.cpp ****     // kod sistemskog poziva
-  78:src/syscall_c.cpp ****     uint64 a0 = 0x13;
- 254              		.loc 1 78 5
+  78:src/syscall_c.cpp **** 
+  79:src/syscall_c.cpp ****     // kod sistemskog poziva
+  80:src/syscall_c.cpp ****     uint64 a0 = 0x13;
+ 254              		.loc 1 80 5
  255              	.LVL25:
-  79:src/syscall_c.cpp ****     // parametri
-  80:src/syscall_c.cpp ****     uint64  a1, a2, a3, a4, a5, a6, a7;
- 256              		.loc 1 80 5
-  81:src/syscall_c.cpp **** 
-  82:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
-GAS LISTING /tmp/ccoAAFXO.s 			page 7
+  81:src/syscall_c.cpp ****     // parametri
+  82:src/syscall_c.cpp ****     uint64  a1, a2, a3, a4, a5, a6, a7;
+ 256              		.loc 1 82 5
+GAS LISTING /tmp/ccehA9I2.s 			page 7
 
 
- 257              		.loc 1 82 5
   83:src/syscall_c.cpp **** 
-  84:src/syscall_c.cpp ****     // void* pokazivac
-  85:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 258              		.loc 1 85 5
- 259              		.loc 1 85 53 is_stmt 0
+  84:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 257              		.loc 1 84 5
+  85:src/syscall_c.cpp **** 
+  86:src/syscall_c.cpp ****     // void* pokazivac
+  87:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 258              		.loc 1 87 5
+ 259              		.loc 1 87 53 is_stmt 0
  260 016c 93073001 		li	a5,19
  261 0170 2338F4FA 		sd	a5,-80(s0)
  262 0174 233C04FA 		sd	zero,-72(s0)
@@ -376,22 +378,22 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  266 0184 233C04FC 		sd	zero,-40(s0)
  267 0188 233004FE 		sd	zero,-32(s0)
  268 018c 233404FE 		sd	zero,-24(s0)
-  86:src/syscall_c.cpp **** 
-  87:src/syscall_c.cpp ****     // sistemski poziv
-  88:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 269              		.loc 1 88 5 is_stmt 1
- 270              		.loc 1 88 18 is_stmt 0
+  88:src/syscall_c.cpp **** 
+  89:src/syscall_c.cpp ****     // sistemski poziv
+  90:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 269              		.loc 1 90 5 is_stmt 1
+ 270              		.loc 1 90 18 is_stmt 0
  271 0190 130504FB 		addi	a0,s0,-80
  272 0194 97000000 		call	_ZN3abi8sys_callEPv@plt
  272      E7800000 
  273              	.LVL26:
-  89:src/syscall_c.cpp **** 
-  90:src/syscall_c.cpp ****     // povratak
-  91:src/syscall_c.cpp ****     return;
- 274              		.loc 1 91 5 is_stmt 1
-  92:src/syscall_c.cpp **** 
-  93:src/syscall_c.cpp **** }
- 275              		.loc 1 93 1 is_stmt 0
+  91:src/syscall_c.cpp **** 
+  92:src/syscall_c.cpp ****     // povratak
+  93:src/syscall_c.cpp ****     return;
+ 274              		.loc 1 93 5 is_stmt 1
+  94:src/syscall_c.cpp **** 
+  95:src/syscall_c.cpp **** }
+ 275              		.loc 1 95 1 is_stmt 0
  276 019c 83308104 		ld	ra,72(sp)
  277              		.cfi_restore 1
  278 01a0 03340104 		ld	s0,64(sp)
@@ -401,14 +403,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  282              		.cfi_def_cfa_offset 0
  283 01a8 67800000 		jr	ra
  284              		.cfi_endproc
- 285              	.LFE43:
+ 285              	.LFE32:
  287              		.align	2
  288              		.globl	thread_exit
  290              	thread_exit:
- 291              	.LFB44:
-  94:src/syscall_c.cpp **** 
-  95:src/syscall_c.cpp **** int thread_exit() {
- 292              		.loc 1 95 19 is_stmt 1
+ 291              	.LFB33:
+  96:src/syscall_c.cpp **** 
+  97:src/syscall_c.cpp **** int thread_exit() {
+ 292              		.loc 1 97 19 is_stmt 1
  293              		.cfi_startproc
  294 01ac 130101FB 		addi	sp,sp,-80
  295              		.cfi_def_cfa_offset 80
@@ -416,27 +418,27 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  297 01b4 23308104 		sd	s0,64(sp)
  298              		.cfi_offset 1, -8
  299              		.cfi_offset 8, -16
+GAS LISTING /tmp/ccehA9I2.s 			page 8
+
+
  300 01b8 13040105 		addi	s0,sp,80
  301              		.cfi_def_cfa 8, 0
-GAS LISTING /tmp/ccoAAFXO.s 			page 8
-
-
-  96:src/syscall_c.cpp **** 
-  97:src/syscall_c.cpp ****     // kod sistemskog poziva
-  98:src/syscall_c.cpp ****     uint64 a0 = 0x12;
- 302              		.loc 1 98 5
+  98:src/syscall_c.cpp **** 
+  99:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 100:src/syscall_c.cpp ****     uint64 a0 = 0x12;
+ 302              		.loc 1 100 5
  303              	.LVL27:
-  99:src/syscall_c.cpp **** 
- 100:src/syscall_c.cpp ****     // parametri
- 101:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 304              		.loc 1 101 5
- 102:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 305              		.loc 1 102 5
- 103:src/syscall_c.cpp **** 
- 104:src/syscall_c.cpp ****     // void* pokazivac
- 105:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 306              		.loc 1 105 5
- 307              		.loc 1 105 53 is_stmt 0
+ 101:src/syscall_c.cpp **** 
+ 102:src/syscall_c.cpp ****     // parametri
+ 103:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 304              		.loc 1 103 5
+ 104:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 305              		.loc 1 104 5
+ 105:src/syscall_c.cpp **** 
+ 106:src/syscall_c.cpp ****     // void* pokazivac
+ 107:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 306              		.loc 1 107 5
+ 307              		.loc 1 107 53 is_stmt 0
  308 01bc 93072001 		li	a5,18
  309 01c0 2338F4FA 		sd	a5,-80(s0)
  310 01c4 233C04FA 		sd	zero,-72(s0)
@@ -446,19 +448,19 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  314 01d4 233C04FC 		sd	zero,-40(s0)
  315 01d8 233004FE 		sd	zero,-32(s0)
  316 01dc 233404FE 		sd	zero,-24(s0)
- 106:src/syscall_c.cpp **** 
- 107:src/syscall_c.cpp ****     // sistemski poziv
- 108:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 317              		.loc 1 108 5 is_stmt 1
- 318              		.loc 1 108 33 is_stmt 0
+ 108:src/syscall_c.cpp **** 
+ 109:src/syscall_c.cpp ****     // sistemski poziv
+ 110:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 317              		.loc 1 110 5 is_stmt 1
+ 318              		.loc 1 110 33 is_stmt 0
  319 01e0 130504FB 		addi	a0,s0,-80
  320 01e4 97000000 		call	_ZN3abi8sys_callEPv@plt
  320      E7800000 
  321              	.LVL28:
- 109:src/syscall_c.cpp **** 
- 110:src/syscall_c.cpp **** //    return 0;
- 111:src/syscall_c.cpp **** }
- 322              		.loc 1 111 1
+ 111:src/syscall_c.cpp **** 
+ 112:src/syscall_c.cpp **** //    return 0;
+ 113:src/syscall_c.cpp **** }
+ 322              		.loc 1 113 1
  323 01ec 1B050500 		sext.w	a0,a0
  324 01f0 83308104 		ld	ra,72(sp)
  325              		.cfi_restore 1
@@ -469,49 +471,49 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  330              		.cfi_def_cfa_offset 0
  331 01fc 67800000 		jr	ra
  332              		.cfi_endproc
- 333              	.LFE44:
+ 333              	.LFE33:
  335              		.align	2
  336              		.globl	time_sleep
  338              	time_sleep:
- 339              	.LFB45:
- 112:src/syscall_c.cpp **** 
- 113:src/syscall_c.cpp **** int time_sleep(time_t time) {
- 340              		.loc 1 113 29 is_stmt 1
- 341              		.cfi_startproc
-GAS LISTING /tmp/ccoAAFXO.s 			page 9
-
-
- 342              	.LVL29:
+ 339              	.LFB34:
  114:src/syscall_c.cpp **** 
- 115:src/syscall_c.cpp ****     if(time == 0)return 0;
- 343              		.loc 1 115 5
+ 115:src/syscall_c.cpp **** int time_sleep(time_t time) {
+GAS LISTING /tmp/ccehA9I2.s 			page 9
+
+
+ 340              		.loc 1 115 29 is_stmt 1
+ 341              		.cfi_startproc
+ 342              	.LVL29:
+ 116:src/syscall_c.cpp **** 
+ 117:src/syscall_c.cpp ****     if(time == 0)return 0;
+ 343              		.loc 1 117 5
  344 0200 63160500 		bnez	a0,.L29
- 345              		.loc 1 115 25 is_stmt 0
+ 345              		.loc 1 117 25 is_stmt 0
  346 0204 13050000 		li	a0,0
  347              	.LVL30:
- 116:src/syscall_c.cpp **** 
- 117:src/syscall_c.cpp ****     // kod sistemskog poziva
- 118:src/syscall_c.cpp ****     uint64 a0 = 0x31;
- 119:src/syscall_c.cpp **** 
- 120:src/syscall_c.cpp ****     // parametri
- 121:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 122:src/syscall_c.cpp ****     a1 = (uint64)time;
- 123:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 124:src/syscall_c.cpp **** 
- 125:src/syscall_c.cpp ****     // void* pokazivac
- 126:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 127:src/syscall_c.cpp **** 
- 128:src/syscall_c.cpp ****     // sistemski poziv
- 129:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 130:src/syscall_c.cpp **** 
- 131:src/syscall_c.cpp **** //    return 0;
- 132:src/syscall_c.cpp **** }
- 348              		.loc 1 132 1
+ 118:src/syscall_c.cpp **** 
+ 119:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 120:src/syscall_c.cpp ****     uint64 a0 = 0x31;
+ 121:src/syscall_c.cpp **** 
+ 122:src/syscall_c.cpp ****     // parametri
+ 123:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 124:src/syscall_c.cpp ****     a1 = (uint64)time;
+ 125:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 126:src/syscall_c.cpp **** 
+ 127:src/syscall_c.cpp ****     // void* pokazivac
+ 128:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 129:src/syscall_c.cpp **** 
+ 130:src/syscall_c.cpp ****     // sistemski poziv
+ 131:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 132:src/syscall_c.cpp **** 
+ 133:src/syscall_c.cpp **** //    return 0;
+ 134:src/syscall_c.cpp **** }
+ 348              		.loc 1 134 1
  349 0208 67800000 		ret
  350              	.LVL31:
  351              	.L29:
- 113:src/syscall_c.cpp **** 
- 352              		.loc 1 113 29
+ 115:src/syscall_c.cpp **** 
+ 352              		.loc 1 115 29
  353 020c 130101FB 		addi	sp,sp,-80
  354              		.cfi_def_cfa_offset 80
  355 0210 23341104 		sd	ra,72(sp)
@@ -520,44 +522,44 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  358              		.cfi_offset 8, -16
  359 0218 13040105 		addi	s0,sp,80
  360              		.cfi_def_cfa 8, 0
- 118:src/syscall_c.cpp **** 
- 361              		.loc 1 118 5 is_stmt 1
+ 120:src/syscall_c.cpp **** 
+ 361              		.loc 1 120 5 is_stmt 1
  362              	.LVL32:
- 121:src/syscall_c.cpp ****     a1 = (uint64)time;
- 363              		.loc 1 121 5
- 122:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 364              		.loc 1 122 5
- 123:src/syscall_c.cpp **** 
- 365              		.loc 1 123 5
- 126:src/syscall_c.cpp **** 
- 366              		.loc 1 126 5
- 126:src/syscall_c.cpp **** 
- 367              		.loc 1 126 53 is_stmt 0
+ 123:src/syscall_c.cpp ****     a1 = (uint64)time;
+ 363              		.loc 1 123 5
+ 124:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 364              		.loc 1 124 5
+ 125:src/syscall_c.cpp **** 
+ 365              		.loc 1 125 5
+ 128:src/syscall_c.cpp **** 
+ 366              		.loc 1 128 5
+ 128:src/syscall_c.cpp **** 
+ 367              		.loc 1 128 53 is_stmt 0
  368 021c 93071003 		li	a5,49
  369 0220 2338F4FA 		sd	a5,-80(s0)
  370 0224 233CA4FA 		sd	a0,-72(s0)
+GAS LISTING /tmp/ccehA9I2.s 			page 10
+
+
  371 0228 233004FC 		sd	zero,-64(s0)
  372 022c 233404FC 		sd	zero,-56(s0)
-GAS LISTING /tmp/ccoAAFXO.s 			page 10
-
-
  373 0230 233804FC 		sd	zero,-48(s0)
  374 0234 233C04FC 		sd	zero,-40(s0)
  375 0238 233004FE 		sd	zero,-32(s0)
  376 023c 233404FE 		sd	zero,-24(s0)
- 129:src/syscall_c.cpp **** 
- 377              		.loc 1 129 5 is_stmt 1
- 129:src/syscall_c.cpp **** 
- 378              		.loc 1 129 33 is_stmt 0
+ 131:src/syscall_c.cpp **** 
+ 377              		.loc 1 131 5 is_stmt 1
+ 131:src/syscall_c.cpp **** 
+ 378              		.loc 1 131 33 is_stmt 0
  379 0240 130504FB 		addi	a0,s0,-80
  380              	.LVL33:
  381 0244 97000000 		call	_ZN3abi8sys_callEPv@plt
  381      E7800000 
  382              	.LVL34:
- 129:src/syscall_c.cpp **** 
- 383              		.loc 1 129 65
+ 131:src/syscall_c.cpp **** 
+ 383              		.loc 1 131 65
  384 024c 1B050500 		sext.w	a0,a0
- 385              		.loc 1 132 1
+ 385              		.loc 1 134 1
  386 0250 83308104 		ld	ra,72(sp)
  387              		.cfi_restore 1
  388 0254 03340104 		ld	s0,64(sp)
@@ -567,14 +569,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  392              		.cfi_def_cfa_offset 0
  393 025c 67800000 		jr	ra
  394              		.cfi_endproc
- 395              	.LFE45:
+ 395              	.LFE34:
  397              		.align	2
  398              		.globl	sem_open
  400              	sem_open:
- 401              	.LFB46:
- 133:src/syscall_c.cpp **** 
- 134:src/syscall_c.cpp **** int sem_open(sem_t *handle, uint64 init) {
- 402              		.loc 1 134 42 is_stmt 1
+ 401              	.LFB35:
+ 135:src/syscall_c.cpp **** 
+ 136:src/syscall_c.cpp **** int sem_open(sem_t *handle, uint64 init) {
+ 402              		.loc 1 136 42 is_stmt 1
  403              		.cfi_startproc
  404              	.LVL35:
  405 0260 130101FB 		addi	sp,sp,-80
@@ -585,28 +587,28 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  410              		.cfi_offset 8, -16
  411 026c 13040105 		addi	s0,sp,80
  412              		.cfi_def_cfa 8, 0
- 135:src/syscall_c.cpp ****     // kod sistemskog poziva
- 136:src/syscall_c.cpp ****     uint64 a0 = 0x21;
- 413              		.loc 1 136 5
+ 137:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 138:src/syscall_c.cpp ****     uint64 a0 = 0x21;
+ 413              		.loc 1 138 5
  414              	.LVL36:
- 137:src/syscall_c.cpp **** 
- 138:src/syscall_c.cpp ****     // parametri
- 139:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 415              		.loc 1 139 5
- 140:src/syscall_c.cpp ****     a1 = (uint64)handle;
- 416              		.loc 1 140 5
- 141:src/syscall_c.cpp ****     a2 = init;
- 417              		.loc 1 141 5
- 142:src/syscall_c.cpp ****     a3 = a4 = a5 = a6 = a7 = 0;
-GAS LISTING /tmp/ccoAAFXO.s 			page 11
+ 139:src/syscall_c.cpp **** 
+ 140:src/syscall_c.cpp ****     // parametri
+ 141:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 415              		.loc 1 141 5
+ 142:src/syscall_c.cpp ****     a1 = (uint64)handle;
+ 416              		.loc 1 142 5
+ 143:src/syscall_c.cpp ****     a2 = init;
+GAS LISTING /tmp/ccehA9I2.s 			page 11
 
 
- 418              		.loc 1 142 5
- 143:src/syscall_c.cpp **** 
- 144:src/syscall_c.cpp ****     // void* pokazivac
- 145:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 419              		.loc 1 145 5
- 420              		.loc 1 145 53 is_stmt 0
+ 417              		.loc 1 143 5
+ 144:src/syscall_c.cpp ****     a3 = a4 = a5 = a6 = a7 = 0;
+ 418              		.loc 1 144 5
+ 145:src/syscall_c.cpp **** 
+ 146:src/syscall_c.cpp ****     // void* pokazivac
+ 147:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 419              		.loc 1 147 5
+ 420              		.loc 1 147 53 is_stmt 0
  421 0270 93071002 		li	a5,33
  422 0274 2338F4FA 		sd	a5,-80(s0)
  423 0278 233CA4FA 		sd	a0,-72(s0)
@@ -616,18 +618,18 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  427 0288 233C04FC 		sd	zero,-40(s0)
  428 028c 233004FE 		sd	zero,-32(s0)
  429 0290 233404FE 		sd	zero,-24(s0)
- 146:src/syscall_c.cpp **** 
- 147:src/syscall_c.cpp ****     // sistemski poziv
- 148:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 430              		.loc 1 148 5 is_stmt 1
- 431              		.loc 1 148 33 is_stmt 0
+ 148:src/syscall_c.cpp **** 
+ 149:src/syscall_c.cpp ****     // sistemski poziv
+ 150:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 430              		.loc 1 150 5 is_stmt 1
+ 431              		.loc 1 150 33 is_stmt 0
  432 0294 130504FB 		addi	a0,s0,-80
  433              	.LVL37:
  434 0298 97000000 		call	_ZN3abi8sys_callEPv@plt
  434      E7800000 
  435              	.LVL38:
- 149:src/syscall_c.cpp **** }
- 436              		.loc 1 149 1
+ 151:src/syscall_c.cpp **** }
+ 436              		.loc 1 151 1
  437 02a0 1B050500 		sext.w	a0,a0
  438 02a4 83308104 		ld	ra,72(sp)
  439              		.cfi_restore 1
@@ -638,14 +640,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  444              		.cfi_def_cfa_offset 0
  445 02b0 67800000 		jr	ra
  446              		.cfi_endproc
- 447              	.LFE46:
+ 447              	.LFE35:
  449              		.align	2
  450              		.globl	sem_close
  452              	sem_close:
- 453              	.LFB47:
- 150:src/syscall_c.cpp **** 
- 151:src/syscall_c.cpp **** int sem_close(sem_t handle) {
- 454              		.loc 1 151 29 is_stmt 1
+ 453              	.LFB36:
+ 152:src/syscall_c.cpp **** 
+ 153:src/syscall_c.cpp **** int sem_close(sem_t handle) {
+ 454              		.loc 1 153 29 is_stmt 1
  455              		.cfi_startproc
  456              	.LVL39:
  457 02b4 130101FB 		addi	sp,sp,-80
@@ -656,26 +658,26 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  462              		.cfi_offset 8, -16
  463 02c0 13040105 		addi	s0,sp,80
  464              		.cfi_def_cfa 8, 0
- 152:src/syscall_c.cpp ****     // kod sistemskog poziva
- 153:src/syscall_c.cpp ****     uint64 a0 = 0x22;
-GAS LISTING /tmp/ccoAAFXO.s 			page 12
+GAS LISTING /tmp/ccehA9I2.s 			page 12
 
 
- 465              		.loc 1 153 5
+ 154:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 155:src/syscall_c.cpp ****     uint64 a0 = 0x22;
+ 465              		.loc 1 155 5
  466              	.LVL40:
- 154:src/syscall_c.cpp **** 
- 155:src/syscall_c.cpp ****     // parametri
- 156:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 467              		.loc 1 156 5
- 157:src/syscall_c.cpp ****     a1 = (uint64)handle;
- 468              		.loc 1 157 5
- 158:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 469              		.loc 1 158 5
- 159:src/syscall_c.cpp **** 
- 160:src/syscall_c.cpp ****     // void* pokazivac
- 161:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 470              		.loc 1 161 5
- 471              		.loc 1 161 53 is_stmt 0
+ 156:src/syscall_c.cpp **** 
+ 157:src/syscall_c.cpp ****     // parametri
+ 158:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 467              		.loc 1 158 5
+ 159:src/syscall_c.cpp ****     a1 = (uint64)handle;
+ 468              		.loc 1 159 5
+ 160:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 469              		.loc 1 160 5
+ 161:src/syscall_c.cpp **** 
+ 162:src/syscall_c.cpp ****     // void* pokazivac
+ 163:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 470              		.loc 1 163 5
+ 471              		.loc 1 163 53 is_stmt 0
  472 02c4 93072002 		li	a5,34
  473 02c8 2338F4FA 		sd	a5,-80(s0)
  474 02cc 233CA4FA 		sd	a0,-72(s0)
@@ -685,18 +687,18 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  478 02dc 233C04FC 		sd	zero,-40(s0)
  479 02e0 233004FE 		sd	zero,-32(s0)
  480 02e4 233404FE 		sd	zero,-24(s0)
- 162:src/syscall_c.cpp **** 
- 163:src/syscall_c.cpp ****     // sistemski poziv
- 164:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 481              		.loc 1 164 5 is_stmt 1
- 482              		.loc 1 164 33 is_stmt 0
+ 164:src/syscall_c.cpp **** 
+ 165:src/syscall_c.cpp ****     // sistemski poziv
+ 166:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 481              		.loc 1 166 5 is_stmt 1
+ 482              		.loc 1 166 33 is_stmt 0
  483 02e8 130504FB 		addi	a0,s0,-80
  484              	.LVL41:
  485 02ec 97000000 		call	_ZN3abi8sys_callEPv@plt
  485      E7800000 
  486              	.LVL42:
- 165:src/syscall_c.cpp **** }
- 487              		.loc 1 165 1
+ 167:src/syscall_c.cpp **** }
+ 487              		.loc 1 167 1
  488 02f4 1B050500 		sext.w	a0,a0
  489 02f8 83308104 		ld	ra,72(sp)
  490              		.cfi_restore 1
@@ -707,20 +709,20 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  495              		.cfi_def_cfa_offset 0
  496 0304 67800000 		jr	ra
  497              		.cfi_endproc
- 498              	.LFE47:
+ 498              	.LFE36:
  500              		.align	2
  501              		.globl	sem_wait
  503              	sem_wait:
- 504              	.LFB48:
- 166:src/syscall_c.cpp **** 
- 167:src/syscall_c.cpp **** int sem_wait(sem_t id) {
- 505              		.loc 1 167 24 is_stmt 1
+ 504              	.LFB37:
+ 168:src/syscall_c.cpp **** 
+ 169:src/syscall_c.cpp **** int sem_wait(sem_t id) {
+ 505              		.loc 1 169 24 is_stmt 1
  506              		.cfi_startproc
+GAS LISTING /tmp/ccehA9I2.s 			page 13
+
+
  507              	.LVL43:
  508 0308 130101FB 		addi	sp,sp,-80
-GAS LISTING /tmp/ccoAAFXO.s 			page 13
-
-
  509              		.cfi_def_cfa_offset 80
  510 030c 23341104 		sd	ra,72(sp)
  511 0310 23308104 		sd	s0,64(sp)
@@ -728,23 +730,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  513              		.cfi_offset 8, -16
  514 0314 13040105 		addi	s0,sp,80
  515              		.cfi_def_cfa 8, 0
- 168:src/syscall_c.cpp ****     // kod sistemskog poziva
- 169:src/syscall_c.cpp ****     uint64 a0 = 0x23;
- 516              		.loc 1 169 5
+ 170:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 171:src/syscall_c.cpp ****     uint64 a0 = 0x23;
+ 516              		.loc 1 171 5
  517              	.LVL44:
- 170:src/syscall_c.cpp **** 
- 171:src/syscall_c.cpp ****     // parametri
- 172:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 518              		.loc 1 172 5
- 173:src/syscall_c.cpp ****     a1 = (uint64)id;
- 519              		.loc 1 173 5
- 174:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 520              		.loc 1 174 5
- 175:src/syscall_c.cpp **** 
- 176:src/syscall_c.cpp ****     // void* pokazivac
- 177:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 521              		.loc 1 177 5
- 522              		.loc 1 177 53 is_stmt 0
+ 172:src/syscall_c.cpp **** 
+ 173:src/syscall_c.cpp ****     // parametri
+ 174:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 518              		.loc 1 174 5
+ 175:src/syscall_c.cpp ****     a1 = (uint64)id;
+ 519              		.loc 1 175 5
+ 176:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 520              		.loc 1 176 5
+ 177:src/syscall_c.cpp **** 
+ 178:src/syscall_c.cpp ****     // void* pokazivac
+ 179:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 521              		.loc 1 179 5
+ 522              		.loc 1 179 53 is_stmt 0
  523 0318 93073002 		li	a5,35
  524 031c 2338F4FA 		sd	a5,-80(s0)
  525 0320 233CA4FA 		sd	a0,-72(s0)
@@ -754,18 +756,18 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  529 0330 233C04FC 		sd	zero,-40(s0)
  530 0334 233004FE 		sd	zero,-32(s0)
  531 0338 233404FE 		sd	zero,-24(s0)
- 178:src/syscall_c.cpp **** 
- 179:src/syscall_c.cpp ****     // sistemski poziv
- 180:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 532              		.loc 1 180 5 is_stmt 1
- 533              		.loc 1 180 33 is_stmt 0
+ 180:src/syscall_c.cpp **** 
+ 181:src/syscall_c.cpp ****     // sistemski poziv
+ 182:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 532              		.loc 1 182 5 is_stmt 1
+ 533              		.loc 1 182 33 is_stmt 0
  534 033c 130504FB 		addi	a0,s0,-80
  535              	.LVL45:
  536 0340 97000000 		call	_ZN3abi8sys_callEPv@plt
  536      E7800000 
  537              	.LVL46:
- 181:src/syscall_c.cpp **** }
- 538              		.loc 1 181 1
+ 183:src/syscall_c.cpp **** }
+ 538              		.loc 1 183 1
  539 0348 1B050500 		sext.w	a0,a0
  540 034c 83308104 		ld	ra,72(sp)
  541              		.cfi_restore 1
@@ -776,17 +778,17 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  546              		.cfi_def_cfa_offset 0
  547 0358 67800000 		jr	ra
  548              		.cfi_endproc
- 549              	.LFE48:
+GAS LISTING /tmp/ccehA9I2.s 			page 14
+
+
+ 549              	.LFE37:
  551              		.align	2
-GAS LISTING /tmp/ccoAAFXO.s 			page 14
-
-
  552              		.globl	sem_signal
  554              	sem_signal:
- 555              	.LFB49:
- 182:src/syscall_c.cpp **** 
- 183:src/syscall_c.cpp **** int sem_signal(sem_t id) {
- 556              		.loc 1 183 26 is_stmt 1
+ 555              	.LFB38:
+ 184:src/syscall_c.cpp **** 
+ 185:src/syscall_c.cpp **** int sem_signal(sem_t id) {
+ 556              		.loc 1 185 26 is_stmt 1
  557              		.cfi_startproc
  558              	.LVL47:
  559 035c 130101FB 		addi	sp,sp,-80
@@ -797,23 +799,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  564              		.cfi_offset 8, -16
  565 0368 13040105 		addi	s0,sp,80
  566              		.cfi_def_cfa 8, 0
- 184:src/syscall_c.cpp ****     // kod sistemskog poziva
- 185:src/syscall_c.cpp ****     uint64 a0 = 0x24;
- 567              		.loc 1 185 5
+ 186:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 187:src/syscall_c.cpp ****     uint64 a0 = 0x24;
+ 567              		.loc 1 187 5
  568              	.LVL48:
- 186:src/syscall_c.cpp **** 
- 187:src/syscall_c.cpp ****     // parametri
- 188:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 569              		.loc 1 188 5
- 189:src/syscall_c.cpp ****     a1 = (uint64)id;
- 570              		.loc 1 189 5
- 190:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 571              		.loc 1 190 5
- 191:src/syscall_c.cpp **** 
- 192:src/syscall_c.cpp ****     // void* pokazivac
- 193:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 572              		.loc 1 193 5
- 573              		.loc 1 193 53 is_stmt 0
+ 188:src/syscall_c.cpp **** 
+ 189:src/syscall_c.cpp ****     // parametri
+ 190:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 569              		.loc 1 190 5
+ 191:src/syscall_c.cpp ****     a1 = (uint64)id;
+ 570              		.loc 1 191 5
+ 192:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 571              		.loc 1 192 5
+ 193:src/syscall_c.cpp **** 
+ 194:src/syscall_c.cpp ****     // void* pokazivac
+ 195:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 572              		.loc 1 195 5
+ 573              		.loc 1 195 53 is_stmt 0
  574 036c 93074002 		li	a5,36
  575 0370 2338F4FA 		sd	a5,-80(s0)
  576 0374 233CA4FA 		sd	a0,-72(s0)
@@ -823,24 +825,24 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  580 0384 233C04FC 		sd	zero,-40(s0)
  581 0388 233004FE 		sd	zero,-32(s0)
  582 038c 233404FE 		sd	zero,-24(s0)
- 194:src/syscall_c.cpp **** 
- 195:src/syscall_c.cpp ****     // sistemski poziv
- 196:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 583              		.loc 1 196 5 is_stmt 1
- 584              		.loc 1 196 33 is_stmt 0
+ 196:src/syscall_c.cpp **** 
+ 197:src/syscall_c.cpp ****     // sistemski poziv
+ 198:src/syscall_c.cpp ****     return (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 583              		.loc 1 198 5 is_stmt 1
+ 584              		.loc 1 198 33 is_stmt 0
  585 0390 130504FB 		addi	a0,s0,-80
  586              	.LVL49:
  587 0394 97000000 		call	_ZN3abi8sys_callEPv@plt
  587      E7800000 
  588              	.LVL50:
- 197:src/syscall_c.cpp **** }
- 589              		.loc 1 197 1
+ 199:src/syscall_c.cpp **** }
+ 589              		.loc 1 199 1
  590 039c 1B050500 		sext.w	a0,a0
+GAS LISTING /tmp/ccehA9I2.s 			page 15
+
+
  591 03a0 83308104 		ld	ra,72(sp)
  592              		.cfi_restore 1
-GAS LISTING /tmp/ccoAAFXO.s 			page 15
-
-
  593 03a4 03340104 		ld	s0,64(sp)
  594              		.cfi_restore 8
  595              		.cfi_def_cfa 2, 80
@@ -848,14 +850,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  597              		.cfi_def_cfa_offset 0
  598 03ac 67800000 		jr	ra
  599              		.cfi_endproc
- 600              	.LFE49:
+ 600              	.LFE38:
  602              		.align	2
  603              		.globl	getc
  605              	getc:
- 606              	.LFB50:
- 198:src/syscall_c.cpp **** 
- 199:src/syscall_c.cpp **** char getc() {
- 607              		.loc 1 199 13 is_stmt 1
+ 606              	.LFB39:
+ 200:src/syscall_c.cpp **** 
+ 201:src/syscall_c.cpp **** char getc() {
+ 607              		.loc 1 201 13 is_stmt 1
  608              		.cfi_startproc
  609 03b0 130101FB 		addi	sp,sp,-80
  610              		.cfi_def_cfa_offset 80
@@ -865,21 +867,21 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  614              		.cfi_offset 8, -16
  615 03bc 13040105 		addi	s0,sp,80
  616              		.cfi_def_cfa 8, 0
- 200:src/syscall_c.cpp ****     // kod sistemskog poziva
- 201:src/syscall_c.cpp ****     uint64 a0 = 0x41;
- 617              		.loc 1 201 5
+ 202:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 203:src/syscall_c.cpp ****     uint64 a0 = 0x41;
+ 617              		.loc 1 203 5
  618              	.LVL51:
- 202:src/syscall_c.cpp **** 
- 203:src/syscall_c.cpp ****     // parametri
- 204:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 619              		.loc 1 204 5
- 205:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 620              		.loc 1 205 5
- 206:src/syscall_c.cpp **** 
- 207:src/syscall_c.cpp ****     // void* pokazivac
- 208:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 621              		.loc 1 208 5
- 622              		.loc 1 208 53 is_stmt 0
+ 204:src/syscall_c.cpp **** 
+ 205:src/syscall_c.cpp ****     // parametri
+ 206:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 619              		.loc 1 206 5
+ 207:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 620              		.loc 1 207 5
+ 208:src/syscall_c.cpp **** 
+ 209:src/syscall_c.cpp ****     // void* pokazivac
+ 210:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 621              		.loc 1 210 5
+ 622              		.loc 1 210 53 is_stmt 0
  623 03c0 93071004 		li	a5,65
  624 03c4 2338F4FA 		sd	a5,-80(s0)
  625 03c8 233C04FA 		sd	zero,-72(s0)
@@ -889,23 +891,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  629 03d8 233C04FC 		sd	zero,-40(s0)
  630 03dc 233004FE 		sd	zero,-32(s0)
  631 03e0 233404FE 		sd	zero,-24(s0)
- 209:src/syscall_c.cpp **** 
- 210:src/syscall_c.cpp ****     // sistemski poziv
- 211:src/syscall_c.cpp ****     uint64 ch = (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
- 632              		.loc 1 211 5 is_stmt 1
- 633              		.loc 1 211 38 is_stmt 0
+ 211:src/syscall_c.cpp **** 
+ 212:src/syscall_c.cpp ****     // sistemski poziv
+ 213:src/syscall_c.cpp ****     uint64 ch = (uint64)abi::sys_call(reinterpret_cast<void *>(empty));
+ 632              		.loc 1 213 5 is_stmt 1
+ 633              		.loc 1 213 38 is_stmt 0
  634 03e4 130504FB 		addi	a0,s0,-80
  635 03e8 97000000 		call	_ZN3abi8sys_callEPv@plt
+GAS LISTING /tmp/ccehA9I2.s 			page 16
+
+
  635      E7800000 
  636              	.LVL52:
-GAS LISTING /tmp/ccoAAFXO.s 			page 16
-
-
- 212:src/syscall_c.cpp **** 
- 213:src/syscall_c.cpp ****     return ch;
- 637              		.loc 1 213 5 is_stmt 1
- 214:src/syscall_c.cpp **** }
- 638              		.loc 1 214 1 is_stmt 0
+ 214:src/syscall_c.cpp **** 
+ 215:src/syscall_c.cpp ****     return ch;
+ 637              		.loc 1 215 5 is_stmt 1
+ 216:src/syscall_c.cpp **** }
+ 638              		.loc 1 216 1 is_stmt 0
  639 03f0 1375F50F 		andi	a0,a0,0xff
  640              	.LVL53:
  641 03f4 83308104 		ld	ra,72(sp)
@@ -917,14 +919,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  647              		.cfi_def_cfa_offset 0
  648 0400 67800000 		jr	ra
  649              		.cfi_endproc
- 650              	.LFE50:
+ 650              	.LFE39:
  652              		.align	2
  653              		.globl	putc
  655              	putc:
- 656              	.LFB51:
- 215:src/syscall_c.cpp **** 
- 216:src/syscall_c.cpp **** void putc(char c) {
- 657              		.loc 1 216 19 is_stmt 1
+ 656              	.LFB40:
+ 217:src/syscall_c.cpp **** 
+ 218:src/syscall_c.cpp **** void putc(char c) {
+ 657              		.loc 1 218 19 is_stmt 1
  658              		.cfi_startproc
  659              	.LVL54:
  660 0404 130101FB 		addi	sp,sp,-80
@@ -935,49 +937,49 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  665              		.cfi_offset 8, -16
  666 0410 13040105 		addi	s0,sp,80
  667              		.cfi_def_cfa 8, 0
- 217:src/syscall_c.cpp ****     // kod sistemskog poziva
- 218:src/syscall_c.cpp ****     uint64 a0 = 0x42;
- 668              		.loc 1 218 5
+ 219:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 220:src/syscall_c.cpp ****     uint64 a0 = 0x42;
+ 668              		.loc 1 220 5
  669              	.LVL55:
- 219:src/syscall_c.cpp **** 
- 220:src/syscall_c.cpp ****     // parametri
- 221:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 670              		.loc 1 221 5
- 222:src/syscall_c.cpp ****     a1 = (uint64)c;
- 671              		.loc 1 222 5
- 223:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 672              		.loc 1 223 5
- 224:src/syscall_c.cpp **** 
- 225:src/syscall_c.cpp ****     // void* pokazivac
- 226:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 673              		.loc 1 226 5
- 674              		.loc 1 226 53 is_stmt 0
+ 221:src/syscall_c.cpp **** 
+ 222:src/syscall_c.cpp ****     // parametri
+ 223:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 670              		.loc 1 223 5
+ 224:src/syscall_c.cpp ****     a1 = (uint64)c;
+ 671              		.loc 1 224 5
+ 225:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 672              		.loc 1 225 5
+ 226:src/syscall_c.cpp **** 
+ 227:src/syscall_c.cpp ****     // void* pokazivac
+ 228:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 673              		.loc 1 228 5
+ 674              		.loc 1 228 53 is_stmt 0
  675 0414 93072004 		li	a5,66
  676 0418 2338F4FA 		sd	a5,-80(s0)
  677 041c 233CA4FA 		sd	a0,-72(s0)
  678 0420 233004FC 		sd	zero,-64(s0)
+GAS LISTING /tmp/ccehA9I2.s 			page 17
+
+
  679 0424 233404FC 		sd	zero,-56(s0)
  680 0428 233804FC 		sd	zero,-48(s0)
-GAS LISTING /tmp/ccoAAFXO.s 			page 17
-
-
  681 042c 233C04FC 		sd	zero,-40(s0)
  682 0430 233004FE 		sd	zero,-32(s0)
  683 0434 233404FE 		sd	zero,-24(s0)
- 227:src/syscall_c.cpp **** 
- 228:src/syscall_c.cpp ****     // sistemski poziv
- 229:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 684              		.loc 1 229 5 is_stmt 1
- 685              		.loc 1 229 18 is_stmt 0
+ 229:src/syscall_c.cpp **** 
+ 230:src/syscall_c.cpp ****     // sistemski poziv
+ 231:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 684              		.loc 1 231 5 is_stmt 1
+ 685              		.loc 1 231 18 is_stmt 0
  686 0438 130504FB 		addi	a0,s0,-80
  687              	.LVL56:
  688 043c 97000000 		call	_ZN3abi8sys_callEPv@plt
  688      E7800000 
  689              	.LVL57:
- 230:src/syscall_c.cpp ****     return;
- 690              		.loc 1 230 5 is_stmt 1
- 231:src/syscall_c.cpp **** }
- 691              		.loc 1 231 1 is_stmt 0
+ 232:src/syscall_c.cpp ****     return;
+ 690              		.loc 1 232 5 is_stmt 1
+ 233:src/syscall_c.cpp **** }
+ 691              		.loc 1 233 1 is_stmt 0
  692 0444 83308104 		ld	ra,72(sp)
  693              		.cfi_restore 1
  694 0448 03340104 		ld	s0,64(sp)
@@ -987,14 +989,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  698              		.cfi_def_cfa_offset 0
  699 0450 67800000 		jr	ra
  700              		.cfi_endproc
- 701              	.LFE51:
+ 701              	.LFE40:
  703              		.align	2
  704              		.globl	put_in_scheduler
  706              	put_in_scheduler:
- 707              	.LFB52:
- 232:src/syscall_c.cpp **** 
- 233:src/syscall_c.cpp **** void put_in_scheduler(thread_t tcb) {
- 708              		.loc 1 233 37 is_stmt 1
+ 707              	.LFB41:
+ 234:src/syscall_c.cpp **** 
+ 235:src/syscall_c.cpp **** void put_in_scheduler(thread_t tcb) {
+ 708              		.loc 1 235 37 is_stmt 1
  709              		.cfi_startproc
  710              	.LVL58:
  711 0454 130101FB 		addi	sp,sp,-80
@@ -1005,26 +1007,26 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  716              		.cfi_offset 8, -16
  717 0460 13040105 		addi	s0,sp,80
  718              		.cfi_def_cfa 8, 0
- 234:src/syscall_c.cpp ****     // kod sistemskog poziva
- 235:src/syscall_c.cpp ****     uint64 a0 = 0x50;
- 719              		.loc 1 235 5
+ 236:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 237:src/syscall_c.cpp ****     uint64 a0 = 0x50;
+ 719              		.loc 1 237 5
  720              	.LVL59:
- 236:src/syscall_c.cpp **** 
- 237:src/syscall_c.cpp ****     // parametri
- 238:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 721              		.loc 1 238 5
- 239:src/syscall_c.cpp ****     a1 = (uint64)tcb;
- 722              		.loc 1 239 5
- 240:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 723              		.loc 1 240 5
- 241:src/syscall_c.cpp **** 
-GAS LISTING /tmp/ccoAAFXO.s 			page 18
+ 238:src/syscall_c.cpp **** 
+ 239:src/syscall_c.cpp ****     // parametri
+ 240:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 721              		.loc 1 240 5
+ 241:src/syscall_c.cpp ****     a1 = (uint64)tcb;
+ 722              		.loc 1 241 5
+ 242:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+GAS LISTING /tmp/ccehA9I2.s 			page 18
 
 
- 242:src/syscall_c.cpp ****     // void* pokazivac
- 243:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 724              		.loc 1 243 5
- 725              		.loc 1 243 53 is_stmt 0
+ 723              		.loc 1 242 5
+ 243:src/syscall_c.cpp **** 
+ 244:src/syscall_c.cpp ****     // void* pokazivac
+ 245:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 724              		.loc 1 245 5
+ 725              		.loc 1 245 53 is_stmt 0
  726 0464 93070005 		li	a5,80
  727 0468 2338F4FA 		sd	a5,-80(s0)
  728 046c 233CA4FA 		sd	a0,-72(s0)
@@ -1034,20 +1036,20 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  732 047c 233C04FC 		sd	zero,-40(s0)
  733 0480 233004FE 		sd	zero,-32(s0)
  734 0484 233404FE 		sd	zero,-24(s0)
- 244:src/syscall_c.cpp **** 
- 245:src/syscall_c.cpp ****     // sistemski poziv
- 246:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 735              		.loc 1 246 5 is_stmt 1
- 736              		.loc 1 246 18 is_stmt 0
+ 246:src/syscall_c.cpp **** 
+ 247:src/syscall_c.cpp ****     // sistemski poziv
+ 248:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 735              		.loc 1 248 5 is_stmt 1
+ 736              		.loc 1 248 18 is_stmt 0
  737 0488 130504FB 		addi	a0,s0,-80
  738              	.LVL60:
  739 048c 97000000 		call	_ZN3abi8sys_callEPv@plt
  739      E7800000 
  740              	.LVL61:
- 247:src/syscall_c.cpp ****     return;
- 741              		.loc 1 247 5 is_stmt 1
- 248:src/syscall_c.cpp **** }
- 742              		.loc 1 248 1 is_stmt 0
+ 249:src/syscall_c.cpp ****     return;
+ 741              		.loc 1 249 5 is_stmt 1
+ 250:src/syscall_c.cpp **** }
+ 742              		.loc 1 250 1 is_stmt 0
  743 0494 83308104 		ld	ra,72(sp)
  744              		.cfi_restore 1
  745 0498 03340104 		ld	s0,64(sp)
@@ -1057,14 +1059,14 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  749              		.cfi_def_cfa_offset 0
  750 04a0 67800000 		jr	ra
  751              		.cfi_endproc
- 752              	.LFE52:
+ 752              	.LFE41:
  754              		.align	2
  755              		.globl	switch_to_user
  757              	switch_to_user:
- 758              	.LFB53:
- 249:src/syscall_c.cpp **** 
- 250:src/syscall_c.cpp **** void switch_to_user() {
- 759              		.loc 1 250 23 is_stmt 1
+ 758              	.LFB42:
+ 251:src/syscall_c.cpp **** 
+ 252:src/syscall_c.cpp **** void switch_to_user() {
+ 759              		.loc 1 252 23 is_stmt 1
  760              		.cfi_startproc
  761 04a4 130101FB 		addi	sp,sp,-80
  762              		.cfi_def_cfa_offset 80
@@ -1074,24 +1076,24 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  766              		.cfi_offset 8, -16
  767 04b0 13040105 		addi	s0,sp,80
  768              		.cfi_def_cfa 8, 0
- 251:src/syscall_c.cpp ****     // kod sistemskog poziva
- 252:src/syscall_c.cpp ****     uint64 a0 = 0x60;
- 769              		.loc 1 252 5
+ 253:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 254:src/syscall_c.cpp ****     uint64 a0 = 0x60;
+GAS LISTING /tmp/ccehA9I2.s 			page 19
+
+
+ 769              		.loc 1 254 5
  770              	.LVL62:
-GAS LISTING /tmp/ccoAAFXO.s 			page 19
-
-
- 253:src/syscall_c.cpp **** 
- 254:src/syscall_c.cpp ****     // parametri
- 255:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 771              		.loc 1 255 5
- 256:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 772              		.loc 1 256 5
- 257:src/syscall_c.cpp **** 
- 258:src/syscall_c.cpp ****     // void* pokazivac
- 259:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 773              		.loc 1 259 5
- 774              		.loc 1 259 53 is_stmt 0
+ 255:src/syscall_c.cpp **** 
+ 256:src/syscall_c.cpp ****     // parametri
+ 257:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 771              		.loc 1 257 5
+ 258:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 772              		.loc 1 258 5
+ 259:src/syscall_c.cpp **** 
+ 260:src/syscall_c.cpp ****     // void* pokazivac
+ 261:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 773              		.loc 1 261 5
+ 774              		.loc 1 261 53 is_stmt 0
  775 04b4 93070006 		li	a5,96
  776 04b8 2338F4FA 		sd	a5,-80(s0)
  777 04bc 233C04FA 		sd	zero,-72(s0)
@@ -1101,19 +1103,19 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  781 04cc 233C04FC 		sd	zero,-40(s0)
  782 04d0 233004FE 		sd	zero,-32(s0)
  783 04d4 233404FE 		sd	zero,-24(s0)
- 260:src/syscall_c.cpp **** 
- 261:src/syscall_c.cpp ****     // sistemski poziv
- 262:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 784              		.loc 1 262 5 is_stmt 1
- 785              		.loc 1 262 18 is_stmt 0
+ 262:src/syscall_c.cpp **** 
+ 263:src/syscall_c.cpp ****     // sistemski poziv
+ 264:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 784              		.loc 1 264 5 is_stmt 1
+ 785              		.loc 1 264 18 is_stmt 0
  786 04d8 130504FB 		addi	a0,s0,-80
  787 04dc 97000000 		call	_ZN3abi8sys_callEPv@plt
  787      E7800000 
  788              	.LVL63:
- 263:src/syscall_c.cpp ****     return;
- 789              		.loc 1 263 5 is_stmt 1
- 264:src/syscall_c.cpp **** }
- 790              		.loc 1 264 1 is_stmt 0
+ 265:src/syscall_c.cpp ****     return;
+ 789              		.loc 1 265 5 is_stmt 1
+ 266:src/syscall_c.cpp **** }
+ 790              		.loc 1 266 1 is_stmt 0
  791 04e4 83308104 		ld	ra,72(sp)
  792              		.cfi_restore 1
  793 04e8 03340104 		ld	s0,64(sp)
@@ -1123,41 +1125,41 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  797              		.cfi_def_cfa_offset 0
  798 04f0 67800000 		jr	ra
  799              		.cfi_endproc
- 800              	.LFE53:
+ 800              	.LFE42:
  802              		.align	2
  803              		.globl	switch_to_priviledged
  805              	switch_to_priviledged:
- 806              	.LFB54:
- 265:src/syscall_c.cpp **** 
- 266:src/syscall_c.cpp **** void switch_to_priviledged() {
- 807              		.loc 1 266 30 is_stmt 1
+ 806              	.LFB43:
+ 267:src/syscall_c.cpp **** 
+ 268:src/syscall_c.cpp **** void switch_to_priviledged() {
+ 807              		.loc 1 268 30 is_stmt 1
  808              		.cfi_startproc
  809 04f4 130101FB 		addi	sp,sp,-80
  810              		.cfi_def_cfa_offset 80
  811 04f8 23341104 		sd	ra,72(sp)
  812 04fc 23308104 		sd	s0,64(sp)
+GAS LISTING /tmp/ccehA9I2.s 			page 20
+
+
  813              		.cfi_offset 1, -8
  814              		.cfi_offset 8, -16
-GAS LISTING /tmp/ccoAAFXO.s 			page 20
-
-
  815 0500 13040105 		addi	s0,sp,80
  816              		.cfi_def_cfa 8, 0
- 267:src/syscall_c.cpp ****     // kod sistemskog poziva
- 268:src/syscall_c.cpp ****     uint64 a0 = 0x61;
- 817              		.loc 1 268 5
+ 269:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 270:src/syscall_c.cpp ****     uint64 a0 = 0x61;
+ 817              		.loc 1 270 5
  818              	.LVL64:
- 269:src/syscall_c.cpp **** 
- 270:src/syscall_c.cpp ****     // parametri
- 271:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 819              		.loc 1 271 5
- 272:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 820              		.loc 1 272 5
- 273:src/syscall_c.cpp **** 
- 274:src/syscall_c.cpp ****     // void* pokazivac
- 275:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 821              		.loc 1 275 5
- 822              		.loc 1 275 53 is_stmt 0
+ 271:src/syscall_c.cpp **** 
+ 272:src/syscall_c.cpp ****     // parametri
+ 273:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 819              		.loc 1 273 5
+ 274:src/syscall_c.cpp ****     a1 = a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 820              		.loc 1 274 5
+ 275:src/syscall_c.cpp **** 
+ 276:src/syscall_c.cpp ****     // void* pokazivac
+ 277:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 821              		.loc 1 277 5
+ 822              		.loc 1 277 53 is_stmt 0
  823 0504 93071006 		li	a5,97
  824 0508 2338F4FA 		sd	a5,-80(s0)
  825 050c 233C04FA 		sd	zero,-72(s0)
@@ -1167,19 +1169,19 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  829 051c 233C04FC 		sd	zero,-40(s0)
  830 0520 233004FE 		sd	zero,-32(s0)
  831 0524 233404FE 		sd	zero,-24(s0)
- 276:src/syscall_c.cpp **** 
- 277:src/syscall_c.cpp ****     // sistemski poziv
- 278:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 832              		.loc 1 278 5 is_stmt 1
- 833              		.loc 1 278 18 is_stmt 0
+ 278:src/syscall_c.cpp **** 
+ 279:src/syscall_c.cpp ****     // sistemski poziv
+ 280:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 832              		.loc 1 280 5 is_stmt 1
+ 833              		.loc 1 280 18 is_stmt 0
  834 0528 130504FB 		addi	a0,s0,-80
  835 052c 97000000 		call	_ZN3abi8sys_callEPv@plt
  835      E7800000 
  836              	.LVL65:
- 279:src/syscall_c.cpp ****     return;
- 837              		.loc 1 279 5 is_stmt 1
- 280:src/syscall_c.cpp **** }
- 838              		.loc 1 280 1 is_stmt 0
+ 281:src/syscall_c.cpp ****     return;
+ 837              		.loc 1 281 5 is_stmt 1
+ 282:src/syscall_c.cpp **** }
+ 838              		.loc 1 282 1 is_stmt 0
  839 0534 83308104 		ld	ra,72(sp)
  840              		.cfi_restore 1
  841 0538 03340104 		ld	s0,64(sp)
@@ -1189,18 +1191,18 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  845              		.cfi_def_cfa_offset 0
  846 0540 67800000 		jr	ra
  847              		.cfi_endproc
- 848              	.LFE54:
+ 848              	.LFE43:
  850              		.align	2
  851              		.globl	set_periodic
  853              	set_periodic:
- 854              	.LFB55:
- 281:src/syscall_c.cpp **** 
- 282:src/syscall_c.cpp **** void set_periodic(thread_t periodic_thread) {
- 855              		.loc 1 282 45 is_stmt 1
+ 854              	.LFB44:
+ 283:src/syscall_c.cpp **** 
+ 284:src/syscall_c.cpp **** void set_periodic(thread_t periodic_thread) {
+GAS LISTING /tmp/ccehA9I2.s 			page 21
+
+
+ 855              		.loc 1 284 45 is_stmt 1
  856              		.cfi_startproc
-GAS LISTING /tmp/ccoAAFXO.s 			page 21
-
-
  857              	.LVL66:
  858 0544 130101FB 		addi	sp,sp,-80
  859              		.cfi_def_cfa_offset 80
@@ -1210,23 +1212,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  863              		.cfi_offset 8, -16
  864 0550 13040105 		addi	s0,sp,80
  865              		.cfi_def_cfa 8, 0
- 283:src/syscall_c.cpp ****     // kod sistemskog poziva
- 284:src/syscall_c.cpp ****     uint64 a0 = 0x70;
- 866              		.loc 1 284 5
+ 285:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 286:src/syscall_c.cpp ****     uint64 a0 = 0x70;
+ 866              		.loc 1 286 5
  867              	.LVL67:
- 285:src/syscall_c.cpp **** 
- 286:src/syscall_c.cpp ****     // parametri
- 287:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 868              		.loc 1 287 5
- 288:src/syscall_c.cpp ****     a1 = (uint64)periodic_thread;
- 869              		.loc 1 288 5
- 289:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 870              		.loc 1 289 5
- 290:src/syscall_c.cpp **** 
- 291:src/syscall_c.cpp ****     // void* pokazivac
- 292:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 871              		.loc 1 292 5
- 872              		.loc 1 292 53 is_stmt 0
+ 287:src/syscall_c.cpp **** 
+ 288:src/syscall_c.cpp ****     // parametri
+ 289:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 868              		.loc 1 289 5
+ 290:src/syscall_c.cpp ****     a1 = (uint64)periodic_thread;
+ 869              		.loc 1 290 5
+ 291:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 870              		.loc 1 291 5
+ 292:src/syscall_c.cpp **** 
+ 293:src/syscall_c.cpp ****     // void* pokazivac
+ 294:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 871              		.loc 1 294 5
+ 872              		.loc 1 294 53 is_stmt 0
  873 0554 93070007 		li	a5,112
  874 0558 2338F4FA 		sd	a5,-80(s0)
  875 055c 233CA4FA 		sd	a0,-72(s0)
@@ -1236,40 +1238,40 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  879 056c 233C04FC 		sd	zero,-40(s0)
  880 0570 233004FE 		sd	zero,-32(s0)
  881 0574 233404FE 		sd	zero,-24(s0)
- 293:src/syscall_c.cpp **** 
- 294:src/syscall_c.cpp ****     // sistemski poziv
- 295:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 882              		.loc 1 295 5 is_stmt 1
- 883              		.loc 1 295 18 is_stmt 0
+ 295:src/syscall_c.cpp **** 
+ 296:src/syscall_c.cpp ****     // sistemski poziv
+ 297:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 882              		.loc 1 297 5 is_stmt 1
+ 883              		.loc 1 297 18 is_stmt 0
  884 0578 130504FB 		addi	a0,s0,-80
  885              	.LVL68:
  886 057c 97000000 		call	_ZN3abi8sys_callEPv@plt
  886      E7800000 
  887              	.LVL69:
- 296:src/syscall_c.cpp ****     return;
- 888              		.loc 1 296 5 is_stmt 1
- 297:src/syscall_c.cpp **** }
- 889              		.loc 1 297 1 is_stmt 0
+ 298:src/syscall_c.cpp ****     return;
+ 888              		.loc 1 298 5 is_stmt 1
+ 299:src/syscall_c.cpp **** }
+ 889              		.loc 1 299 1 is_stmt 0
  890 0584 83308104 		ld	ra,72(sp)
  891              		.cfi_restore 1
  892 0588 03340104 		ld	s0,64(sp)
  893              		.cfi_restore 8
  894              		.cfi_def_cfa 2, 80
  895 058c 13010105 		addi	sp,sp,80
+GAS LISTING /tmp/ccehA9I2.s 			page 22
+
+
  896              		.cfi_def_cfa_offset 0
  897 0590 67800000 		jr	ra
-GAS LISTING /tmp/ccoAAFXO.s 			page 22
-
-
  898              		.cfi_endproc
- 899              	.LFE55:
+ 899              	.LFE44:
  901              		.align	2
  902              		.globl	kill
  904              	kill:
- 905              	.LFB56:
- 298:src/syscall_c.cpp **** 
- 299:src/syscall_c.cpp **** void kill(thread_t thread) {
- 906              		.loc 1 299 28 is_stmt 1
+ 905              	.LFB45:
+ 300:src/syscall_c.cpp **** 
+ 301:src/syscall_c.cpp **** void kill(thread_t thread) {
+ 906              		.loc 1 301 28 is_stmt 1
  907              		.cfi_startproc
  908              	.LVL70:
  909 0594 130101FB 		addi	sp,sp,-80
@@ -1280,23 +1282,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  914              		.cfi_offset 8, -16
  915 05a0 13040105 		addi	s0,sp,80
  916              		.cfi_def_cfa 8, 0
- 300:src/syscall_c.cpp ****     // kod sistemskog poziva
- 301:src/syscall_c.cpp ****     uint64 a0 = 0x111;
- 917              		.loc 1 301 5
+ 302:src/syscall_c.cpp ****     // kod sistemskog poziva
+ 303:src/syscall_c.cpp ****     uint64 a0 = 0x111;
+ 917              		.loc 1 303 5
  918              	.LVL71:
- 302:src/syscall_c.cpp **** 
- 303:src/syscall_c.cpp ****     // parametri
- 304:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
- 919              		.loc 1 304 5
- 305:src/syscall_c.cpp ****     a1 = (uint64)thread;
- 920              		.loc 1 305 5
- 306:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
- 921              		.loc 1 306 5
- 307:src/syscall_c.cpp **** 
- 308:src/syscall_c.cpp ****     // void* pokazivac
- 309:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
- 922              		.loc 1 309 5
- 923              		.loc 1 309 53 is_stmt 0
+ 304:src/syscall_c.cpp **** 
+ 305:src/syscall_c.cpp ****     // parametri
+ 306:src/syscall_c.cpp ****     uint64 a1, a2, a3, a4, a5, a6, a7;
+ 919              		.loc 1 306 5
+ 307:src/syscall_c.cpp ****     a1 = (uint64)thread;
+ 920              		.loc 1 307 5
+ 308:src/syscall_c.cpp ****     a2 = a3 = a4 = a5 = a6 = a7 = 0;
+ 921              		.loc 1 308 5
+ 309:src/syscall_c.cpp **** 
+ 310:src/syscall_c.cpp ****     // void* pokazivac
+ 311:src/syscall_c.cpp ****     uint64 empty[8]= {a0, a1, a2, a3, a4, a5, a6, a7};
+ 922              		.loc 1 311 5
+ 923              		.loc 1 311 53 is_stmt 0
  924 05a4 93071011 		li	a5,273
  925 05a8 2338F4FA 		sd	a5,-80(s0)
  926 05ac 233CA4FA 		sd	a0,-72(s0)
@@ -1306,23 +1308,23 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  930 05bc 233C04FC 		sd	zero,-40(s0)
  931 05c0 233004FE 		sd	zero,-32(s0)
  932 05c4 233404FE 		sd	zero,-24(s0)
- 310:src/syscall_c.cpp **** 
- 311:src/syscall_c.cpp ****     // sistemski poziv
- 312:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
- 933              		.loc 1 312 5 is_stmt 1
- 934              		.loc 1 312 18 is_stmt 0
+ 312:src/syscall_c.cpp **** 
+ 313:src/syscall_c.cpp ****     // sistemski poziv
+ 314:src/syscall_c.cpp ****     abi::sys_call(reinterpret_cast<void *>(empty));
+ 933              		.loc 1 314 5 is_stmt 1
+ 934              		.loc 1 314 18 is_stmt 0
  935 05c8 130504FB 		addi	a0,s0,-80
  936              	.LVL72:
  937 05cc 97000000 		call	_ZN3abi8sys_callEPv@plt
  937      E7800000 
  938              	.LVL73:
- 313:src/syscall_c.cpp ****     return;
- 939              		.loc 1 313 5 is_stmt 1
-GAS LISTING /tmp/ccoAAFXO.s 			page 23
+GAS LISTING /tmp/ccehA9I2.s 			page 23
 
 
- 314:src/syscall_c.cpp **** }
- 940              		.loc 1 314 1 is_stmt 0
+ 315:src/syscall_c.cpp ****     return;
+ 939              		.loc 1 315 5 is_stmt 1
+ 316:src/syscall_c.cpp **** }
+ 940              		.loc 1 316 1 is_stmt 0
  941 05d4 83308104 		ld	ra,72(sp)
  942              		.cfi_restore 1
  943 05d8 03340104 		ld	s0,64(sp)
@@ -1332,659 +1334,664 @@ GAS LISTING /tmp/ccoAAFXO.s 			page 1
  947              		.cfi_def_cfa_offset 0
  948 05e0 67800000 		jr	ra
  949              		.cfi_endproc
- 950              	.LFE56:
+ 950              	.LFE45:
  952              	.Letext0:
  953              		.file 2 "src/../h/../h/../h/../lib/hw.h"
  954              		.file 3 "src/../h/syscall_c.h"
-GAS LISTING /tmp/ccoAAFXO.s 			page 24
+ 955              		.file 4 "src/../h/../h/../h/../h/SlabI.h"
+GAS LISTING /tmp/ccehA9I2.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 syscall_c.cpp
-     /tmp/ccoAAFXO.s:9      .text:0000000000000000 mem_alloc
-     /tmp/ccoAAFXO.s:13     .text:0000000000000000 .L0 
-     /tmp/ccoAAFXO.s:15     .text:0000000000000000 .L0 
-     /tmp/ccoAAFXO.s:16     .text:0000000000000004 .L0 
-     /tmp/ccoAAFXO.s:19     .text:000000000000000c .L0 
-     /tmp/ccoAAFXO.s:20     .text:000000000000000c .L0 
-     /tmp/ccoAAFXO.s:22     .text:0000000000000010 .L0 
-     /tmp/ccoAAFXO.s:24     .text:0000000000000010 .L0 
-     /tmp/ccoAAFXO.s:25     .text:0000000000000010 .L0 
-     /tmp/ccoAAFXO.s:28     .text:0000000000000014 .L0 
-     /tmp/ccoAAFXO.s:31     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:32     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:33     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:34     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:35     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:36     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:37     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:38     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:39     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:40     .text:0000000000000018 .L0 
-     /tmp/ccoAAFXO.s:50     .text:000000000000003c .L0 
-     /tmp/ccoAAFXO.s:51     .text:000000000000003c .L0 
-     /tmp/ccoAAFXO.s:56     .text:0000000000000048 .L0 
-     /tmp/ccoAAFXO.s:57     .text:000000000000004c .L0 
-     /tmp/ccoAAFXO.s:59     .text:0000000000000050 .L0 
-     /tmp/ccoAAFXO.s:60     .text:0000000000000050 .L0 
-     /tmp/ccoAAFXO.s:62     .text:0000000000000054 .L0 
-     /tmp/ccoAAFXO.s:64     .text:0000000000000058 .L0 
-     /tmp/ccoAAFXO.s:70     .text:0000000000000058 mem_free
-     /tmp/ccoAAFXO.s:73     .text:0000000000000058 .L0 
-     /tmp/ccoAAFXO.s:75     .text:0000000000000058 .L0 
-     /tmp/ccoAAFXO.s:76     .text:0000000000000058 .L0 
-     /tmp/ccoAAFXO.s:78     .text:000000000000005c .L0 
-     /tmp/ccoAAFXO.s:79     .text:0000000000000060 .L0 
-     /tmp/ccoAAFXO.s:82     .text:0000000000000068 .L0 
-     /tmp/ccoAAFXO.s:83     .text:0000000000000068 .L0 
-     /tmp/ccoAAFXO.s:85     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:88     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:89     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:90     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:91     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:92     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:93     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:94     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:95     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:96     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:97     .text:000000000000006c .L0 
-     /tmp/ccoAAFXO.s:107    .text:0000000000000090 .L0 
-     /tmp/ccoAAFXO.s:108    .text:0000000000000090 .L0 
-     /tmp/ccoAAFXO.s:113    .text:000000000000009c .L0 
-     /tmp/ccoAAFXO.s:115    .text:00000000000000a0 .L0 
-     /tmp/ccoAAFXO.s:116    .text:00000000000000a4 .L0 
-     /tmp/ccoAAFXO.s:118    .text:00000000000000a8 .L0 
-     /tmp/ccoAAFXO.s:119    .text:00000000000000a8 .L0 
-     /tmp/ccoAAFXO.s:121    .text:00000000000000ac .L0 
-GAS LISTING /tmp/ccoAAFXO.s 			page 25
+     /tmp/ccehA9I2.s:9      .text:0000000000000000 mem_alloc
+     /tmp/ccehA9I2.s:13     .text:0000000000000000 .L0 
+     /tmp/ccehA9I2.s:15     .text:0000000000000000 .L0 
+     /tmp/ccehA9I2.s:16     .text:0000000000000004 .L0 
+     /tmp/ccehA9I2.s:19     .text:000000000000000c .L0 
+     /tmp/ccehA9I2.s:20     .text:000000000000000c .L0 
+     /tmp/ccehA9I2.s:22     .text:0000000000000010 .L0 
+     /tmp/ccehA9I2.s:24     .text:0000000000000010 .L0 
+     /tmp/ccehA9I2.s:25     .text:0000000000000010 .L0 
+     /tmp/ccehA9I2.s:28     .text:0000000000000014 .L0 
+     /tmp/ccehA9I2.s:31     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:32     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:33     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:34     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:35     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:36     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:37     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:38     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:39     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:40     .text:0000000000000018 .L0 
+     /tmp/ccehA9I2.s:50     .text:000000000000003c .L0 
+     /tmp/ccehA9I2.s:51     .text:000000000000003c .L0 
+     /tmp/ccehA9I2.s:56     .text:0000000000000048 .L0 
+     /tmp/ccehA9I2.s:57     .text:000000000000004c .L0 
+     /tmp/ccehA9I2.s:59     .text:0000000000000050 .L0 
+     /tmp/ccehA9I2.s:60     .text:0000000000000050 .L0 
+     /tmp/ccehA9I2.s:62     .text:0000000000000054 .L0 
+     /tmp/ccehA9I2.s:64     .text:0000000000000058 .L0 
+     /tmp/ccehA9I2.s:70     .text:0000000000000058 mem_free
+     /tmp/ccehA9I2.s:73     .text:0000000000000058 .L0 
+     /tmp/ccehA9I2.s:75     .text:0000000000000058 .L0 
+     /tmp/ccehA9I2.s:76     .text:0000000000000058 .L0 
+     /tmp/ccehA9I2.s:78     .text:000000000000005c .L0 
+     /tmp/ccehA9I2.s:79     .text:0000000000000060 .L0 
+     /tmp/ccehA9I2.s:82     .text:0000000000000068 .L0 
+     /tmp/ccehA9I2.s:83     .text:0000000000000068 .L0 
+     /tmp/ccehA9I2.s:85     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:88     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:89     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:90     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:91     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:92     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:93     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:94     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:95     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:96     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:97     .text:000000000000006c .L0 
+     /tmp/ccehA9I2.s:107    .text:0000000000000090 .L0 
+     /tmp/ccehA9I2.s:108    .text:0000000000000090 .L0 
+     /tmp/ccehA9I2.s:113    .text:000000000000009c .L0 
+     /tmp/ccehA9I2.s:115    .text:00000000000000a0 .L0 
+     /tmp/ccehA9I2.s:116    .text:00000000000000a4 .L0 
+     /tmp/ccehA9I2.s:118    .text:00000000000000a8 .L0 
+     /tmp/ccehA9I2.s:119    .text:00000000000000a8 .L0 
+     /tmp/ccehA9I2.s:121    .text:00000000000000ac .L0 
+GAS LISTING /tmp/ccehA9I2.s 			page 25
 
 
-     /tmp/ccoAAFXO.s:126    .text:00000000000000b0 .L0 
-     /tmp/ccoAAFXO.s:129    .text:00000000000000b4 .L0 
-     /tmp/ccoAAFXO.s:130    .text:00000000000000b8 .L0 
-     /tmp/ccoAAFXO.s:136    .text:00000000000000b8 thread_create
-     /tmp/ccoAAFXO.s:139    .text:00000000000000b8 .L0 
-     /tmp/ccoAAFXO.s:141    .text:00000000000000b8 .L0 
-     /tmp/ccoAAFXO.s:142    .text:00000000000000bc .L0 
-     /tmp/ccoAAFXO.s:148    .text:00000000000000d0 .L0 
-     /tmp/ccoAAFXO.s:149    .text:00000000000000d0 .L0 
-     /tmp/ccoAAFXO.s:150    .text:00000000000000d0 .L0 
-     /tmp/ccoAAFXO.s:151    .text:00000000000000d0 .L0 
-     /tmp/ccoAAFXO.s:152    .text:00000000000000d0 .L0 
-     /tmp/ccoAAFXO.s:154    .text:00000000000000d4 .L0 
-     /tmp/ccoAAFXO.s:159    .text:00000000000000e0 .L0 
-     /tmp/ccoAAFXO.s:160    .text:00000000000000e0 .L0 
-     /tmp/ccoAAFXO.s:165    .text:00000000000000ec .L0 
-     /tmp/ccoAAFXO.s:167    .text:00000000000000f0 .L0 
-     /tmp/ccoAAFXO.s:168    .text:00000000000000f0 .L0 
-     /tmp/ccoAAFXO.s:172    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:173    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:174    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:175    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:176    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:177    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:178    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:179    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:180    .text:00000000000000f4 .L0 
-     /tmp/ccoAAFXO.s:191    .text:000000000000011c .L0 
-     /tmp/ccoAAFXO.s:192    .text:000000000000011c .L0 
-     /tmp/ccoAAFXO.s:197    .text:0000000000000128 .L0 
-     /tmp/ccoAAFXO.s:201    .text:000000000000012c .L0 
-     /tmp/ccoAAFXO.s:202    .text:0000000000000130 .L0 
-     /tmp/ccoAAFXO.s:203    .text:0000000000000130 .L0 
-     /tmp/ccoAAFXO.s:205    .text:0000000000000134 .L0 
-     /tmp/ccoAAFXO.s:206    .text:0000000000000134 .L0 
-     /tmp/ccoAAFXO.s:208    .text:0000000000000138 .L0 
-     /tmp/ccoAAFXO.s:211    .text:000000000000013c .L0 
-     /tmp/ccoAAFXO.s:214    .text:0000000000000140 .L0 
-     /tmp/ccoAAFXO.s:217    .text:0000000000000144 .L0 
-     /tmp/ccoAAFXO.s:221    .text:0000000000000148 .L0 
-     /tmp/ccoAAFXO.s:223    .text:0000000000000148 .L0 
-     /tmp/ccoAAFXO.s:224    .text:0000000000000148 .L0 
-     /tmp/ccoAAFXO.s:226    .text:000000000000014c .L0 
-     /tmp/ccoAAFXO.s:227    .text:000000000000014c .L0 
-     /tmp/ccoAAFXO.s:233    .text:0000000000000154 .L0 
-     /tmp/ccoAAFXO.s:236    .text:000000000000015c .L0 
-     /tmp/ccoAAFXO.s:242    .text:000000000000015c thread_dispatch
-     /tmp/ccoAAFXO.s:245    .text:000000000000015c .L0 
-     /tmp/ccoAAFXO.s:246    .text:000000000000015c .L0 
-     /tmp/ccoAAFXO.s:247    .text:0000000000000160 .L0 
-     /tmp/ccoAAFXO.s:250    .text:0000000000000168 .L0 
-     /tmp/ccoAAFXO.s:251    .text:0000000000000168 .L0 
-     /tmp/ccoAAFXO.s:253    .text:000000000000016c .L0 
-     /tmp/ccoAAFXO.s:256    .text:000000000000016c .L0 
-     /tmp/ccoAAFXO.s:257    .text:000000000000016c .L0 
-     /tmp/ccoAAFXO.s:258    .text:000000000000016c .L0 
-     /tmp/ccoAAFXO.s:259    .text:000000000000016c .L0 
-GAS LISTING /tmp/ccoAAFXO.s 			page 26
+     /tmp/ccehA9I2.s:126    .text:00000000000000b0 .L0 
+     /tmp/ccehA9I2.s:129    .text:00000000000000b4 .L0 
+     /tmp/ccehA9I2.s:130    .text:00000000000000b8 .L0 
+     /tmp/ccehA9I2.s:136    .text:00000000000000b8 thread_create
+     /tmp/ccehA9I2.s:139    .text:00000000000000b8 .L0 
+     /tmp/ccehA9I2.s:141    .text:00000000000000b8 .L0 
+     /tmp/ccehA9I2.s:142    .text:00000000000000bc .L0 
+     /tmp/ccehA9I2.s:148    .text:00000000000000d0 .L0 
+     /tmp/ccehA9I2.s:149    .text:00000000000000d0 .L0 
+     /tmp/ccehA9I2.s:150    .text:00000000000000d0 .L0 
+     /tmp/ccehA9I2.s:151    .text:00000000000000d0 .L0 
+     /tmp/ccehA9I2.s:152    .text:00000000000000d0 .L0 
+     /tmp/ccehA9I2.s:154    .text:00000000000000d4 .L0 
+     /tmp/ccehA9I2.s:159    .text:00000000000000e0 .L0 
+     /tmp/ccehA9I2.s:160    .text:00000000000000e0 .L0 
+     /tmp/ccehA9I2.s:165    .text:00000000000000ec .L0 
+     /tmp/ccehA9I2.s:167    .text:00000000000000f0 .L0 
+     /tmp/ccehA9I2.s:168    .text:00000000000000f0 .L0 
+     /tmp/ccehA9I2.s:172    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:173    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:174    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:175    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:176    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:177    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:178    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:179    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:180    .text:00000000000000f4 .L0 
+     /tmp/ccehA9I2.s:191    .text:000000000000011c .L0 
+     /tmp/ccehA9I2.s:192    .text:000000000000011c .L0 
+     /tmp/ccehA9I2.s:197    .text:0000000000000128 .L0 
+     /tmp/ccehA9I2.s:201    .text:000000000000012c .L0 
+     /tmp/ccehA9I2.s:202    .text:0000000000000130 .L0 
+     /tmp/ccehA9I2.s:203    .text:0000000000000130 .L0 
+     /tmp/ccehA9I2.s:205    .text:0000000000000134 .L0 
+     /tmp/ccehA9I2.s:206    .text:0000000000000134 .L0 
+     /tmp/ccehA9I2.s:208    .text:0000000000000138 .L0 
+     /tmp/ccehA9I2.s:211    .text:000000000000013c .L0 
+     /tmp/ccehA9I2.s:214    .text:0000000000000140 .L0 
+     /tmp/ccehA9I2.s:217    .text:0000000000000144 .L0 
+     /tmp/ccehA9I2.s:221    .text:0000000000000148 .L0 
+     /tmp/ccehA9I2.s:223    .text:0000000000000148 .L0 
+     /tmp/ccehA9I2.s:224    .text:0000000000000148 .L0 
+     /tmp/ccehA9I2.s:226    .text:000000000000014c .L0 
+     /tmp/ccehA9I2.s:227    .text:000000000000014c .L0 
+     /tmp/ccehA9I2.s:233    .text:0000000000000154 .L0 
+     /tmp/ccehA9I2.s:236    .text:000000000000015c .L0 
+     /tmp/ccehA9I2.s:242    .text:000000000000015c thread_dispatch
+     /tmp/ccehA9I2.s:245    .text:000000000000015c .L0 
+     /tmp/ccehA9I2.s:246    .text:000000000000015c .L0 
+     /tmp/ccehA9I2.s:247    .text:0000000000000160 .L0 
+     /tmp/ccehA9I2.s:250    .text:0000000000000168 .L0 
+     /tmp/ccehA9I2.s:251    .text:0000000000000168 .L0 
+     /tmp/ccehA9I2.s:253    .text:000000000000016c .L0 
+     /tmp/ccehA9I2.s:256    .text:000000000000016c .L0 
+     /tmp/ccehA9I2.s:257    .text:000000000000016c .L0 
+     /tmp/ccehA9I2.s:258    .text:000000000000016c .L0 
+     /tmp/ccehA9I2.s:259    .text:000000000000016c .L0 
+GAS LISTING /tmp/ccehA9I2.s 			page 26
 
 
-     /tmp/ccoAAFXO.s:260    .text:000000000000016c .L0 
-     /tmp/ccoAAFXO.s:270    .text:0000000000000190 .L0 
-     /tmp/ccoAAFXO.s:271    .text:0000000000000190 .L0 
-     /tmp/ccoAAFXO.s:275    .text:000000000000019c .L0 
-     /tmp/ccoAAFXO.s:276    .text:000000000000019c .L0 
-     /tmp/ccoAAFXO.s:277    .text:00000000000001a0 .L0 
-     /tmp/ccoAAFXO.s:279    .text:00000000000001a4 .L0 
-     /tmp/ccoAAFXO.s:280    .text:00000000000001a4 .L0 
-     /tmp/ccoAAFXO.s:282    .text:00000000000001a8 .L0 
-     /tmp/ccoAAFXO.s:284    .text:00000000000001ac .L0 
-     /tmp/ccoAAFXO.s:290    .text:00000000000001ac thread_exit
-     /tmp/ccoAAFXO.s:293    .text:00000000000001ac .L0 
-     /tmp/ccoAAFXO.s:294    .text:00000000000001ac .L0 
-     /tmp/ccoAAFXO.s:295    .text:00000000000001b0 .L0 
-     /tmp/ccoAAFXO.s:298    .text:00000000000001b8 .L0 
-     /tmp/ccoAAFXO.s:299    .text:00000000000001b8 .L0 
-     /tmp/ccoAAFXO.s:301    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:304    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:305    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:306    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:307    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:308    .text:00000000000001bc .L0 
-     /tmp/ccoAAFXO.s:318    .text:00000000000001e0 .L0 
-     /tmp/ccoAAFXO.s:319    .text:00000000000001e0 .L0 
-     /tmp/ccoAAFXO.s:323    .text:00000000000001ec .L0 
-     /tmp/ccoAAFXO.s:325    .text:00000000000001f4 .L0 
-     /tmp/ccoAAFXO.s:327    .text:00000000000001f8 .L0 
-     /tmp/ccoAAFXO.s:328    .text:00000000000001f8 .L0 
-     /tmp/ccoAAFXO.s:330    .text:00000000000001fc .L0 
-     /tmp/ccoAAFXO.s:332    .text:0000000000000200 .L0 
-     /tmp/ccoAAFXO.s:338    .text:0000000000000200 time_sleep
-     /tmp/ccoAAFXO.s:341    .text:0000000000000200 .L0 
-     /tmp/ccoAAFXO.s:343    .text:0000000000000200 .L0 
-     /tmp/ccoAAFXO.s:344    .text:0000000000000200 .L0 
-     /tmp/ccoAAFXO.s:346    .text:0000000000000204 .L0 
-     /tmp/ccoAAFXO.s:349    .text:0000000000000208 .L0 
-     /tmp/ccoAAFXO.s:353    .text:000000000000020c .L0 
-     /tmp/ccoAAFXO.s:354    .text:0000000000000210 .L0 
-     /tmp/ccoAAFXO.s:357    .text:0000000000000218 .L0 
-     /tmp/ccoAAFXO.s:358    .text:0000000000000218 .L0 
-     /tmp/ccoAAFXO.s:360    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:363    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:364    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:365    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:366    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:367    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:368    .text:000000000000021c .L0 
-     /tmp/ccoAAFXO.s:378    .text:0000000000000240 .L0 
-     /tmp/ccoAAFXO.s:379    .text:0000000000000240 .L0 
-     /tmp/ccoAAFXO.s:384    .text:000000000000024c .L0 
-     /tmp/ccoAAFXO.s:386    .text:0000000000000250 .L0 
-     /tmp/ccoAAFXO.s:387    .text:0000000000000254 .L0 
-     /tmp/ccoAAFXO.s:389    .text:0000000000000258 .L0 
-     /tmp/ccoAAFXO.s:390    .text:0000000000000258 .L0 
-     /tmp/ccoAAFXO.s:392    .text:000000000000025c .L0 
-     /tmp/ccoAAFXO.s:394    .text:0000000000000260 .L0 
-     /tmp/ccoAAFXO.s:400    .text:0000000000000260 sem_open
-GAS LISTING /tmp/ccoAAFXO.s 			page 27
+     /tmp/ccehA9I2.s:260    .text:000000000000016c .L0 
+     /tmp/ccehA9I2.s:270    .text:0000000000000190 .L0 
+     /tmp/ccehA9I2.s:271    .text:0000000000000190 .L0 
+     /tmp/ccehA9I2.s:275    .text:000000000000019c .L0 
+     /tmp/ccehA9I2.s:276    .text:000000000000019c .L0 
+     /tmp/ccehA9I2.s:277    .text:00000000000001a0 .L0 
+     /tmp/ccehA9I2.s:279    .text:00000000000001a4 .L0 
+     /tmp/ccehA9I2.s:280    .text:00000000000001a4 .L0 
+     /tmp/ccehA9I2.s:282    .text:00000000000001a8 .L0 
+     /tmp/ccehA9I2.s:284    .text:00000000000001ac .L0 
+     /tmp/ccehA9I2.s:290    .text:00000000000001ac thread_exit
+     /tmp/ccehA9I2.s:293    .text:00000000000001ac .L0 
+     /tmp/ccehA9I2.s:294    .text:00000000000001ac .L0 
+     /tmp/ccehA9I2.s:295    .text:00000000000001b0 .L0 
+     /tmp/ccehA9I2.s:298    .text:00000000000001b8 .L0 
+     /tmp/ccehA9I2.s:299    .text:00000000000001b8 .L0 
+     /tmp/ccehA9I2.s:301    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:304    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:305    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:306    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:307    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:308    .text:00000000000001bc .L0 
+     /tmp/ccehA9I2.s:318    .text:00000000000001e0 .L0 
+     /tmp/ccehA9I2.s:319    .text:00000000000001e0 .L0 
+     /tmp/ccehA9I2.s:323    .text:00000000000001ec .L0 
+     /tmp/ccehA9I2.s:325    .text:00000000000001f4 .L0 
+     /tmp/ccehA9I2.s:327    .text:00000000000001f8 .L0 
+     /tmp/ccehA9I2.s:328    .text:00000000000001f8 .L0 
+     /tmp/ccehA9I2.s:330    .text:00000000000001fc .L0 
+     /tmp/ccehA9I2.s:332    .text:0000000000000200 .L0 
+     /tmp/ccehA9I2.s:338    .text:0000000000000200 time_sleep
+     /tmp/ccehA9I2.s:341    .text:0000000000000200 .L0 
+     /tmp/ccehA9I2.s:343    .text:0000000000000200 .L0 
+     /tmp/ccehA9I2.s:344    .text:0000000000000200 .L0 
+     /tmp/ccehA9I2.s:346    .text:0000000000000204 .L0 
+     /tmp/ccehA9I2.s:349    .text:0000000000000208 .L0 
+     /tmp/ccehA9I2.s:353    .text:000000000000020c .L0 
+     /tmp/ccehA9I2.s:354    .text:0000000000000210 .L0 
+     /tmp/ccehA9I2.s:357    .text:0000000000000218 .L0 
+     /tmp/ccehA9I2.s:358    .text:0000000000000218 .L0 
+     /tmp/ccehA9I2.s:360    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:363    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:364    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:365    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:366    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:367    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:368    .text:000000000000021c .L0 
+     /tmp/ccehA9I2.s:378    .text:0000000000000240 .L0 
+     /tmp/ccehA9I2.s:379    .text:0000000000000240 .L0 
+     /tmp/ccehA9I2.s:384    .text:000000000000024c .L0 
+     /tmp/ccehA9I2.s:386    .text:0000000000000250 .L0 
+     /tmp/ccehA9I2.s:387    .text:0000000000000254 .L0 
+     /tmp/ccehA9I2.s:389    .text:0000000000000258 .L0 
+     /tmp/ccehA9I2.s:390    .text:0000000000000258 .L0 
+     /tmp/ccehA9I2.s:392    .text:000000000000025c .L0 
+     /tmp/ccehA9I2.s:394    .text:0000000000000260 .L0 
+     /tmp/ccehA9I2.s:400    .text:0000000000000260 sem_open
+GAS LISTING /tmp/ccehA9I2.s 			page 27
 
 
-     /tmp/ccoAAFXO.s:403    .text:0000000000000260 .L0 
-     /tmp/ccoAAFXO.s:405    .text:0000000000000260 .L0 
-     /tmp/ccoAAFXO.s:406    .text:0000000000000264 .L0 
-     /tmp/ccoAAFXO.s:409    .text:000000000000026c .L0 
-     /tmp/ccoAAFXO.s:410    .text:000000000000026c .L0 
-     /tmp/ccoAAFXO.s:412    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:415    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:416    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:417    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:418    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:419    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:420    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:421    .text:0000000000000270 .L0 
-     /tmp/ccoAAFXO.s:431    .text:0000000000000294 .L0 
-     /tmp/ccoAAFXO.s:432    .text:0000000000000294 .L0 
-     /tmp/ccoAAFXO.s:437    .text:00000000000002a0 .L0 
-     /tmp/ccoAAFXO.s:439    .text:00000000000002a8 .L0 
-     /tmp/ccoAAFXO.s:441    .text:00000000000002ac .L0 
-     /tmp/ccoAAFXO.s:442    .text:00000000000002ac .L0 
-     /tmp/ccoAAFXO.s:444    .text:00000000000002b0 .L0 
-     /tmp/ccoAAFXO.s:446    .text:00000000000002b4 .L0 
-     /tmp/ccoAAFXO.s:452    .text:00000000000002b4 sem_close
-     /tmp/ccoAAFXO.s:455    .text:00000000000002b4 .L0 
-     /tmp/ccoAAFXO.s:457    .text:00000000000002b4 .L0 
-     /tmp/ccoAAFXO.s:458    .text:00000000000002b8 .L0 
-     /tmp/ccoAAFXO.s:461    .text:00000000000002c0 .L0 
-     /tmp/ccoAAFXO.s:462    .text:00000000000002c0 .L0 
-     /tmp/ccoAAFXO.s:464    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:467    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:468    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:469    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:470    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:471    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:472    .text:00000000000002c4 .L0 
-     /tmp/ccoAAFXO.s:482    .text:00000000000002e8 .L0 
-     /tmp/ccoAAFXO.s:483    .text:00000000000002e8 .L0 
-     /tmp/ccoAAFXO.s:488    .text:00000000000002f4 .L0 
-     /tmp/ccoAAFXO.s:490    .text:00000000000002fc .L0 
-     /tmp/ccoAAFXO.s:492    .text:0000000000000300 .L0 
-     /tmp/ccoAAFXO.s:493    .text:0000000000000300 .L0 
-     /tmp/ccoAAFXO.s:495    .text:0000000000000304 .L0 
-     /tmp/ccoAAFXO.s:497    .text:0000000000000308 .L0 
-     /tmp/ccoAAFXO.s:503    .text:0000000000000308 sem_wait
-     /tmp/ccoAAFXO.s:506    .text:0000000000000308 .L0 
-     /tmp/ccoAAFXO.s:508    .text:0000000000000308 .L0 
-     /tmp/ccoAAFXO.s:509    .text:000000000000030c .L0 
-     /tmp/ccoAAFXO.s:512    .text:0000000000000314 .L0 
-     /tmp/ccoAAFXO.s:513    .text:0000000000000314 .L0 
-     /tmp/ccoAAFXO.s:515    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:518    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:519    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:520    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:521    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:522    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:523    .text:0000000000000318 .L0 
-     /tmp/ccoAAFXO.s:533    .text:000000000000033c .L0 
-     /tmp/ccoAAFXO.s:534    .text:000000000000033c .L0 
-GAS LISTING /tmp/ccoAAFXO.s 			page 28
+     /tmp/ccehA9I2.s:403    .text:0000000000000260 .L0 
+     /tmp/ccehA9I2.s:405    .text:0000000000000260 .L0 
+     /tmp/ccehA9I2.s:406    .text:0000000000000264 .L0 
+     /tmp/ccehA9I2.s:409    .text:000000000000026c .L0 
+     /tmp/ccehA9I2.s:410    .text:000000000000026c .L0 
+     /tmp/ccehA9I2.s:412    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:415    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:416    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:417    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:418    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:419    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:420    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:421    .text:0000000000000270 .L0 
+     /tmp/ccehA9I2.s:431    .text:0000000000000294 .L0 
+     /tmp/ccehA9I2.s:432    .text:0000000000000294 .L0 
+     /tmp/ccehA9I2.s:437    .text:00000000000002a0 .L0 
+     /tmp/ccehA9I2.s:439    .text:00000000000002a8 .L0 
+     /tmp/ccehA9I2.s:441    .text:00000000000002ac .L0 
+     /tmp/ccehA9I2.s:442    .text:00000000000002ac .L0 
+     /tmp/ccehA9I2.s:444    .text:00000000000002b0 .L0 
+     /tmp/ccehA9I2.s:446    .text:00000000000002b4 .L0 
+     /tmp/ccehA9I2.s:452    .text:00000000000002b4 sem_close
+     /tmp/ccehA9I2.s:455    .text:00000000000002b4 .L0 
+     /tmp/ccehA9I2.s:457    .text:00000000000002b4 .L0 
+     /tmp/ccehA9I2.s:458    .text:00000000000002b8 .L0 
+     /tmp/ccehA9I2.s:461    .text:00000000000002c0 .L0 
+     /tmp/ccehA9I2.s:462    .text:00000000000002c0 .L0 
+     /tmp/ccehA9I2.s:464    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:467    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:468    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:469    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:470    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:471    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:472    .text:00000000000002c4 .L0 
+     /tmp/ccehA9I2.s:482    .text:00000000000002e8 .L0 
+     /tmp/ccehA9I2.s:483    .text:00000000000002e8 .L0 
+     /tmp/ccehA9I2.s:488    .text:00000000000002f4 .L0 
+     /tmp/ccehA9I2.s:490    .text:00000000000002fc .L0 
+     /tmp/ccehA9I2.s:492    .text:0000000000000300 .L0 
+     /tmp/ccehA9I2.s:493    .text:0000000000000300 .L0 
+     /tmp/ccehA9I2.s:495    .text:0000000000000304 .L0 
+     /tmp/ccehA9I2.s:497    .text:0000000000000308 .L0 
+     /tmp/ccehA9I2.s:503    .text:0000000000000308 sem_wait
+     /tmp/ccehA9I2.s:506    .text:0000000000000308 .L0 
+     /tmp/ccehA9I2.s:508    .text:0000000000000308 .L0 
+     /tmp/ccehA9I2.s:509    .text:000000000000030c .L0 
+     /tmp/ccehA9I2.s:512    .text:0000000000000314 .L0 
+     /tmp/ccehA9I2.s:513    .text:0000000000000314 .L0 
+     /tmp/ccehA9I2.s:515    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:518    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:519    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:520    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:521    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:522    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:523    .text:0000000000000318 .L0 
+     /tmp/ccehA9I2.s:533    .text:000000000000033c .L0 
+     /tmp/ccehA9I2.s:534    .text:000000000000033c .L0 
+GAS LISTING /tmp/ccehA9I2.s 			page 28
 
 
-     /tmp/ccoAAFXO.s:539    .text:0000000000000348 .L0 
-     /tmp/ccoAAFXO.s:541    .text:0000000000000350 .L0 
-     /tmp/ccoAAFXO.s:543    .text:0000000000000354 .L0 
-     /tmp/ccoAAFXO.s:544    .text:0000000000000354 .L0 
-     /tmp/ccoAAFXO.s:546    .text:0000000000000358 .L0 
-     /tmp/ccoAAFXO.s:548    .text:000000000000035c .L0 
-     /tmp/ccoAAFXO.s:554    .text:000000000000035c sem_signal
-     /tmp/ccoAAFXO.s:557    .text:000000000000035c .L0 
-     /tmp/ccoAAFXO.s:559    .text:000000000000035c .L0 
-     /tmp/ccoAAFXO.s:560    .text:0000000000000360 .L0 
-     /tmp/ccoAAFXO.s:563    .text:0000000000000368 .L0 
-     /tmp/ccoAAFXO.s:564    .text:0000000000000368 .L0 
-     /tmp/ccoAAFXO.s:566    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:569    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:570    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:571    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:572    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:573    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:574    .text:000000000000036c .L0 
-     /tmp/ccoAAFXO.s:584    .text:0000000000000390 .L0 
-     /tmp/ccoAAFXO.s:585    .text:0000000000000390 .L0 
-     /tmp/ccoAAFXO.s:590    .text:000000000000039c .L0 
-     /tmp/ccoAAFXO.s:592    .text:00000000000003a4 .L0 
-     /tmp/ccoAAFXO.s:594    .text:00000000000003a8 .L0 
-     /tmp/ccoAAFXO.s:595    .text:00000000000003a8 .L0 
-     /tmp/ccoAAFXO.s:597    .text:00000000000003ac .L0 
-     /tmp/ccoAAFXO.s:599    .text:00000000000003b0 .L0 
-     /tmp/ccoAAFXO.s:605    .text:00000000000003b0 getc
-     /tmp/ccoAAFXO.s:608    .text:00000000000003b0 .L0 
-     /tmp/ccoAAFXO.s:609    .text:00000000000003b0 .L0 
-     /tmp/ccoAAFXO.s:610    .text:00000000000003b4 .L0 
-     /tmp/ccoAAFXO.s:613    .text:00000000000003bc .L0 
-     /tmp/ccoAAFXO.s:614    .text:00000000000003bc .L0 
-     /tmp/ccoAAFXO.s:616    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:619    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:620    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:621    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:622    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:623    .text:00000000000003c0 .L0 
-     /tmp/ccoAAFXO.s:633    .text:00000000000003e4 .L0 
-     /tmp/ccoAAFXO.s:634    .text:00000000000003e4 .L0 
-     /tmp/ccoAAFXO.s:638    .text:00000000000003f0 .L0 
-     /tmp/ccoAAFXO.s:639    .text:00000000000003f0 .L0 
-     /tmp/ccoAAFXO.s:642    .text:00000000000003f8 .L0 
-     /tmp/ccoAAFXO.s:644    .text:00000000000003fc .L0 
-     /tmp/ccoAAFXO.s:645    .text:00000000000003fc .L0 
-     /tmp/ccoAAFXO.s:647    .text:0000000000000400 .L0 
-     /tmp/ccoAAFXO.s:649    .text:0000000000000404 .L0 
-     /tmp/ccoAAFXO.s:655    .text:0000000000000404 putc
-     /tmp/ccoAAFXO.s:658    .text:0000000000000404 .L0 
-     /tmp/ccoAAFXO.s:660    .text:0000000000000404 .L0 
-     /tmp/ccoAAFXO.s:661    .text:0000000000000408 .L0 
-     /tmp/ccoAAFXO.s:664    .text:0000000000000410 .L0 
-     /tmp/ccoAAFXO.s:665    .text:0000000000000410 .L0 
-     /tmp/ccoAAFXO.s:667    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:670    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:671    .text:0000000000000414 .L0 
-GAS LISTING /tmp/ccoAAFXO.s 			page 29
+     /tmp/ccehA9I2.s:539    .text:0000000000000348 .L0 
+     /tmp/ccehA9I2.s:541    .text:0000000000000350 .L0 
+     /tmp/ccehA9I2.s:543    .text:0000000000000354 .L0 
+     /tmp/ccehA9I2.s:544    .text:0000000000000354 .L0 
+     /tmp/ccehA9I2.s:546    .text:0000000000000358 .L0 
+     /tmp/ccehA9I2.s:548    .text:000000000000035c .L0 
+     /tmp/ccehA9I2.s:554    .text:000000000000035c sem_signal
+     /tmp/ccehA9I2.s:557    .text:000000000000035c .L0 
+     /tmp/ccehA9I2.s:559    .text:000000000000035c .L0 
+     /tmp/ccehA9I2.s:560    .text:0000000000000360 .L0 
+     /tmp/ccehA9I2.s:563    .text:0000000000000368 .L0 
+     /tmp/ccehA9I2.s:564    .text:0000000000000368 .L0 
+     /tmp/ccehA9I2.s:566    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:569    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:570    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:571    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:572    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:573    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:574    .text:000000000000036c .L0 
+     /tmp/ccehA9I2.s:584    .text:0000000000000390 .L0 
+     /tmp/ccehA9I2.s:585    .text:0000000000000390 .L0 
+     /tmp/ccehA9I2.s:590    .text:000000000000039c .L0 
+     /tmp/ccehA9I2.s:592    .text:00000000000003a4 .L0 
+     /tmp/ccehA9I2.s:594    .text:00000000000003a8 .L0 
+     /tmp/ccehA9I2.s:595    .text:00000000000003a8 .L0 
+     /tmp/ccehA9I2.s:597    .text:00000000000003ac .L0 
+     /tmp/ccehA9I2.s:599    .text:00000000000003b0 .L0 
+     /tmp/ccehA9I2.s:605    .text:00000000000003b0 getc
+     /tmp/ccehA9I2.s:608    .text:00000000000003b0 .L0 
+     /tmp/ccehA9I2.s:609    .text:00000000000003b0 .L0 
+     /tmp/ccehA9I2.s:610    .text:00000000000003b4 .L0 
+     /tmp/ccehA9I2.s:613    .text:00000000000003bc .L0 
+     /tmp/ccehA9I2.s:614    .text:00000000000003bc .L0 
+     /tmp/ccehA9I2.s:616    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:619    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:620    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:621    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:622    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:623    .text:00000000000003c0 .L0 
+     /tmp/ccehA9I2.s:633    .text:00000000000003e4 .L0 
+     /tmp/ccehA9I2.s:634    .text:00000000000003e4 .L0 
+     /tmp/ccehA9I2.s:638    .text:00000000000003f0 .L0 
+     /tmp/ccehA9I2.s:639    .text:00000000000003f0 .L0 
+     /tmp/ccehA9I2.s:642    .text:00000000000003f8 .L0 
+     /tmp/ccehA9I2.s:644    .text:00000000000003fc .L0 
+     /tmp/ccehA9I2.s:645    .text:00000000000003fc .L0 
+     /tmp/ccehA9I2.s:647    .text:0000000000000400 .L0 
+     /tmp/ccehA9I2.s:649    .text:0000000000000404 .L0 
+     /tmp/ccehA9I2.s:655    .text:0000000000000404 putc
+     /tmp/ccehA9I2.s:658    .text:0000000000000404 .L0 
+     /tmp/ccehA9I2.s:660    .text:0000000000000404 .L0 
+     /tmp/ccehA9I2.s:661    .text:0000000000000408 .L0 
+     /tmp/ccehA9I2.s:664    .text:0000000000000410 .L0 
+     /tmp/ccehA9I2.s:665    .text:0000000000000410 .L0 
+     /tmp/ccehA9I2.s:667    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:670    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:671    .text:0000000000000414 .L0 
+GAS LISTING /tmp/ccehA9I2.s 			page 29
 
 
-     /tmp/ccoAAFXO.s:672    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:673    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:674    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:675    .text:0000000000000414 .L0 
-     /tmp/ccoAAFXO.s:685    .text:0000000000000438 .L0 
-     /tmp/ccoAAFXO.s:686    .text:0000000000000438 .L0 
-     /tmp/ccoAAFXO.s:691    .text:0000000000000444 .L0 
-     /tmp/ccoAAFXO.s:692    .text:0000000000000444 .L0 
-     /tmp/ccoAAFXO.s:693    .text:0000000000000448 .L0 
-     /tmp/ccoAAFXO.s:695    .text:000000000000044c .L0 
-     /tmp/ccoAAFXO.s:696    .text:000000000000044c .L0 
-     /tmp/ccoAAFXO.s:698    .text:0000000000000450 .L0 
-     /tmp/ccoAAFXO.s:700    .text:0000000000000454 .L0 
-     /tmp/ccoAAFXO.s:706    .text:0000000000000454 put_in_scheduler
-     /tmp/ccoAAFXO.s:709    .text:0000000000000454 .L0 
-     /tmp/ccoAAFXO.s:711    .text:0000000000000454 .L0 
-     /tmp/ccoAAFXO.s:712    .text:0000000000000458 .L0 
-     /tmp/ccoAAFXO.s:715    .text:0000000000000460 .L0 
-     /tmp/ccoAAFXO.s:716    .text:0000000000000460 .L0 
-     /tmp/ccoAAFXO.s:718    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:721    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:722    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:723    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:724    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:725    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:726    .text:0000000000000464 .L0 
-     /tmp/ccoAAFXO.s:736    .text:0000000000000488 .L0 
-     /tmp/ccoAAFXO.s:737    .text:0000000000000488 .L0 
-     /tmp/ccoAAFXO.s:742    .text:0000000000000494 .L0 
-     /tmp/ccoAAFXO.s:743    .text:0000000000000494 .L0 
-     /tmp/ccoAAFXO.s:744    .text:0000000000000498 .L0 
-     /tmp/ccoAAFXO.s:746    .text:000000000000049c .L0 
-     /tmp/ccoAAFXO.s:747    .text:000000000000049c .L0 
-     /tmp/ccoAAFXO.s:749    .text:00000000000004a0 .L0 
-     /tmp/ccoAAFXO.s:751    .text:00000000000004a4 .L0 
-     /tmp/ccoAAFXO.s:757    .text:00000000000004a4 switch_to_user
-     /tmp/ccoAAFXO.s:760    .text:00000000000004a4 .L0 
-     /tmp/ccoAAFXO.s:761    .text:00000000000004a4 .L0 
-     /tmp/ccoAAFXO.s:762    .text:00000000000004a8 .L0 
-     /tmp/ccoAAFXO.s:765    .text:00000000000004b0 .L0 
-     /tmp/ccoAAFXO.s:766    .text:00000000000004b0 .L0 
-     /tmp/ccoAAFXO.s:768    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:771    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:772    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:773    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:774    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:775    .text:00000000000004b4 .L0 
-     /tmp/ccoAAFXO.s:785    .text:00000000000004d8 .L0 
-     /tmp/ccoAAFXO.s:786    .text:00000000000004d8 .L0 
-     /tmp/ccoAAFXO.s:790    .text:00000000000004e4 .L0 
-     /tmp/ccoAAFXO.s:791    .text:00000000000004e4 .L0 
-     /tmp/ccoAAFXO.s:792    .text:00000000000004e8 .L0 
-     /tmp/ccoAAFXO.s:794    .text:00000000000004ec .L0 
-     /tmp/ccoAAFXO.s:795    .text:00000000000004ec .L0 
-     /tmp/ccoAAFXO.s:797    .text:00000000000004f0 .L0 
-     /tmp/ccoAAFXO.s:799    .text:00000000000004f4 .L0 
-     /tmp/ccoAAFXO.s:805    .text:00000000000004f4 switch_to_priviledged
-GAS LISTING /tmp/ccoAAFXO.s 			page 30
+     /tmp/ccehA9I2.s:672    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:673    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:674    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:675    .text:0000000000000414 .L0 
+     /tmp/ccehA9I2.s:685    .text:0000000000000438 .L0 
+     /tmp/ccehA9I2.s:686    .text:0000000000000438 .L0 
+     /tmp/ccehA9I2.s:691    .text:0000000000000444 .L0 
+     /tmp/ccehA9I2.s:692    .text:0000000000000444 .L0 
+     /tmp/ccehA9I2.s:693    .text:0000000000000448 .L0 
+     /tmp/ccehA9I2.s:695    .text:000000000000044c .L0 
+     /tmp/ccehA9I2.s:696    .text:000000000000044c .L0 
+     /tmp/ccehA9I2.s:698    .text:0000000000000450 .L0 
+     /tmp/ccehA9I2.s:700    .text:0000000000000454 .L0 
+     /tmp/ccehA9I2.s:706    .text:0000000000000454 put_in_scheduler
+     /tmp/ccehA9I2.s:709    .text:0000000000000454 .L0 
+     /tmp/ccehA9I2.s:711    .text:0000000000000454 .L0 
+     /tmp/ccehA9I2.s:712    .text:0000000000000458 .L0 
+     /tmp/ccehA9I2.s:715    .text:0000000000000460 .L0 
+     /tmp/ccehA9I2.s:716    .text:0000000000000460 .L0 
+     /tmp/ccehA9I2.s:718    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:721    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:722    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:723    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:724    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:725    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:726    .text:0000000000000464 .L0 
+     /tmp/ccehA9I2.s:736    .text:0000000000000488 .L0 
+     /tmp/ccehA9I2.s:737    .text:0000000000000488 .L0 
+     /tmp/ccehA9I2.s:742    .text:0000000000000494 .L0 
+     /tmp/ccehA9I2.s:743    .text:0000000000000494 .L0 
+     /tmp/ccehA9I2.s:744    .text:0000000000000498 .L0 
+     /tmp/ccehA9I2.s:746    .text:000000000000049c .L0 
+     /tmp/ccehA9I2.s:747    .text:000000000000049c .L0 
+     /tmp/ccehA9I2.s:749    .text:00000000000004a0 .L0 
+     /tmp/ccehA9I2.s:751    .text:00000000000004a4 .L0 
+     /tmp/ccehA9I2.s:757    .text:00000000000004a4 switch_to_user
+     /tmp/ccehA9I2.s:760    .text:00000000000004a4 .L0 
+     /tmp/ccehA9I2.s:761    .text:00000000000004a4 .L0 
+     /tmp/ccehA9I2.s:762    .text:00000000000004a8 .L0 
+     /tmp/ccehA9I2.s:765    .text:00000000000004b0 .L0 
+     /tmp/ccehA9I2.s:766    .text:00000000000004b0 .L0 
+     /tmp/ccehA9I2.s:768    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:771    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:772    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:773    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:774    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:775    .text:00000000000004b4 .L0 
+     /tmp/ccehA9I2.s:785    .text:00000000000004d8 .L0 
+     /tmp/ccehA9I2.s:786    .text:00000000000004d8 .L0 
+     /tmp/ccehA9I2.s:790    .text:00000000000004e4 .L0 
+     /tmp/ccehA9I2.s:791    .text:00000000000004e4 .L0 
+     /tmp/ccehA9I2.s:792    .text:00000000000004e8 .L0 
+     /tmp/ccehA9I2.s:794    .text:00000000000004ec .L0 
+     /tmp/ccehA9I2.s:795    .text:00000000000004ec .L0 
+     /tmp/ccehA9I2.s:797    .text:00000000000004f0 .L0 
+     /tmp/ccehA9I2.s:799    .text:00000000000004f4 .L0 
+     /tmp/ccehA9I2.s:805    .text:00000000000004f4 switch_to_priviledged
+GAS LISTING /tmp/ccehA9I2.s 			page 30
 
 
-     /tmp/ccoAAFXO.s:808    .text:00000000000004f4 .L0 
-     /tmp/ccoAAFXO.s:809    .text:00000000000004f4 .L0 
-     /tmp/ccoAAFXO.s:810    .text:00000000000004f8 .L0 
-     /tmp/ccoAAFXO.s:813    .text:0000000000000500 .L0 
-     /tmp/ccoAAFXO.s:814    .text:0000000000000500 .L0 
-     /tmp/ccoAAFXO.s:816    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:819    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:820    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:821    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:822    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:823    .text:0000000000000504 .L0 
-     /tmp/ccoAAFXO.s:833    .text:0000000000000528 .L0 
-     /tmp/ccoAAFXO.s:834    .text:0000000000000528 .L0 
-     /tmp/ccoAAFXO.s:838    .text:0000000000000534 .L0 
-     /tmp/ccoAAFXO.s:839    .text:0000000000000534 .L0 
-     /tmp/ccoAAFXO.s:840    .text:0000000000000538 .L0 
-     /tmp/ccoAAFXO.s:842    .text:000000000000053c .L0 
-     /tmp/ccoAAFXO.s:843    .text:000000000000053c .L0 
-     /tmp/ccoAAFXO.s:845    .text:0000000000000540 .L0 
-     /tmp/ccoAAFXO.s:847    .text:0000000000000544 .L0 
-     /tmp/ccoAAFXO.s:853    .text:0000000000000544 set_periodic
-     /tmp/ccoAAFXO.s:856    .text:0000000000000544 .L0 
-     /tmp/ccoAAFXO.s:858    .text:0000000000000544 .L0 
-     /tmp/ccoAAFXO.s:859    .text:0000000000000548 .L0 
-     /tmp/ccoAAFXO.s:862    .text:0000000000000550 .L0 
-     /tmp/ccoAAFXO.s:863    .text:0000000000000550 .L0 
-     /tmp/ccoAAFXO.s:865    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:868    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:869    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:870    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:871    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:872    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:873    .text:0000000000000554 .L0 
-     /tmp/ccoAAFXO.s:883    .text:0000000000000578 .L0 
-     /tmp/ccoAAFXO.s:884    .text:0000000000000578 .L0 
-     /tmp/ccoAAFXO.s:889    .text:0000000000000584 .L0 
-     /tmp/ccoAAFXO.s:890    .text:0000000000000584 .L0 
-     /tmp/ccoAAFXO.s:891    .text:0000000000000588 .L0 
-     /tmp/ccoAAFXO.s:893    .text:000000000000058c .L0 
-     /tmp/ccoAAFXO.s:894    .text:000000000000058c .L0 
-     /tmp/ccoAAFXO.s:896    .text:0000000000000590 .L0 
-     /tmp/ccoAAFXO.s:898    .text:0000000000000594 .L0 
-     /tmp/ccoAAFXO.s:904    .text:0000000000000594 kill
-     /tmp/ccoAAFXO.s:907    .text:0000000000000594 .L0 
-     /tmp/ccoAAFXO.s:909    .text:0000000000000594 .L0 
-     /tmp/ccoAAFXO.s:910    .text:0000000000000598 .L0 
-     /tmp/ccoAAFXO.s:913    .text:00000000000005a0 .L0 
-     /tmp/ccoAAFXO.s:914    .text:00000000000005a0 .L0 
-     /tmp/ccoAAFXO.s:916    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:919    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:920    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:921    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:922    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:923    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:924    .text:00000000000005a4 .L0 
-     /tmp/ccoAAFXO.s:934    .text:00000000000005c8 .L0 
-     /tmp/ccoAAFXO.s:935    .text:00000000000005c8 .L0 
-GAS LISTING /tmp/ccoAAFXO.s 			page 31
+     /tmp/ccehA9I2.s:808    .text:00000000000004f4 .L0 
+     /tmp/ccehA9I2.s:809    .text:00000000000004f4 .L0 
+     /tmp/ccehA9I2.s:810    .text:00000000000004f8 .L0 
+     /tmp/ccehA9I2.s:813    .text:0000000000000500 .L0 
+     /tmp/ccehA9I2.s:814    .text:0000000000000500 .L0 
+     /tmp/ccehA9I2.s:816    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:819    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:820    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:821    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:822    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:823    .text:0000000000000504 .L0 
+     /tmp/ccehA9I2.s:833    .text:0000000000000528 .L0 
+     /tmp/ccehA9I2.s:834    .text:0000000000000528 .L0 
+     /tmp/ccehA9I2.s:838    .text:0000000000000534 .L0 
+     /tmp/ccehA9I2.s:839    .text:0000000000000534 .L0 
+     /tmp/ccehA9I2.s:840    .text:0000000000000538 .L0 
+     /tmp/ccehA9I2.s:842    .text:000000000000053c .L0 
+     /tmp/ccehA9I2.s:843    .text:000000000000053c .L0 
+     /tmp/ccehA9I2.s:845    .text:0000000000000540 .L0 
+     /tmp/ccehA9I2.s:847    .text:0000000000000544 .L0 
+     /tmp/ccehA9I2.s:853    .text:0000000000000544 set_periodic
+     /tmp/ccehA9I2.s:856    .text:0000000000000544 .L0 
+     /tmp/ccehA9I2.s:858    .text:0000000000000544 .L0 
+     /tmp/ccehA9I2.s:859    .text:0000000000000548 .L0 
+     /tmp/ccehA9I2.s:862    .text:0000000000000550 .L0 
+     /tmp/ccehA9I2.s:863    .text:0000000000000550 .L0 
+     /tmp/ccehA9I2.s:865    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:868    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:869    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:870    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:871    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:872    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:873    .text:0000000000000554 .L0 
+     /tmp/ccehA9I2.s:883    .text:0000000000000578 .L0 
+     /tmp/ccehA9I2.s:884    .text:0000000000000578 .L0 
+     /tmp/ccehA9I2.s:889    .text:0000000000000584 .L0 
+     /tmp/ccehA9I2.s:890    .text:0000000000000584 .L0 
+     /tmp/ccehA9I2.s:891    .text:0000000000000588 .L0 
+     /tmp/ccehA9I2.s:893    .text:000000000000058c .L0 
+     /tmp/ccehA9I2.s:894    .text:000000000000058c .L0 
+     /tmp/ccehA9I2.s:896    .text:0000000000000590 .L0 
+     /tmp/ccehA9I2.s:898    .text:0000000000000594 .L0 
+     /tmp/ccehA9I2.s:904    .text:0000000000000594 kill
+     /tmp/ccehA9I2.s:907    .text:0000000000000594 .L0 
+     /tmp/ccehA9I2.s:909    .text:0000000000000594 .L0 
+     /tmp/ccehA9I2.s:910    .text:0000000000000598 .L0 
+     /tmp/ccehA9I2.s:913    .text:00000000000005a0 .L0 
+     /tmp/ccehA9I2.s:914    .text:00000000000005a0 .L0 
+     /tmp/ccehA9I2.s:916    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:919    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:920    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:921    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:922    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:923    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:924    .text:00000000000005a4 .L0 
+     /tmp/ccehA9I2.s:934    .text:00000000000005c8 .L0 
+     /tmp/ccehA9I2.s:935    .text:00000000000005c8 .L0 
+GAS LISTING /tmp/ccehA9I2.s 			page 31
 
 
-     /tmp/ccoAAFXO.s:940    .text:00000000000005d4 .L0 
-     /tmp/ccoAAFXO.s:941    .text:00000000000005d4 .L0 
-     /tmp/ccoAAFXO.s:942    .text:00000000000005d8 .L0 
-     /tmp/ccoAAFXO.s:944    .text:00000000000005dc .L0 
-     /tmp/ccoAAFXO.s:945    .text:00000000000005dc .L0 
-     /tmp/ccoAAFXO.s:947    .text:00000000000005e0 .L0 
-     /tmp/ccoAAFXO.s:949    .text:00000000000005e4 .L0 
-     /tmp/ccoAAFXO.s:955    .text:00000000000005e4 .L0 
-     /tmp/ccoAAFXO.s:124    .text:00000000000000b0 .L5
-     /tmp/ccoAAFXO.s:220    .text:0000000000000148 .L16
-     /tmp/ccoAAFXO.s:231    .text:0000000000000154 .L17
-     /tmp/ccoAAFXO.s:199    .text:000000000000012c .L12
-     /tmp/ccoAAFXO.s:170    .text:00000000000000f4 .L13
-     /tmp/ccoAAFXO.s:351    .text:000000000000020c .L29
-     /tmp/ccoAAFXO.s:2749   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccoAAFXO.s:4020   .debug_str:0000000000000256 .LASF53
-     /tmp/ccoAAFXO.s:3982   .debug_str:0000000000000185 .LASF54
-     /tmp/ccoAAFXO.s:3930   .debug_str:0000000000000023 .LASF55
-     /tmp/ccoAAFXO.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccoAAFXO.s:952    .text:00000000000005e4 .Letext0
-     /tmp/ccoAAFXO.s:3922   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccoAAFXO.s:3960   .debug_str:0000000000000101 .LASF0
-     /tmp/ccoAAFXO.s:3972   .debug_str:000000000000014b .LASF1
-     /tmp/ccoAAFXO.s:4000   .debug_str:00000000000001eb .LASF2
-     /tmp/ccoAAFXO.s:4002   .debug_str:00000000000001f9 .LASF4
-     /tmp/ccoAAFXO.s:3964   .debug_str:0000000000000113 .LASF3
-     /tmp/ccoAAFXO.s:3928   .debug_str:000000000000001c .LASF5
-     /tmp/ccoAAFXO.s:3988   .debug_str:00000000000001af .LASF6
-     /tmp/ccoAAFXO.s:3984   .debug_str:0000000000000197 .LASF7
-     /tmp/ccoAAFXO.s:3966   .debug_str:0000000000000125 .LASF8
-     /tmp/ccoAAFXO.s:3954   .debug_str:00000000000000d8 .LASF9
-     /tmp/ccoAAFXO.s:3956   .debug_str:00000000000000e8 .LASF10
-     /tmp/ccoAAFXO.s:3940   .debug_str:0000000000000079 .LASF11
-     /tmp/ccoAAFXO.s:4022   .debug_str:0000000000000326 .LASF12
-     /tmp/ccoAAFXO.s:3952   .debug_str:00000000000000c9 .LASF13
-     /tmp/ccoAAFXO.s:3944   .debug_str:000000000000008d .LASF14
-     /tmp/ccoAAFXO.s:3938   .debug_str:0000000000000069 .LASF15
-     /tmp/ccoAAFXO.s:4010   .debug_str:0000000000000229 .LASF16
-     /tmp/ccoAAFXO.s:3950   .debug_str:00000000000000b3 .LASF17
-     /tmp/ccoAAFXO.s:4004   .debug_str:0000000000000200 .LASF18
-     /tmp/ccoAAFXO.s:3976   .debug_str:000000000000016f .LASF19
-     /tmp/ccoAAFXO.s:4016   .debug_str:0000000000000243 .LASF20
-     /tmp/ccoAAFXO.s:3932   .debug_str:0000000000000057 .LASF22
-     /tmp/ccoAAFXO.s:4030   .debug_str:0000000000000354 .LASF21
-     /tmp/ccoAAFXO.s:4006   .debug_str:0000000000000216 .LASF23
-     /tmp/ccoAAFXO.s:3942   .debug_str:0000000000000088 .LASF25
-     /tmp/ccoAAFXO.s:905    .text:0000000000000594 .LFB56
-     /tmp/ccoAAFXO.s:950    .text:00000000000005e4 .LFE56
-     /tmp/ccoAAFXO.s:3998   .debug_str:00000000000001e4 .LASF27
-     /tmp/ccoAAFXO.s:3264   .debug_loc:0000000000000000 .LLST43
-     /tmp/ccoAAFXO.s:3283   .debug_loc:000000000000004e .LLST44
-     /tmp/ccoAAFXO.s:3948   .debug_str:00000000000000ad .LASF24
-     /tmp/ccoAAFXO.s:938    .text:00000000000005d4 .LVL73
-     /tmp/ccoAAFXO.s:4026   .debug_str:0000000000000340 .LASF26
-     /tmp/ccoAAFXO.s:854    .text:0000000000000544 .LFB55
-     /tmp/ccoAAFXO.s:899    .text:0000000000000594 .LFE55
-     /tmp/ccoAAFXO.s:3946   .debug_str:000000000000009d .LASF28
-GAS LISTING /tmp/ccoAAFXO.s 			page 32
+     /tmp/ccehA9I2.s:940    .text:00000000000005d4 .L0 
+     /tmp/ccehA9I2.s:941    .text:00000000000005d4 .L0 
+     /tmp/ccehA9I2.s:942    .text:00000000000005d8 .L0 
+     /tmp/ccehA9I2.s:944    .text:00000000000005dc .L0 
+     /tmp/ccehA9I2.s:945    .text:00000000000005dc .L0 
+     /tmp/ccehA9I2.s:947    .text:00000000000005e0 .L0 
+     /tmp/ccehA9I2.s:949    .text:00000000000005e4 .L0 
+     /tmp/ccehA9I2.s:956    .text:00000000000005e4 .L0 
+     /tmp/ccehA9I2.s:124    .text:00000000000000b0 .L5
+     /tmp/ccehA9I2.s:220    .text:0000000000000148 .L16
+     /tmp/ccehA9I2.s:231    .text:0000000000000154 .L17
+     /tmp/ccehA9I2.s:199    .text:000000000000012c .L12
+     /tmp/ccehA9I2.s:170    .text:00000000000000f4 .L13
+     /tmp/ccehA9I2.s:351    .text:000000000000020c .L29
+     /tmp/ccehA9I2.s:2764   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccehA9I2.s:4031   .debug_str:000000000000026a .LASF54
+     /tmp/ccehA9I2.s:3993   .debug_str:0000000000000199 .LASF55
+     /tmp/ccehA9I2.s:3939   .debug_str:0000000000000023 .LASF56
+     /tmp/ccehA9I2.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccehA9I2.s:952    .text:00000000000005e4 .Letext0
+     /tmp/ccehA9I2.s:3931   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccehA9I2.s:3969   .debug_str:0000000000000101 .LASF0
+     /tmp/ccehA9I2.s:3981   .debug_str:000000000000014b .LASF1
+     /tmp/ccehA9I2.s:4011   .debug_str:00000000000001ff .LASF2
+     /tmp/ccehA9I2.s:4013   .debug_str:000000000000020d .LASF4
+     /tmp/ccehA9I2.s:3973   .debug_str:0000000000000113 .LASF3
+     /tmp/ccehA9I2.s:3937   .debug_str:000000000000001c .LASF5
+     /tmp/ccehA9I2.s:3999   .debug_str:00000000000001c3 .LASF6
+     /tmp/ccehA9I2.s:3995   .debug_str:00000000000001ab .LASF7
+     /tmp/ccehA9I2.s:3975   .debug_str:0000000000000125 .LASF8
+     /tmp/ccehA9I2.s:3987   .debug_str:0000000000000174 .LASF9
+     /tmp/ccehA9I2.s:3963   .debug_str:00000000000000d8 .LASF10
+     /tmp/ccehA9I2.s:3965   .debug_str:00000000000000e8 .LASF11
+     /tmp/ccehA9I2.s:3949   .debug_str:0000000000000079 .LASF12
+     /tmp/ccehA9I2.s:4033   .debug_str:000000000000033a .LASF13
+     /tmp/ccehA9I2.s:3961   .debug_str:00000000000000c9 .LASF14
+     /tmp/ccehA9I2.s:3953   .debug_str:000000000000008d .LASF15
+     /tmp/ccehA9I2.s:3947   .debug_str:0000000000000069 .LASF16
+     /tmp/ccehA9I2.s:4021   .debug_str:000000000000023d .LASF17
+     /tmp/ccehA9I2.s:3959   .debug_str:00000000000000b3 .LASF18
+     /tmp/ccehA9I2.s:4015   .debug_str:0000000000000214 .LASF19
+     /tmp/ccehA9I2.s:3985   .debug_str:000000000000016f .LASF20
+     /tmp/ccehA9I2.s:4027   .debug_str:0000000000000257 .LASF21
+     /tmp/ccehA9I2.s:3941   .debug_str:0000000000000057 .LASF23
+     /tmp/ccehA9I2.s:4045   .debug_str:000000000000037c .LASF22
+     /tmp/ccehA9I2.s:4017   .debug_str:000000000000022a .LASF24
+     /tmp/ccehA9I2.s:3951   .debug_str:0000000000000088 .LASF26
+     /tmp/ccehA9I2.s:905    .text:0000000000000594 .LFB45
+     /tmp/ccehA9I2.s:950    .text:00000000000005e4 .LFE45
+     /tmp/ccehA9I2.s:4009   .debug_str:00000000000001f8 .LASF28
+     /tmp/ccehA9I2.s:3273   .debug_loc:0000000000000000 .LLST43
+     /tmp/ccehA9I2.s:3292   .debug_loc:000000000000004e .LLST44
+     /tmp/ccehA9I2.s:3957   .debug_str:00000000000000ad .LASF25
+     /tmp/ccehA9I2.s:938    .text:00000000000005d4 .LVL73
+     /tmp/ccehA9I2.s:4037   .debug_str:0000000000000354 .LASF27
+     /tmp/ccehA9I2.s:854    .text:0000000000000544 .LFB44
+     /tmp/ccehA9I2.s:899    .text:0000000000000594 .LFE44
+GAS LISTING /tmp/ccehA9I2.s 			page 32
 
 
-     /tmp/ccoAAFXO.s:3302   .debug_loc:000000000000009c .LLST41
-     /tmp/ccoAAFXO.s:3321   .debug_loc:00000000000000ea .LLST42
-     /tmp/ccoAAFXO.s:887    .text:0000000000000584 .LVL69
-     /tmp/ccoAAFXO.s:3924   .debug_str:0000000000000000 .LASF29
-     /tmp/ccoAAFXO.s:806    .text:00000000000004f4 .LFB54
-     /tmp/ccoAAFXO.s:848    .text:0000000000000544 .LFE54
-     /tmp/ccoAAFXO.s:836    .text:0000000000000534 .LVL65
-     /tmp/ccoAAFXO.s:4024   .debug_str:0000000000000331 .LASF30
-     /tmp/ccoAAFXO.s:758    .text:00000000000004a4 .LFB53
-     /tmp/ccoAAFXO.s:800    .text:00000000000004f4 .LFE53
-     /tmp/ccoAAFXO.s:788    .text:00000000000004e4 .LVL63
-     /tmp/ccoAAFXO.s:3974   .debug_str:000000000000015e .LASF31
-     /tmp/ccoAAFXO.s:707    .text:0000000000000454 .LFB52
-     /tmp/ccoAAFXO.s:752    .text:00000000000004a4 .LFE52
-     /tmp/ccoAAFXO.s:3340   .debug_loc:0000000000000138 .LLST39
-     /tmp/ccoAAFXO.s:3359   .debug_loc:0000000000000186 .LLST40
-     /tmp/ccoAAFXO.s:740    .text:0000000000000494 .LVL61
-     /tmp/ccoAAFXO.s:3980   .debug_str:0000000000000180 .LASF32
-     /tmp/ccoAAFXO.s:656    .text:0000000000000404 .LFB51
-     /tmp/ccoAAFXO.s:701    .text:0000000000000454 .LFE51
-     /tmp/ccoAAFXO.s:3378   .debug_loc:00000000000001d4 .LLST37
-     /tmp/ccoAAFXO.s:3392   .debug_loc:000000000000020d .LLST38
-     /tmp/ccoAAFXO.s:689    .text:0000000000000444 .LVL57
-     /tmp/ccoAAFXO.s:4014   .debug_str:000000000000023e .LASF33
-     /tmp/ccoAAFXO.s:3962   .debug_str:000000000000010e .LASF34
-     /tmp/ccoAAFXO.s:606    .text:00000000000003b0 .LFB50
-     /tmp/ccoAAFXO.s:650    .text:0000000000000404 .LFE50
-     /tmp/ccoAAFXO.s:3404   .debug_loc:0000000000000245 .LLST36
-     /tmp/ccoAAFXO.s:636    .text:00000000000003f0 .LVL52
-     /tmp/ccoAAFXO.s:3958   .debug_str:00000000000000f6 .LASF35
-     /tmp/ccoAAFXO.s:555    .text:000000000000035c .LFB49
-     /tmp/ccoAAFXO.s:600    .text:00000000000003b0 .LFE49
-     /tmp/ccoAAFXO.s:3411   .debug_loc:0000000000000268 .LLST34
-     /tmp/ccoAAFXO.s:3430   .debug_loc:00000000000002b6 .LLST35
-     /tmp/ccoAAFXO.s:588    .text:000000000000039c .LVL50
-     /tmp/ccoAAFXO.s:4034   .debug_str:0000000000000360 .LASF36
-     /tmp/ccoAAFXO.s:504    .text:0000000000000308 .LFB48
-     /tmp/ccoAAFXO.s:549    .text:000000000000035c .LFE48
-     /tmp/ccoAAFXO.s:3449   .debug_loc:0000000000000304 .LLST32
-     /tmp/ccoAAFXO.s:3468   .debug_loc:0000000000000352 .LLST33
-     /tmp/ccoAAFXO.s:537    .text:0000000000000348 .LVL46
-     /tmp/ccoAAFXO.s:3990   .debug_str:00000000000001b6 .LASF37
-     /tmp/ccoAAFXO.s:453    .text:00000000000002b4 .LFB47
-     /tmp/ccoAAFXO.s:498    .text:0000000000000308 .LFE47
-     /tmp/ccoAAFXO.s:4028   .debug_str:000000000000034d .LASF38
-     /tmp/ccoAAFXO.s:3487   .debug_loc:00000000000003a0 .LLST30
-     /tmp/ccoAAFXO.s:3506   .debug_loc:00000000000003ee .LLST31
-     /tmp/ccoAAFXO.s:486    .text:00000000000002f4 .LVL42
-     /tmp/ccoAAFXO.s:3994   .debug_str:00000000000001d0 .LASF39
-     /tmp/ccoAAFXO.s:401    .text:0000000000000260 .LFB46
-     /tmp/ccoAAFXO.s:447    .text:00000000000002b4 .LFE46
-     /tmp/ccoAAFXO.s:3525   .debug_loc:000000000000043c .LLST26
-     /tmp/ccoAAFXO.s:3934   .debug_str:000000000000005f .LASF40
-     /tmp/ccoAAFXO.s:3544   .debug_loc:000000000000048a .LLST27
-     /tmp/ccoAAFXO.s:3558   .debug_loc:00000000000004c3 .LLST28
-     /tmp/ccoAAFXO.s:3577   .debug_loc:0000000000000511 .LLST29
-     /tmp/ccoAAFXO.s:435    .text:00000000000002a0 .LVL38
-GAS LISTING /tmp/ccoAAFXO.s 			page 33
+     /tmp/ccehA9I2.s:3955   .debug_str:000000000000009d .LASF29
+     /tmp/ccehA9I2.s:3311   .debug_loc:000000000000009c .LLST41
+     /tmp/ccehA9I2.s:3330   .debug_loc:00000000000000ea .LLST42
+     /tmp/ccehA9I2.s:887    .text:0000000000000584 .LVL69
+     /tmp/ccehA9I2.s:3933   .debug_str:0000000000000000 .LASF30
+     /tmp/ccehA9I2.s:806    .text:00000000000004f4 .LFB43
+     /tmp/ccehA9I2.s:848    .text:0000000000000544 .LFE43
+     /tmp/ccehA9I2.s:836    .text:0000000000000534 .LVL65
+     /tmp/ccehA9I2.s:4035   .debug_str:0000000000000345 .LASF31
+     /tmp/ccehA9I2.s:758    .text:00000000000004a4 .LFB42
+     /tmp/ccehA9I2.s:800    .text:00000000000004f4 .LFE42
+     /tmp/ccehA9I2.s:788    .text:00000000000004e4 .LVL63
+     /tmp/ccehA9I2.s:3983   .debug_str:000000000000015e .LASF32
+     /tmp/ccehA9I2.s:707    .text:0000000000000454 .LFB41
+     /tmp/ccehA9I2.s:752    .text:00000000000004a4 .LFE41
+     /tmp/ccehA9I2.s:3349   .debug_loc:0000000000000138 .LLST39
+     /tmp/ccehA9I2.s:3368   .debug_loc:0000000000000186 .LLST40
+     /tmp/ccehA9I2.s:740    .text:0000000000000494 .LVL61
+     /tmp/ccehA9I2.s:3991   .debug_str:0000000000000194 .LASF33
+     /tmp/ccehA9I2.s:656    .text:0000000000000404 .LFB40
+     /tmp/ccehA9I2.s:701    .text:0000000000000454 .LFE40
+     /tmp/ccehA9I2.s:3387   .debug_loc:00000000000001d4 .LLST37
+     /tmp/ccehA9I2.s:3401   .debug_loc:000000000000020d .LLST38
+     /tmp/ccehA9I2.s:689    .text:0000000000000444 .LVL57
+     /tmp/ccehA9I2.s:4025   .debug_str:0000000000000252 .LASF34
+     /tmp/ccehA9I2.s:3971   .debug_str:000000000000010e .LASF35
+     /tmp/ccehA9I2.s:606    .text:00000000000003b0 .LFB39
+     /tmp/ccehA9I2.s:650    .text:0000000000000404 .LFE39
+     /tmp/ccehA9I2.s:3413   .debug_loc:0000000000000245 .LLST36
+     /tmp/ccehA9I2.s:636    .text:00000000000003f0 .LVL52
+     /tmp/ccehA9I2.s:3967   .debug_str:00000000000000f6 .LASF36
+     /tmp/ccehA9I2.s:555    .text:000000000000035c .LFB38
+     /tmp/ccehA9I2.s:600    .text:00000000000003b0 .LFE38
+     /tmp/ccehA9I2.s:3420   .debug_loc:0000000000000268 .LLST34
+     /tmp/ccehA9I2.s:3439   .debug_loc:00000000000002b6 .LLST35
+     /tmp/ccehA9I2.s:588    .text:000000000000039c .LVL50
+     /tmp/ccehA9I2.s:4049   .debug_str:0000000000000388 .LASF37
+     /tmp/ccehA9I2.s:504    .text:0000000000000308 .LFB37
+     /tmp/ccehA9I2.s:549    .text:000000000000035c .LFE37
+     /tmp/ccehA9I2.s:3458   .debug_loc:0000000000000304 .LLST32
+     /tmp/ccehA9I2.s:3477   .debug_loc:0000000000000352 .LLST33
+     /tmp/ccehA9I2.s:537    .text:0000000000000348 .LVL46
+     /tmp/ccehA9I2.s:4001   .debug_str:00000000000001ca .LASF38
+     /tmp/ccehA9I2.s:453    .text:00000000000002b4 .LFB36
+     /tmp/ccehA9I2.s:498    .text:0000000000000308 .LFE36
+     /tmp/ccehA9I2.s:4043   .debug_str:0000000000000375 .LASF39
+     /tmp/ccehA9I2.s:3496   .debug_loc:00000000000003a0 .LLST30
+     /tmp/ccehA9I2.s:3515   .debug_loc:00000000000003ee .LLST31
+     /tmp/ccehA9I2.s:486    .text:00000000000002f4 .LVL42
+     /tmp/ccehA9I2.s:4005   .debug_str:00000000000001e4 .LASF40
+     /tmp/ccehA9I2.s:401    .text:0000000000000260 .LFB35
+     /tmp/ccehA9I2.s:447    .text:00000000000002b4 .LFE35
+     /tmp/ccehA9I2.s:3534   .debug_loc:000000000000043c .LLST26
+     /tmp/ccehA9I2.s:3943   .debug_str:000000000000005f .LASF41
+     /tmp/ccehA9I2.s:3553   .debug_loc:000000000000048a .LLST27
+     /tmp/ccehA9I2.s:3567   .debug_loc:00000000000004c3 .LLST28
+     /tmp/ccehA9I2.s:3586   .debug_loc:0000000000000511 .LLST29
+GAS LISTING /tmp/ccehA9I2.s 			page 33
 
 
-     /tmp/ccoAAFXO.s:3996   .debug_str:00000000000001d9 .LASF41
-     /tmp/ccoAAFXO.s:339    .text:0000000000000200 .LFB45
-     /tmp/ccoAAFXO.s:395    .text:0000000000000260 .LFE45
-     /tmp/ccoAAFXO.s:3986   .debug_str:00000000000001aa .LASF42
-     /tmp/ccoAAFXO.s:3591   .debug_loc:000000000000054a .LLST24
-     /tmp/ccoAAFXO.s:3621   .debug_loc:00000000000005c1 .LLST25
-     /tmp/ccoAAFXO.s:382    .text:000000000000024c .LVL34
-     /tmp/ccoAAFXO.s:3978   .debug_str:0000000000000174 .LASF43
-     /tmp/ccoAAFXO.s:291    .text:00000000000001ac .LFB44
-     /tmp/ccoAAFXO.s:333    .text:0000000000000200 .LFE44
-     /tmp/ccoAAFXO.s:321    .text:00000000000001ec .LVL28
-     /tmp/ccoAAFXO.s:3992   .debug_str:00000000000001c0 .LASF44
-     /tmp/ccoAAFXO.s:243    .text:000000000000015c .LFB43
-     /tmp/ccoAAFXO.s:285    .text:00000000000001ac .LFE43
-     /tmp/ccoAAFXO.s:273    .text:000000000000019c .LVL26
-     /tmp/ccoAAFXO.s:4008   .debug_str:000000000000021b .LASF45
-     /tmp/ccoAAFXO.s:137    .text:00000000000000b8 .LFB42
-     /tmp/ccoAAFXO.s:237    .text:000000000000015c .LFE42
-     /tmp/ccoAAFXO.s:3640   .debug_loc:000000000000060f .LLST12
-     /tmp/ccoAAFXO.s:3968   .debug_str:0000000000000138 .LASF46
-     /tmp/ccoAAFXO.s:3662   .debug_loc:000000000000066e .LLST13
-     /tmp/ccoAAFXO.s:3684   .debug_loc:00000000000006cd .LLST14
-     /tmp/ccoAAFXO.s:4032   .debug_str:000000000000035a .LASF47
-     /tmp/ccoAAFXO.s:3706   .debug_loc:000000000000072c .LLST15
-     /tmp/ccoAAFXO.s:3721   .debug_loc:0000000000000775 .LLST16
-     /tmp/ccoAAFXO.s:3733   .debug_loc:00000000000007ad .LLST17
-     /tmp/ccoAAFXO.s:3741   .debug_loc:00000000000007d1 .LLST18
-     /tmp/ccoAAFXO.s:3748   .debug_loc:00000000000007f4 .LLST19
-     /tmp/ccoAAFXO.s:3755   .debug_loc:0000000000000817 .LLST20
-     /tmp/ccoAAFXO.s:3762   .debug_loc:000000000000083a .LLST21
-     /tmp/ccoAAFXO.s:3770   .debug_loc:000000000000085e .LLST22
-     /tmp/ccoAAFXO.s:163    .text:00000000000000ec .LVL13
-     /tmp/ccoAAFXO.s:195    .text:0000000000000128 .LVL16
-     /tmp/ccoAAFXO.s:4012   .debug_str:0000000000000235 .LASF48
-     /tmp/ccoAAFXO.s:71     .text:0000000000000058 .LFB41
-     /tmp/ccoAAFXO.s:131    .text:00000000000000b8 .LFE41
-     /tmp/ccoAAFXO.s:3936   .debug_str:0000000000000064 .LASF49
-     /tmp/ccoAAFXO.s:3778   .debug_loc:0000000000000882 .LLST3
-     /tmp/ccoAAFXO.s:3808   .debug_loc:00000000000008f9 .LLST4
-     /tmp/ccoAAFXO.s:3816   .debug_loc:000000000000091d .LLST5
-     /tmp/ccoAAFXO.s:3835   .debug_loc:000000000000096b .LLST6
-     /tmp/ccoAAFXO.s:111    .text:000000000000009c .LVL8
-     /tmp/ccoAAFXO.s:4018   .debug_str:000000000000024c .LASF50
-     /tmp/ccoAAFXO.s:10     .text:0000000000000000 .LFB40
-     /tmp/ccoAAFXO.s:65     .text:0000000000000058 .LFE40
-     /tmp/ccoAAFXO.s:3970   .debug_str:0000000000000146 .LASF51
-     /tmp/ccoAAFXO.s:3843   .debug_loc:000000000000098f .LLST0
-     /tmp/ccoAAFXO.s:3926   .debug_str:0000000000000016 .LASF52
-     /tmp/ccoAAFXO.s:3863   .debug_loc:00000000000009dd .LLST1
-     /tmp/ccoAAFXO.s:3886   .debug_loc:0000000000000a2f .LLST2
-     /tmp/ccoAAFXO.s:54     .text:0000000000000048 .LVL4
-     /tmp/ccoAAFXO.s:908    .text:0000000000000594 .LVL70
-     /tmp/ccoAAFXO.s:936    .text:00000000000005cc .LVL72
-     /tmp/ccoAAFXO.s:918    .text:00000000000005a4 .LVL71
-     /tmp/ccoAAFXO.s:857    .text:0000000000000544 .LVL66
-     /tmp/ccoAAFXO.s:885    .text:000000000000057c .LVL68
-     /tmp/ccoAAFXO.s:867    .text:0000000000000554 .LVL67
-GAS LISTING /tmp/ccoAAFXO.s 			page 34
+     /tmp/ccehA9I2.s:435    .text:00000000000002a0 .LVL38
+     /tmp/ccehA9I2.s:4007   .debug_str:00000000000001ed .LASF42
+     /tmp/ccehA9I2.s:339    .text:0000000000000200 .LFB34
+     /tmp/ccehA9I2.s:395    .text:0000000000000260 .LFE34
+     /tmp/ccehA9I2.s:3997   .debug_str:00000000000001be .LASF43
+     /tmp/ccehA9I2.s:3600   .debug_loc:000000000000054a .LLST24
+     /tmp/ccehA9I2.s:3630   .debug_loc:00000000000005c1 .LLST25
+     /tmp/ccehA9I2.s:382    .text:000000000000024c .LVL34
+     /tmp/ccehA9I2.s:3989   .debug_str:0000000000000188 .LASF44
+     /tmp/ccehA9I2.s:291    .text:00000000000001ac .LFB33
+     /tmp/ccehA9I2.s:333    .text:0000000000000200 .LFE33
+     /tmp/ccehA9I2.s:321    .text:00000000000001ec .LVL28
+     /tmp/ccehA9I2.s:4003   .debug_str:00000000000001d4 .LASF45
+     /tmp/ccehA9I2.s:243    .text:000000000000015c .LFB32
+     /tmp/ccehA9I2.s:285    .text:00000000000001ac .LFE32
+     /tmp/ccehA9I2.s:273    .text:000000000000019c .LVL26
+     /tmp/ccehA9I2.s:4019   .debug_str:000000000000022f .LASF46
+     /tmp/ccehA9I2.s:137    .text:00000000000000b8 .LFB31
+     /tmp/ccehA9I2.s:237    .text:000000000000015c .LFE31
+     /tmp/ccehA9I2.s:3649   .debug_loc:000000000000060f .LLST12
+     /tmp/ccehA9I2.s:3977   .debug_str:0000000000000138 .LASF47
+     /tmp/ccehA9I2.s:3671   .debug_loc:000000000000066e .LLST13
+     /tmp/ccehA9I2.s:3693   .debug_loc:00000000000006cd .LLST14
+     /tmp/ccehA9I2.s:4047   .debug_str:0000000000000382 .LASF48
+     /tmp/ccehA9I2.s:3715   .debug_loc:000000000000072c .LLST15
+     /tmp/ccehA9I2.s:3730   .debug_loc:0000000000000775 .LLST16
+     /tmp/ccehA9I2.s:3742   .debug_loc:00000000000007ad .LLST17
+     /tmp/ccehA9I2.s:3750   .debug_loc:00000000000007d1 .LLST18
+     /tmp/ccehA9I2.s:3757   .debug_loc:00000000000007f4 .LLST19
+     /tmp/ccehA9I2.s:3764   .debug_loc:0000000000000817 .LLST20
+     /tmp/ccehA9I2.s:3771   .debug_loc:000000000000083a .LLST21
+     /tmp/ccehA9I2.s:3779   .debug_loc:000000000000085e .LLST22
+     /tmp/ccehA9I2.s:163    .text:00000000000000ec .LVL13
+     /tmp/ccehA9I2.s:195    .text:0000000000000128 .LVL16
+     /tmp/ccehA9I2.s:4023   .debug_str:0000000000000249 .LASF49
+     /tmp/ccehA9I2.s:71     .text:0000000000000058 .LFB30
+     /tmp/ccehA9I2.s:131    .text:00000000000000b8 .LFE30
+     /tmp/ccehA9I2.s:3945   .debug_str:0000000000000064 .LASF50
+     /tmp/ccehA9I2.s:3787   .debug_loc:0000000000000882 .LLST3
+     /tmp/ccehA9I2.s:3817   .debug_loc:00000000000008f9 .LLST4
+     /tmp/ccehA9I2.s:3825   .debug_loc:000000000000091d .LLST5
+     /tmp/ccehA9I2.s:3844   .debug_loc:000000000000096b .LLST6
+     /tmp/ccehA9I2.s:111    .text:000000000000009c .LVL8
+     /tmp/ccehA9I2.s:4029   .debug_str:0000000000000260 .LASF51
+     /tmp/ccehA9I2.s:10     .text:0000000000000000 .LFB29
+     /tmp/ccehA9I2.s:65     .text:0000000000000058 .LFE29
+     /tmp/ccehA9I2.s:3979   .debug_str:0000000000000146 .LASF52
+     /tmp/ccehA9I2.s:3852   .debug_loc:000000000000098f .LLST0
+     /tmp/ccehA9I2.s:3935   .debug_str:0000000000000016 .LASF53
+     /tmp/ccehA9I2.s:3872   .debug_loc:00000000000009dd .LLST1
+     /tmp/ccehA9I2.s:3895   .debug_loc:0000000000000a2f .LLST2
+     /tmp/ccehA9I2.s:54     .text:0000000000000048 .LVL4
+     /tmp/ccehA9I2.s:4039   .debug_str:0000000000000361 .LASF57
+     /tmp/ccehA9I2.s:4041   .debug_str:000000000000036d .LASF58
+     /tmp/ccehA9I2.s:908    .text:0000000000000594 .LVL70
+     /tmp/ccehA9I2.s:936    .text:00000000000005cc .LVL72
+     /tmp/ccehA9I2.s:918    .text:00000000000005a4 .LVL71
+GAS LISTING /tmp/ccehA9I2.s 			page 34
 
 
-     /tmp/ccoAAFXO.s:710    .text:0000000000000454 .LVL58
-     /tmp/ccoAAFXO.s:738    .text:000000000000048c .LVL60
-     /tmp/ccoAAFXO.s:720    .text:0000000000000464 .LVL59
-     /tmp/ccoAAFXO.s:659    .text:0000000000000404 .LVL54
-     /tmp/ccoAAFXO.s:687    .text:000000000000043c .LVL56
-     /tmp/ccoAAFXO.s:669    .text:0000000000000414 .LVL55
-     /tmp/ccoAAFXO.s:640    .text:00000000000003f4 .LVL53
-     /tmp/ccoAAFXO.s:558    .text:000000000000035c .LVL47
-     /tmp/ccoAAFXO.s:586    .text:0000000000000394 .LVL49
-     /tmp/ccoAAFXO.s:568    .text:000000000000036c .LVL48
-     /tmp/ccoAAFXO.s:507    .text:0000000000000308 .LVL43
-     /tmp/ccoAAFXO.s:535    .text:0000000000000340 .LVL45
-     /tmp/ccoAAFXO.s:517    .text:0000000000000318 .LVL44
-     /tmp/ccoAAFXO.s:456    .text:00000000000002b4 .LVL39
-     /tmp/ccoAAFXO.s:484    .text:00000000000002ec .LVL41
-     /tmp/ccoAAFXO.s:466    .text:00000000000002c4 .LVL40
-     /tmp/ccoAAFXO.s:404    .text:0000000000000260 .LVL35
-     /tmp/ccoAAFXO.s:433    .text:0000000000000298 .LVL37
-     /tmp/ccoAAFXO.s:414    .text:0000000000000270 .LVL36
-     /tmp/ccoAAFXO.s:342    .text:0000000000000200 .LVL29
-     /tmp/ccoAAFXO.s:347    .text:0000000000000208 .LVL30
-     /tmp/ccoAAFXO.s:350    .text:000000000000020c .LVL31
-     /tmp/ccoAAFXO.s:380    .text:0000000000000244 .LVL33
-     /tmp/ccoAAFXO.s:362    .text:000000000000021c .LVL32
-     /tmp/ccoAAFXO.s:140    .text:00000000000000b8 .LVL11
-     /tmp/ccoAAFXO.s:161    .text:00000000000000e4 .LVL12
-     /tmp/ccoAAFXO.s:212    .text:000000000000013c .LVL19
-     /tmp/ccoAAFXO.s:219    .text:0000000000000148 .LVL21
-     /tmp/ccoAAFXO.s:209    .text:0000000000000138 .LVL18
-     /tmp/ccoAAFXO.s:215    .text:0000000000000140 .LVL20
-     /tmp/ccoAAFXO.s:169    .text:00000000000000f4 .LVL14
-     /tmp/ccoAAFXO.s:228    .text:0000000000000150 .LVL22
-     /tmp/ccoAAFXO.s:230    .text:0000000000000154 .LVL23
-     /tmp/ccoAAFXO.s:234    .text:0000000000000158 .LVL24
-     /tmp/ccoAAFXO.s:193    .text:0000000000000120 .LVL15
-     /tmp/ccoAAFXO.s:198    .text:000000000000012c .LVL17
-     /tmp/ccoAAFXO.s:74     .text:0000000000000058 .LVL5
-     /tmp/ccoAAFXO.s:109    .text:0000000000000094 .LVL7
-     /tmp/ccoAAFXO.s:123    .text:00000000000000b0 .LVL9
-     /tmp/ccoAAFXO.s:127    .text:00000000000000b4 .LVL10
-     /tmp/ccoAAFXO.s:87     .text:000000000000006c .LVL6
-     /tmp/ccoAAFXO.s:14     .text:0000000000000000 .LVL0
-     /tmp/ccoAAFXO.s:26     .text:0000000000000014 .LVL1
-     /tmp/ccoAAFXO.s:29     .text:0000000000000018 .LVL2
-     /tmp/ccoAAFXO.s:52     .text:0000000000000040 .LVL3
-     /tmp/ccoAAFXO.s:956    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccehA9I2.s:857    .text:0000000000000544 .LVL66
+     /tmp/ccehA9I2.s:885    .text:000000000000057c .LVL68
+     /tmp/ccehA9I2.s:867    .text:0000000000000554 .LVL67
+     /tmp/ccehA9I2.s:710    .text:0000000000000454 .LVL58
+     /tmp/ccehA9I2.s:738    .text:000000000000048c .LVL60
+     /tmp/ccehA9I2.s:720    .text:0000000000000464 .LVL59
+     /tmp/ccehA9I2.s:659    .text:0000000000000404 .LVL54
+     /tmp/ccehA9I2.s:687    .text:000000000000043c .LVL56
+     /tmp/ccehA9I2.s:669    .text:0000000000000414 .LVL55
+     /tmp/ccehA9I2.s:640    .text:00000000000003f4 .LVL53
+     /tmp/ccehA9I2.s:558    .text:000000000000035c .LVL47
+     /tmp/ccehA9I2.s:586    .text:0000000000000394 .LVL49
+     /tmp/ccehA9I2.s:568    .text:000000000000036c .LVL48
+     /tmp/ccehA9I2.s:507    .text:0000000000000308 .LVL43
+     /tmp/ccehA9I2.s:535    .text:0000000000000340 .LVL45
+     /tmp/ccehA9I2.s:517    .text:0000000000000318 .LVL44
+     /tmp/ccehA9I2.s:456    .text:00000000000002b4 .LVL39
+     /tmp/ccehA9I2.s:484    .text:00000000000002ec .LVL41
+     /tmp/ccehA9I2.s:466    .text:00000000000002c4 .LVL40
+     /tmp/ccehA9I2.s:404    .text:0000000000000260 .LVL35
+     /tmp/ccehA9I2.s:433    .text:0000000000000298 .LVL37
+     /tmp/ccehA9I2.s:414    .text:0000000000000270 .LVL36
+     /tmp/ccehA9I2.s:342    .text:0000000000000200 .LVL29
+     /tmp/ccehA9I2.s:347    .text:0000000000000208 .LVL30
+     /tmp/ccehA9I2.s:350    .text:000000000000020c .LVL31
+     /tmp/ccehA9I2.s:380    .text:0000000000000244 .LVL33
+     /tmp/ccehA9I2.s:362    .text:000000000000021c .LVL32
+     /tmp/ccehA9I2.s:140    .text:00000000000000b8 .LVL11
+     /tmp/ccehA9I2.s:161    .text:00000000000000e4 .LVL12
+     /tmp/ccehA9I2.s:212    .text:000000000000013c .LVL19
+     /tmp/ccehA9I2.s:219    .text:0000000000000148 .LVL21
+     /tmp/ccehA9I2.s:209    .text:0000000000000138 .LVL18
+     /tmp/ccehA9I2.s:215    .text:0000000000000140 .LVL20
+     /tmp/ccehA9I2.s:169    .text:00000000000000f4 .LVL14
+     /tmp/ccehA9I2.s:228    .text:0000000000000150 .LVL22
+     /tmp/ccehA9I2.s:230    .text:0000000000000154 .LVL23
+     /tmp/ccehA9I2.s:234    .text:0000000000000158 .LVL24
+     /tmp/ccehA9I2.s:193    .text:0000000000000120 .LVL15
+     /tmp/ccehA9I2.s:198    .text:000000000000012c .LVL17
+     /tmp/ccehA9I2.s:74     .text:0000000000000058 .LVL5
+     /tmp/ccehA9I2.s:109    .text:0000000000000094 .LVL7
+     /tmp/ccehA9I2.s:123    .text:00000000000000b0 .LVL9
+     /tmp/ccehA9I2.s:127    .text:00000000000000b4 .LVL10
+     /tmp/ccehA9I2.s:87     .text:000000000000006c .LVL6
+     /tmp/ccehA9I2.s:14     .text:0000000000000000 .LVL0
+     /tmp/ccehA9I2.s:26     .text:0000000000000014 .LVL1
+     /tmp/ccehA9I2.s:29     .text:0000000000000018 .LVL2
+     /tmp/ccehA9I2.s:52     .text:0000000000000040 .LVL3
+     /tmp/ccehA9I2.s:957    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 _ZN3abi8sys_callEPv
+_Z7kmallocm

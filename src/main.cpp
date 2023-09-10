@@ -16,6 +16,8 @@ int main(){
     uint64 address = reinterpret_cast<uint64>(&Riscv::supervisorTrap);
     Riscv::w_stvec(address);
 
+    memory_setup();
+
     // kreiranje main niti
     thread_t mainThread = nullptr;
     thread_create(&mainThread, nullptr, nullptr);
@@ -34,8 +36,9 @@ int main(){
     // kreiranje niti za ispis
     thread_t consoleWriter = nullptr;
     thread_create(&consoleWriter, &putc_function, nullptr);
+
+    // memory and console setup
     Console::getInstance();
-    memory_setup();
 
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
 

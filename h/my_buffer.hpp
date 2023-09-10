@@ -4,6 +4,7 @@
 #include "../h/semaphore.hpp"
 #include "../h/MemoryAllocator.hpp"
 #include "../lib/hw.h"
+#include "SlabI.h"
 
 class MyBuffer {
 private:
@@ -16,34 +17,37 @@ private:
     MySemaphore* mutexHead;
     MySemaphore* mutexTail;
 
-
+    static kmem_cache_t* buffer_cache;
+    static void buffer_setup(void* MyBuffer);
+    static void buffer_destroy(void* MyBuffer);
 
 public:
-    MyBuffer(int _cap);
-    ~MyBuffer();
+
+    static kmem_cache_t* &get_buffer_cache();
 
     void put(int val);
     int get();
-
     int getCnt();
 
     // operatori
     void *operator new(uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        return kmem_cache_alloc(get_buffer_cache());
     }
 
     void *operator new[](uint64 n){
-        uint64 ssize = (n + MEM_BLOCK_SIZE - 1) / MEM_BLOCK_SIZE;
-        return MemoryAllocator::getInstance().memory_alloc(ssize);
+        if(n == 0)return nullptr;
+        size_t num_of_elem = n / sizeof(MyBuffer);
+        MyBuffer** arr =  (MyBuffer**)kmalloc(num_of_elem);
+        return (void*)arr;
     }
 
     void operator delete(void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        kmem_cache_free(get_buffer_cache(), p);
     }
 
     void operator delete[](void* p)noexcept{
-        MemoryAllocator::getInstance().memory_free(p);
+        if(p == nullptr)return;
+        kfree(p);
     }
 
 };
